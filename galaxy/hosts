@@ -1,0 +1,2 @@
+[galaxyservers]
+hyperion.cac.cornell.edu ansible_connection=ssh ansible_user=wkl29

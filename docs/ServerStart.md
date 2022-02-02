@@ -1,6 +1,23 @@
 # Starting point
 ---
-This guide assumes a clean build of Ubuntu 20.04 LTS that you have sudo rights on. If you are using LetsEncrypt for SSL security, a registered
+- This guide assumes a clean build of Ubuntu 20.04 LTS that you have sudo rights on.
+- If you are using LetsEncrypt for SSL security, a registered DNS is required.
+- This guide closely follows this [tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html), although differences are expected due to changes over time.
+
+#### Update Ubuntu with latest patches
+Get list of updates for system
+```
+sudo apt update
+```
+Apply updates
+```
+sudo apt -y upgrade
+```
+Reboot system
+```
+sudo reboot
+```
+
 
 #### Open PORTS required on remote server
 - 22 for SSH, this can be a different port or via VPN or similar.
@@ -41,4 +58,28 @@ sudo apt install ansible
 sudo apt install sshpass -y
 ```
 
-## Get Galaxy-ansible playbook
+## Deploy production Galaxy
+
+Download roles for ansible
+```
+cd galaxy/
+ansible-galaxy install -p roles -r requirements.yml
+```
+
+Deploy ansible playbook
+- -k allows for passing of SSH password through commandline
+- -K allows for passing of sudo password through commandline
+
+```
+ansible-playbook -kK galaxy.yml
+```
+
+Note that Certbot authorization is set to 'staging' by default. This parameter should remain in this mode until Galaxy is confirmed to be online and working. Then change group_vars/galaxyservers.yml accordingly.
+```
+#certbot_environment: staging
+certbot_environment: production
+```
+Re-run the ansible playbook one final time.
+```
+ansible-playbook -kK galaxy.yml
+```
