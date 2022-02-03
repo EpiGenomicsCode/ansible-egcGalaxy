@@ -85,6 +85,10 @@ galaxy_config:
       - lib/galaxy/main.py
     farm: job-handlers:1,2
 
+
+galaxy_local_tools:
+- testing.xml
+
 # systemd
 galaxy_manage_systemd: yes
 
