@@ -28,7 +28,7 @@ miniconda_manage_dependencies: false
 
 galaxy_config:
   galaxy:
-    brand: "🧬🔬🚀"
+    brand: "Single-cell Analysis"
     admin_users: admin@example.org
     serve_xss_vulnerable_mimetypes: true # To allow SVG files be shown in galaxy web interface
     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
@@ -87,7 +87,8 @@ galaxy_config:
 
 
 galaxy_local_tools:
-- testing.xml
+- scATAC_debarcode.xml
+- scATAC_debarcode.py
 
 # systemd
 galaxy_manage_systemd: yes
