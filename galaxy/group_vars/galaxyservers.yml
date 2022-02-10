@@ -28,6 +28,7 @@ miniconda_manage_dependencies: false
 
 galaxy_config:
   galaxy:
+    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
     brand: "Single-cell Analysis"
     admin_users: admin@example.org
     serve_xss_vulnerable_mimetypes: true # To allow SVG files be shown in galaxy web interface
@@ -104,8 +105,8 @@ certbot_auth_method: --webroot
 certbot_install_method: virtualenv
 certbot_auto_renew: yes
 certbot_auto_renew_user: root
-#certbot_environment: production
-certbot_environment: staging
+certbot_environment: production
+#certbot_environment: staging
 certbot_well_known_root: /srv/nginx/_well-known_root
 certbot_share_key_users:
   - nginx
