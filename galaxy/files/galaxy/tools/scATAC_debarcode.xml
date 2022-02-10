@@ -1,6 +1,5 @@
-<tool id="scATAC-seq debarcode" name="Parse barcodes from scATAC-seq data" version="1.0.0">
-    <description>
-    </description>
+<tool id="scATAC-seq_debarcode" name="scATAC-seq debarcode" version="1.0.0">
+    <description>- parse barcodes from scATAC-seq data</description>
 
     <code file="scATAC_debarcode.py"/>
 
@@ -12,16 +11,17 @@
             python  $__tool_directory__/scATAC_debarcode.py
             -a "$I1_fastq"
             -b "$I2_fastq"
-            -c "$R1_fastq"
+            -c "$R1_fastq" | gzip -> "$output"
         ]]>
     </command>
     <inputs>
-        <param name="I1_fastq" type="data" format="fastq" label="Index 1 FASTQ file" />
-        <param name="I2_fastq" type="data" format="fastq" label="Index 2 FASTQ file" />
-        <param name="R1_fastq" type="data" format="fastq" label="Read 1 FASTQ file" />
+        <param name="I1_fastq" type="data" format="fastqsanger.gz" label="Index 1 FASTQ file" />
+        <param name="I2_fastq" type="data" format="fastqsanger.gz" label="Index 2 FASTQ file" />
+        <param name="R1_fastq" type="data" format="fastqsanger.gz" label="Read 1 FASTQ file" />
     </inputs>
 
     <outputs>
+        <data name="output" type="data" format="fastqsanger.gz"  label="Output FASTQ with scATAC-seq barcode in header"/>
     </outputs>
 
     <tests>

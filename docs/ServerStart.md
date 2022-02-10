@@ -83,3 +83,18 @@ Re-run the ansible playbook one final time.
 ```
 ansible-playbook -kK galaxy.yml
 ```
+
+## Organize local tools
+
+Local tool organization is handled by the 'local_tool_conf.xml' located:
+'/srv/galaxy/config'
+
+Sample for de-barcoding:
+```
+<?xml version='1.0' encoding='utf-8'?>
+<toolbox monitor="true" tool_path="/srv/galaxy/local_tools">
+    <section id="single-cell_analysis" name="Single-cell Analysis" version="">
+        <tool file="scATAC_debarcode.xml" />
+    </section>
+</toolbox>
+```
