@@ -1,8 +1,7 @@
 # Starting point
 ---
 - This guide assumes a clean build of Ubuntu 20.04 LTS that you have sudo rights on.
-- If you are using LetsEncrypt for SSL security, a registered DNS is required.
-- This guide closely follows this [tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html), although differences are expected due to changes over time.
+- This playbook using LetsEncrypt for SSL security, which assumes you have a properly registered DNS name.
 
 #### Update Ubuntu with latest patches
 Get list of updates for system
@@ -17,7 +16,6 @@ Reboot system
 ```
 sudo reboot
 ```
-
 
 #### Open PORTS required on remote server
 - 22 for SSH, this can be a different port or via VPN or similar.
@@ -40,11 +38,11 @@ This assumes you are managing software packages through [homebrew](https://brew.
 brew install ansible
 ```
 ##### sshpass Install
-This is required for passing the sudo password to the provisioned machine. Note that Homebrew officially does NOT support the use of sshpass. This command pulls sshpass from a 3rd party source and compiles it locally. Use at your own risk.
+- This is required for passing the sudo password to the provisioned machine. Note that Homebrew officially does NOT support the use of sshpass. This command pulls sshpass from a 3rd party source and compiles it locally. Use at your own risk.
+- Generally you should be using SSH keys instead of passing your password over the internet.
 ```
 brew install hudochenkov/sshpass/sshpass
 ```
-
 
 #### Ubuntu instructions
 ```
@@ -74,27 +72,38 @@ Deploy ansible playbook
 ansible-playbook -kK galaxy.yml
 ```
 
-Note that Certbot authorization is set to 'staging' by default. This parameter should remain in this mode until Galaxy is confirmed to be online and working. Then change group_vars/galaxyservers.yml accordingly.
+Note that Certbot authorization is set to 'production' by default. If you are performing development work on a server, this should be set to 'staging' to avoid hitting your Certbot certificate quota. We **strongly** recommend to keep this parameter in this mode until Galaxy is confirmed to be online and working.
+
+
+Under `group_vars/galaxyservers.yml`
+
+Staging SSL
+```
+certbot_environment: staging
+#certbot_environment: production
+```
+
+Production SSL
 ```
 #certbot_environment: staging
 certbot_environment: production
 ```
-Re-run the ansible playbook one final time.
+
+#### Converting over to SSL 'production'
+If you were previously set to SSL 'staging' and are now ready to move your Galaxy instance into SSL 'production', begin by removing your 'staging' certificates.
+```
+sudo su -
+rm -r /etc/letsencrypt/live/hyperion.cac.cornell.edu/
+rm -r /etc/letsencrypt/archive/hyperion.cac.cornell.edu/
+```
+
+Update your `group_vars/galaxyservers.yml` to reflect a production SSL environment and then re-run the ansible playbook.
 ```
 ansible-playbook -kK galaxy.yml
 ```
 
-## Organize local tools
-
-Local tool organization is handled by the 'local_tool_conf.xml' located:
-'/srv/galaxy/config'
-
-Sample for de-barcoding:
-```
-<?xml version='1.0' encoding='utf-8'?>
-<toolbox monitor="true" tool_path="/srv/galaxy/local_tools">
-    <section id="single-cell_analysis" name="Single-cell Analysis" version="">
-        <tool file="scATAC_debarcode.xml" />
-    </section>
-</toolbox>
-```
+## Learn More
+---
+- This guide closely follows this [tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html), although differences are expected due to changes over time.
+- CVMFS in Galaxy [HERE](https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/tutorial.html).
+- Ansible documentation [HERE](https://docs.ansible.com/)
