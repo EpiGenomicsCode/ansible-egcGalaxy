@@ -1,8 +1,6 @@
-<tool id="scATAC-seq_debarcode" name="scATAC-seq debarcode" version="1.0.0">
+<tool id="scATAC-seq_debarcode" name="scATAC-seq De-Barcode" version="1.0.0">
     <description>- parse barcodes from scATAC-seq data</description>
-
-    <code file="scATAC_debarcode.py"/>
-
+    
     <requirements>
     </requirements>
 

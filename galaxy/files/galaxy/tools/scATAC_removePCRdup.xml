@@ -1,0 +1,35 @@
+<tool id="scATAC-seq_dedup" name="scATAC-seq remove PCR duplication" version="1.0.0">
+    <description>- remove scATAC-seq PCR duplication</description>
+
+    <requirements>
+      <requirement type="package" version="0.1.18">samtools</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+            samtools view -bS "$input"
+            | samtools sort -o - raw-sorted
+            | samtools rmdup - $output
+        ]]>
+    </command>
+    <inputs>
+      <param name="input" type="data" format="unsorted.bam" label="BAM file" />
+    </inputs>
+
+    <outputs>
+        <data name="output" type="data" format="bam"  label="PCR de-duplicated BAM file"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+**What it does**
+
+Remove PCR duplication for each cell
+Provided by:
+https://raw.githubusercontent.com/epigen-UCSD/snATAC_pipeline/master/bin/scATAC
+
+    </help>
+
+</tool>

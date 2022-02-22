@@ -1,0 +1,35 @@
+<tool id="scATAC-seq_decell" name="scATAC-seq split cells" version="1.0.0">
+    <description>- parse cells from scATAC-seq data</description>
+    
+    <requirements>
+      <requirement type="package" version="0.1.18">samtools</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+            samtools view -h "$input"
+            | python  $__tool_directory__/scATAC_decell.py "$minread" "$output" -
+        ]]>
+    </command>
+    <inputs>
+      <param name="input" type="data" format="unsorted.bam" label="Uncorrected BAM file" />
+      <param name="minread" type="integer" value="20" min="1" label="Mismatches allowed" />
+    </inputs>
+
+    <outputs>
+        <data name="output" type="data" format="unsorted.bam"  label="Barcode Error-corrected BAM file"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+**What it does**
+
+Split single-cell ATAC-seq data into individual BAM files.
+Provided by:
+https://raw.githubusercontent.com/epigen-UCSD/snATAC_pipeline/master/bin/scATAC_decell
+
+    </help>
+
+</tool>

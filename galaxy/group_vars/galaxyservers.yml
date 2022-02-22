@@ -90,6 +90,11 @@ galaxy_config:
 galaxy_local_tools:
 - scATAC_debarcode.xml
 - scATAC_debarcode.py
+- scATAC_barcode_err_correct.xml
+- scATAC_barcode_err_correct.py
+- scATAC_decell.xml
+- scATAC_decell.py
+- scATAC_removePCRdup.xml
 
 # systemd
 galaxy_manage_systemd: yes

@@ -1,0 +1,35 @@
+<tool id="scATAC-seq_errcorrect" name="scATAC-seq Error Correction" version="1.0.0">
+    <description>- correct scATAC-seq barcode error</description>
+    <requirements>
+      <requirement type="package" version="0.1.18">samtools</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+          samtools view -h "$input"
+          | python  $__tool_directory__/scATAC_barcode_err_correct.py "$barcode_mismatch" "$barcode"
+          | samtools view -bS - > "$output"
+        ]]>
+    </command>
+    <inputs>
+      <param name="input" type="data" format="unsorted.bam" label="Uncorrected BAM file" />
+      <param name="barcode_mismatch" type="integer" value="2" min="1" label="Mismatches allowed" />
+      <param name="barcode" type="data" format="tabular" label="Collections of barcodes" />
+    </inputs>
+    <outputs>
+        <data name="output" type="data" format="unsorted.bam"  label="Barcode Error-corrected BAM file"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+**What it does**
+
+Decomplex single-cell ATAC-seq barcode allowing mismatch.
+Provided by:
+https://raw.githubusercontent.com/epigen-UCSD/snATAC_pipeline/master/bin/scATAC_debarcode
+
+    </help>
+
+</tool>
