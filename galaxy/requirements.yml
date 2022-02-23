@@ -1,5 +1,5 @@
 - src: galaxyproject.galaxy
-  version: 0.9.16
+  version: 0.9.17
 - src: galaxyproject.nginx
   version: 0.7.0
 - src: galaxyproject.postgresql
@@ -13,4 +13,4 @@
 - src: usegalaxy_eu.certbot
   version: 0.1.5
 - src: galaxyproject.cvmfs
-  version: 0.2.13
+  version: 0.2.14
