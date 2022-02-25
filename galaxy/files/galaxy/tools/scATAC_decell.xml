@@ -1,23 +1,25 @@
 <tool id="scATAC-seq_decell" name="scATAC-seq split cells" version="1.0.0">
     <description>- parse cells from scATAC-seq data</description>
-    
+
     <requirements>
-      <requirement type="package" version="0.1.18">samtools</requirement>
+      <requirement type="package" version="1.14">samtools</requirement>
     </requirements>
 
     <command>
         <![CDATA[
             samtools view -h "$input"
-            | python  $__tool_directory__/scATAC_decell.py "$minread" "$output" -
+            | python  $__tool_directory__/scATAC_decell.py -m "$minread" -
         ]]>
     </command>
     <inputs>
       <param name="input" type="data" format="unsorted.bam" label="Uncorrected BAM file" />
-      <param name="minread" type="integer" value="20" min="1" label="Mismatches allowed" />
+      <param name="minread" type="integer" value="20" min="1" label="Minimum reads per cell" />
     </inputs>
 
     <outputs>
-        <data name="output" type="data" format="unsorted.bam"  label="Barcode Error-corrected BAM file"/>
+      <collection name="singlecells" type="list" label="scATAC-seq individual cells">
+        <discover_datasets pattern="(?P&lt;designation&gt;.*)" directory="output" ext="sam" visible="false" />
+      </collection>
     </outputs>
 
     <tests>

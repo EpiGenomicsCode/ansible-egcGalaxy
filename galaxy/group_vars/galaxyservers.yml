@@ -39,6 +39,7 @@ galaxy_config:
     object_store_store_by: uuid
     #dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
     galaxy_dependency_resolvers:
+      - type: tool_shed_packages
       - type: galaxy_packages
       - type: conda
         prefix: /srv/galaxy/conda
@@ -117,6 +118,9 @@ galaxy_local_tools:
 - scATAC_decell.xml
 - scATAC_decell.py
 - scATAC_removePCRdup.xml
+- scATAC_barcodefreq.xml
+- scATAC_filterCellnumber.xml
+- scATAC_filterCellnumber.py
 
 # Certbot
 certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"

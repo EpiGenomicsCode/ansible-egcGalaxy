@@ -2,7 +2,7 @@
     <description>- remove scATAC-seq PCR duplication</description>
 
     <requirements>
-      <requirement type="package" version="0.1.18">samtools</requirement>
+      <requirement type="package" version="1.14">samtools</requirement>
     </requirements>
 
     <command>

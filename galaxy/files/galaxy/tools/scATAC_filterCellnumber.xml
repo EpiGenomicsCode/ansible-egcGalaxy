@@ -1,0 +1,35 @@
+<tool id="scATAC-seq_errcorrect" name="scATAC-seq Error Correction" version="1.0.0">
+    <description>- correct scATAC-seq barcode error</description>
+    <requirements>
+      <requirement type="package" version="1.14">samtools</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+          samtools view -h "$input"
+          | python $__tool_directory__/scATAC_rm_cell_with_low_cov.py -m "$MIN_READ" -f "$FREQ" -
+          | samtools view -bS - > "$output"
+        ]]>
+    </command>
+    <inputs>
+      <param name="input" type="data" format="unsorted.bam" label="Uncorrected BAM file" />
+      <param name="MIN_READ" type="data" format="tabular" label="Minimun number of reads per cell to retain in BAM" />
+      <param name="FREQ" type="data" format="tabular" label="Barcode frequency statistics" />
+    </inputs>
+    <outputs>
+        <data name="output" type="data" format="unsorted.bam"  label="Barcode Error-corrected BAM file"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+**What it does**
+
+Filters BAM file to only retain cells with a minimum number of reads.
+Provided by:
+https://raw.githubusercontent.com/epigen-UCSD/snATAC_pipeline/master/bin/scATAC_rm_cell_with_low_cov
+
+    </help>
+
+</tool>

@@ -1,7 +1,7 @@
 <tool id="scATAC-seq_errcorrect" name="scATAC-seq Error Correction" version="1.0.0">
     <description>- correct scATAC-seq barcode error</description>
     <requirements>
-      <requirement type="package" version="0.1.18">samtools</requirement>
+      <requirement type="package" version="1.14">samtools</requirement>
     </requirements>
 
     <command>

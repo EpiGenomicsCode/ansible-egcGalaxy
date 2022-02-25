@@ -1,0 +1,35 @@
+<tool id="scATAC-seq_barcodefeq" name="scATAC-seq barcode frequency" version="1.0.0">
+    <description>- calculate barcode frequency in scATAC-seq data</description>
+
+    <requirements>
+      <requirement type="package" version="1.14">samtools</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+            samtools view "$input"
+            | awk '{split($1,a,":"); print a[1]}' | sort | uniq -c | awk '{print $2, $1}'
+            | sort -k2rn - > "$output"
+        ]]>
+    </command>
+    <inputs>
+      <param name="input" type="data" format="unsorted.bam" label="scATAC-seq BAM file" />
+    </inputs>
+
+    <outputs>
+      <data name="output" type="data" format="tabular"  label="Barcode usage statistics from scATAC-seq"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+**What it does**
+
+Calculate Barcode usage frequency in scATAC-seq data
+Provided by:
+https://raw.githubusercontent.com/epigen-UCSD/snATAC_pipeline/master/bin/scATAC
+
+    </help>
+
+</tool>
