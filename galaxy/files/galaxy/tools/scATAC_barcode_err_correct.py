@@ -3,6 +3,7 @@
 import sys
 import collections
 import os
+import optparse
 
 def min_dist(s, sl):
     """ return the string with min edit distance """
@@ -25,29 +26,46 @@ def min_dist(s, sl):
     return (min_s, min_value, min_s2, min_value2)
 
 def main():
-    max_mm = int(sys.argv[1])
-    dirt = sys.argv[2]
-
     """ main function """
-    if os.path.isfile(dirt+'/r7_ATAC'):
-        table_r7 = [x.strip() for x in open(dirt+'/r7_ATAC').readlines()]
-    else:
-        sys.exit("error(main): r7_ATAC file not exists")
+    parser = optparse.OptionParser(usage='%prog [-h] [-m mismatches allowed] [-a r7_ATAC] [-b i7_ATAC] [-c i5_ATAC] [-d r5_ATAC]',
+                                   description='Barcode error correction single-cell ATAC-seq allowing mismatch.')
+    parser.add_option('-m',
+        dest="mismatch",
+        help='Mismatches allowed',
+        type="int",
+    )
+    parser.add_option('-a',
+        dest="r7",
+        help='r7 Barcodes'
+    )
+    parser.add_option('-b',
+        dest="i7",
+        help='i7 Barcodes'
+    )
+    parser.add_option('-c',
+        dest="i5",
+        help='i5 Barcodes'
+    )
+    parser.add_option('-d',
+        dest="r5",
+        help='r5 Barcodes'
+    )
 
-    if os.path.isfile(dirt+'/i7_ATAC'):
-        table_i7 = [x.strip() for x in open(dirt+'/i7_ATAC').readlines()]
-    else:
-        sys.exit("error(main): i7_ATAC file not exists")
+    if len(sys.argv) < 10:
+        parser.print_help()
+        exit('error: too few arguments')
 
-    if os.path.isfile(dirt+'/i5_ATAC'):
-        table_i5 = [x.strip() for x in open(dirt+'/i5_ATAC').readlines()]
-    else:
-        sys.exit("error(main): i5_ATAC file not exists")
+    args = parser.parse_args()[0]
+    max_mm = args.mismatch
+    r7_ATAC = args.r7
+    i7_ATAC = args.i7
+    i5_ATAC = args.i5
+    r5_ATAC = args.r5
 
-    if os.path.isfile(dirt+'/r5_ATAC'):
-        table_r5 = [x.strip() for x in open(dirt+'/r5_ATAC').readlines()]
-    else:
-        sys.exit("error(main): r5_ATAC file not exists")
+    table_r7 = [x.strip() for x in open(r7_ATAC).readlines()]
+    table_i7 = [x.strip() for x in open(i7_ATAC).readlines()]
+    table_i5 = [x.strip() for x in open(i5_ATAC).readlines()]
+    table_r5 = [x.strip() for x in open(r5_ATAC).readlines()]
 
     if len(table_r7) == 0: sys.exit("error(main): r7 table has 0 elements")
     if len(table_i7) == 0: sys.exit("error(main): i7 table has 0 elements")
@@ -58,7 +76,7 @@ def main():
         # head of bam file
         if line[0] == '@':
             try:
-                print(line),
+                print(line,end='')
             except IOError:
                 try:
                     sys.stdout.close()
@@ -75,6 +93,17 @@ def main():
         cur_i7 = barcode[8:16]
         cur_i5 = barcode[16:24]
         cur_r5 = barcode[24:]
+
+        #CTGAAGCT r7
+        #TAAGGCGA i7
+        #TCAGAGCC r5
+        #ATTATACG
+
+        #CGGCTATG r7
+        #CTCTCTAC i7
+        #GTCAGTAC r5
+        #AAGGCTAT i5
+
         # skip this read if barcode has mismatch with r5 or r7
         if not cur_r7 in table_r7:  # if not perfectly matched
             (opt_match, num_mm, opt_match2, num_mm2) = min_dist(cur_r7, table_r7)
@@ -107,7 +136,7 @@ def main():
         # new barcode
         barcode = cur_r7 + cur_i7 + cur_i5 + cur_r5
         try:
-            print(barcode + line[len(barcode):]),
+            print(barcode + line[len(barcode):],end='')
         except IOError:
             try:
                 sys.stdout.close()

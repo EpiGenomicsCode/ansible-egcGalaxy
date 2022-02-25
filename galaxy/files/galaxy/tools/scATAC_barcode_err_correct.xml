@@ -7,14 +7,17 @@
     <command>
         <![CDATA[
           samtools view -h "$input"
-          | python  $__tool_directory__/scATAC_barcode_err_correct.py "$barcode_mismatch" "$barcode"
+          | python $__tool_directory__/scATAC_barcode_err_correct.py -m "$barcode_mismatch" -a "$r7_scATAC" -b "$i7_scATAC" -c "$r5_scATAC" -d "$i5_scATAC"
           | samtools view -bS - > "$output"
         ]]>
     </command>
     <inputs>
       <param name="input" type="data" format="unsorted.bam" label="Uncorrected BAM file" />
       <param name="barcode_mismatch" type="integer" value="2" min="1" label="Mismatches allowed" />
-      <param name="barcode" type="data" format="tabular" label="Collections of barcodes" />
+      <param name="r7_scATAC" type="data" format="tabular" label="r7 scATAC-seq barcodes" />
+      <param name="i7_scATAC" type="data" format="tabular" label="i7 scATAC-seq barcodes" />
+      <param name="r5_scATAC" type="data" format="tabular" label="r5 scATAC-seq barcodes" />
+      <param name="i5_scATAC" type="data" format="tabular" label="i5 scATAC-seq barcodes" />
     </inputs>
     <outputs>
         <data name="output" type="data" format="unsorted.bam"  label="Barcode Error-corrected BAM file"/>
@@ -26,9 +29,9 @@
     <help>
 **What it does**
 
-Decomplex single-cell ATAC-seq barcode allowing mismatch.
+Performs error correction on single-cell ATAC-seq barcodes with user-specified mismatch.
 Provided by:
-https://raw.githubusercontent.com/epigen-UCSD/snATAC_pipeline/master/bin/scATAC_debarcode
+https://raw.githubusercontent.com/epigen-UCSD/snATAC_pipeline/master/bin/scATAC_barcode_err_correct
 
     </help>
 

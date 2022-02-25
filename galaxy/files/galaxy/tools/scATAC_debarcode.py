@@ -49,33 +49,38 @@ def main():
     if not os.path.isfile(fi2_name): exit("error: \'%s\' not exist" % fi2_name)
     if not os.path.isfile(fr1_name): exit("error: \'%s\' not exist" % fr1_name)
 
-    # check file format
-    if fi1_name.endswith('.gz'):
-        fi1 = gzip.open(fi1_name, 'rb')
-    elif fi1_name.endswith('.bz2'):
-        fi1 = bz2.BZ2File(fi1_name, 'r')
-    elif fi1_name.endswith('.fastq'):
-        fi1 = open(fi1_name, 'r')
-    elif fi1_name.endswith('.fq'):
-        fi1 = open(fi1_name, 'r')
+    fi1 = gzip.open(fi1_name, 'rt')
+    fi2 = gzip.open(fi2_name, 'rt')
+    fr1 = gzip.open(fr1_name, 'rt')
 
-    if fi2_name.endswith('.gz'):
-        fi2 = gzip.open(fi2_name, 'rb')
-    elif fi2_name.endswith('.bz2'):
-        fi2 = bz2.BZ2File(fi2_name, 'r')
-    elif fi2_name.endswith('.fastq'):
-        fi2 = open(fi2_name, 'r')
-    elif fi2_name.endswith('.fq'):
-        fi2 = open(fi2_name, 'r')
-
-    if fr1_name.endswith('.gz'):
-        fr1 = gzip.open(fr1_name, 'rb')
-    elif fr1_name.endswith('.bz2'):
-        fr1 = bz2.BZ2File(fr1_name, 'r')
-    elif fr1_name.endswith('.fastq'):
-        fr1 = open(fr1_name, 'r')
-    elif fr1_name.endswith('.fq'):
-        fr1 = open(fr1_name, 'r')
+# Galaxy enforces a GZIP file format
+#    # check file format
+#    if fi1_name.endswith('.gz'):
+#        fi1 = gzip.open(fi1_name, 'rb')
+#    elif fi1_name.endswith('.bz2'):
+#        fi1 = bz2.BZ2File(fi1_name, 'r')
+#    elif fi1_name.endswith('.fastq'):
+#        fi1 = open(fi1_name, 'r')
+#    elif fi1_name.endswith('.fq'):
+#        fi1 = open(fi1_name, 'r')
+#
+#    if fi2_name.endswith('.gz'):
+#        fi2 = gzip.open(fi2_name, 'rb')
+#    elif fi2_name.endswith('.bz2'):
+#        fi2 = bz2.BZ2File(fi2_name, 'r')
+#    elif fi2_name.endswith('.fastq'):
+#        fi2 = open(fi2_name, 'r')
+#    elif fi2_name.endswith('.fq'):
+#        fi2 = open(fi2_name, 'r')
+#
+#    if fr1_name.endswith('.gz'):
+#        fr1 = gzip.open(fr1_name, 'rb')
+#    elif fr1_name.endswith('.bz2'):
+#        fr1 = bz2.BZ2File(fr1_name, 'r')
+#    elif fr1_name.endswith('.fastq'):
+#        fr1 = open(fr1_name, 'r')
+#    elif fr1_name.endswith('.fq'):
+#        fr1 = open(fr1_name, 'r')
 
     while True:
         cur_i1_name = fi1.readline().strip()[1:]
