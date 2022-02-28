@@ -1,5 +1,5 @@
-<tool id="scATAC-seq_barcodefeq" name="scATAC-seq barcode frequency" version="1.0.0">
-    <description>- calculate barcode frequency in scATAC-seq data</description>
+<tool id="scATAC-seq_barcodefeq" name="scATAC-seq Barcode frequency" version="1.0.0">
+    <description>- calculate scATAC-seq barcode usage frequency</description>
 
     <requirements>
       <requirement type="package" version="1.14">samtools</requirement>

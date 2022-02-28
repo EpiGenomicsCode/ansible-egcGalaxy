@@ -1,5 +1,5 @@
-<tool id="scATAC-seq_errcorrect" name="scATAC-seq Error Correction" version="1.0.0">
-    <description>- correct scATAC-seq barcode error</description>
+<tool id="scATAC-seq_filtercell" name="scATAC-seq Filter cells" version="1.0.0">
+    <description>- filter scATAC-seq by cell number</description>
     <requirements>
       <requirement type="package" version="1.14">samtools</requirement>
     </requirements>
@@ -7,17 +7,17 @@
     <command>
         <![CDATA[
           samtools view -h "$input"
-          | python $__tool_directory__/scATAC_rm_cell_with_low_cov.py -m "$MIN_READ" -f "$FREQ" -
+          | python $__tool_directory__/scATAC_filterCellnumber.py -m "$MIN_READ" -f "$FREQ" -
           | samtools view -bS - > "$output"
         ]]>
     </command>
     <inputs>
       <param name="input" type="data" format="unsorted.bam" label="Uncorrected BAM file" />
-      <param name="MIN_READ" type="data" format="tabular" label="Minimun number of reads per cell to retain in BAM" />
+      <param name="MIN_READ" type="integer" value="20" min="1" label="Minimun number of reads per cell to retain in BAM" />
       <param name="FREQ" type="data" format="tabular" label="Barcode frequency statistics" />
     </inputs>
     <outputs>
-        <data name="output" type="data" format="unsorted.bam"  label="Barcode Error-corrected BAM file"/>
+        <data name="output" type="data" format="unsorted.bam"  label="Filtered BAM file"/>
     </outputs>
 
     <tests>

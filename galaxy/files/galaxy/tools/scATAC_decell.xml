@@ -1,5 +1,5 @@
-<tool id="scATAC-seq_decell" name="scATAC-seq split cells" version="1.0.0">
-    <description>- parse cells from scATAC-seq data</description>
+<tool id="scATAC-seq_decell" name="scATAC-seq Split cells" version="1.0.0">
+    <description>- parse out individual cells from scATAC-seq</description>
 
     <requirements>
       <requirement type="package" version="1.14">samtools</requirement>

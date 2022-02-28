@@ -1,6 +1,6 @@
-<tool id="scATAC-seq_debarcode" name="scATAC-seq De-Barcode" version="1.0.0">
-    <description>- parse barcodes from scATAC-seq data</description>
-    
+<tool id="scATAC-seq_debarcode" name="scATAC-seq Parse barcode" version="1.0.0">
+    <description>- format FASTQ header with scATAC-seq barcodes</description>
+
     <requirements>
     </requirements>
 
