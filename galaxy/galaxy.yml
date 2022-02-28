@@ -6,6 +6,8 @@
       package:
         name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
   roles:
+    - galaxyproject.repos
+    - galaxyproject.slurm
     - galaxyproject.postgresql
     - role: natefoo.postgresql_objects
       become: true
@@ -17,3 +19,7 @@
       become_user: "{{ galaxy_user.name }}"
     - galaxyproject.nginx
     - galaxyproject.cvmfs
+  post_tasks:
+    - name: Install slurm-drmaa
+      package:
+        name: slurm-drmaa1

@@ -14,3 +14,7 @@
   version: 0.1.5
 - src: galaxyproject.cvmfs
   version: 0.2.14
+- src: galaxyproject.repos
+  version: 0.0.2
+- src: galaxyproject.slurm
+  version: 0.1.3

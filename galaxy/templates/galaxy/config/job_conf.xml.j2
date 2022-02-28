@@ -1,9 +1,13 @@
 <job_conf>
     <plugins workers="4">
         <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+        <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
     </plugins>
     <destinations default="local_destination">
         <destination id="local_destination" runner="local_plugin"/>
+        <destination id="slurm" runner="slurm">
+            <param id="nativeSpecification">--nodes=1 --ntasks=1 --cpus-per-task=1 </param>
+        </destination>
     </destinations>
     <tools>
     </tools>
