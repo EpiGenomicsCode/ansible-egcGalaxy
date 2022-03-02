@@ -2,6 +2,7 @@
     <description>- calculate scATAC-seq summary statistics</description>
 
     <requirements>
+            <requirement type="package" version="1.14">samtools</requirement>
     </requirements>
 
     <command>
@@ -27,15 +28,18 @@
         echo "Number of cells with more than $MIN_READ reads: $TOTAL_CELLS" 2>&1 | tee -a $PREFIX.log
       -->
         <![CDATA[
+          TOTAL_READS=$(zcat "$R1" | wc -l | awk '{print $1}')
 
+          echo "================================ Summary ==================================" > "$output"
+          echo "Total number of raw reads: $((TOTAL_READS/4))" >> "$output"
         ]]>
     </command>
     <inputs>
-      <param name="input" type="data" format="unsorted.bam" label="scATAC-seq BAM file" />
+      <param name="R1" type="data" format="fastqsanger.gz" label="scATAC-seq FASTQ file" />
     </inputs>
 
     <outputs>
-      <data name="output" type="data" format="tabular"  label="Barcode usage statistics from scATAC-seq"/>
+      <data name="output" type="data" format="tabular"  label="scATAC-seq Statistics"/>
     </outputs>
 
     <tests>

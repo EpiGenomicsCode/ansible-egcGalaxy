@@ -8,6 +8,7 @@
     <command>
         <![CDATA[
             samtools view -h "$input"
+            | samtools sort -n -O sam -T sorttmp -
             | python  $__tool_directory__/scATAC_decell.py -m "$minread" -
         ]]>
     </command>

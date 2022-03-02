@@ -1,6 +1,5 @@
 <tool id="scATAC-seq_dedup" name="scATAC-seq Remove duplicates" version="1.0.0">
     <description>- remove scATAC-seq PCR duplication</description>
-
     <requirements>
       <requirement type="package" version="1.14">samtools</requirement>
     </requirements>
@@ -8,12 +7,13 @@
     <command>
         <![CDATA[
             samtools view -bS "$input"
-            | samtools sort -o - raw-sorted
-            | samtools rmdup - $output
+            | samtools fixmate -m - -
+            | samtools sort -O BAM -
+            | samtools markdup -r - "$output"
         ]]>
     </command>
     <inputs>
-      <param name="input" type="data" format="unsorted.bam" label="BAM file" />
+      <param name="input" type="data" format="sam" label="SAM file" />
     </inputs>
 
     <outputs>

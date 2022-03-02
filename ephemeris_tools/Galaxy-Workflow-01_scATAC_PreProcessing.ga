@@ -1,0 +1,1176 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "01_scATAC_PreProcessing",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "r7 scATAC Barcodes"
+                }
+            ],
+            "label": "r7 scATAC Barcodes",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 459.2000045776367,
+                "height": 82.20000457763672,
+                "left": -501.5,
+                "right": -301.5,
+                "top": 377,
+                "width": 200,
+                "x": -501.5,
+                "y": 377
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1ddd38de-1ce2-4920-a86a-edaea51a9d1c",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "i7 scATAC Barcodes"
+                }
+            ],
+            "label": "i7 scATAC Barcodes",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 554.2000045776367,
+                "height": 82.20000457763672,
+                "left": -497.5,
+                "right": -297.5,
+                "top": 472,
+                "width": 200,
+                "x": -497.5,
+                "y": 472
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "01dce359-8016-407c-b999-42f0e8cf00cc",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "r5 scATAC Barcodes"
+                }
+            ],
+            "label": "r5 scATAC Barcodes",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 654.2000045776367,
+                "height": 82.20000457763672,
+                "left": -499.5,
+                "right": -299.5,
+                "top": 572,
+                "width": 200,
+                "x": -499.5,
+                "y": 572
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d268cede-023e-4958-821a-f60ad5096ea2",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "i5 scATAC Barcodes"
+                }
+            ],
+            "label": "i5 scATAC Barcodes",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 758.2000045776367,
+                "height": 82.20000457763672,
+                "left": -496.5,
+                "right": -296.5,
+                "top": 676,
+                "width": 200,
+                "x": -496.5,
+                "y": 676
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "bcbcc35e-5469-45bc-9cf8-f30c5d997c0b",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Read 1 FASTQ"
+                }
+            ],
+            "label": "Read 1 FASTQ",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 99.39374923706055,
+                "height": 61.79999923706055,
+                "left": -1388.4375,
+                "right": -1188.4375,
+                "top": 37.59375,
+                "width": 200,
+                "x": -1388.4375,
+                "y": 37.59375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ab84a2c6-6b78-4e76-a387-c283d493f25b",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 5,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Index 1 FASTQ"
+                }
+            ],
+            "label": "Index 1 FASTQ",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 183.39374923706055,
+                "height": 61.79999923706055,
+                "left": -1386.4375,
+                "right": -1186.4375,
+                "top": 121.59375,
+                "width": 200,
+                "x": -1386.4375,
+                "y": 121.59375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "fe627aa5-0bca-499b-8839-0fe8780e6457",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 6,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Index 2 FASTQ"
+                }
+            ],
+            "label": "Index 2 FASTQ",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 265.37499618530273,
+                "height": 61.79999923706055,
+                "left": -1388.46875,
+                "right": -1188.46875,
+                "top": 203.5749969482422,
+                "width": 200,
+                "x": -1388.46875,
+                "y": 203.5749969482422
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "cc1c29e0-c4f4-4140-b1e3-8416b117276f",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 7,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Read 2 FASTQ"
+                }
+            ],
+            "label": "Read 2 FASTQ",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 346.3750114440918,
+                "height": 61.79999923706055,
+                "left": -1393.46875,
+                "right": -1193.46875,
+                "top": 284.57501220703125,
+                "width": 200,
+                "x": -1393.46875,
+                "y": 284.57501220703125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e458ae59-c20e-43a8-8ac5-6e3a6fd1121f",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input_file": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "adapters"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 714.3312683105469,
+                "height": 316.8000183105469,
+                "left": -1481,
+                "right": -1281,
+                "top": 397.53125,
+                "width": 200,
+                "x": -1481,
+                "y": 397.53125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3d0c7bdf12f5",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.73+galaxy0",
+            "type": "tool",
+            "uuid": "f117702a-3447-44d9-b495-0995a88ea468",
+            "workflow_outputs": [
+                {
+                    "label": "FastQC on input dataset(s): Webpage",
+                    "output_name": "html_file",
+                    "uuid": "ec754015-9f9b-4d69-911d-9263e0067d35"
+                },
+                {
+                    "label": "FastQC on input dataset(s): RawData",
+                    "output_name": "text_file",
+                    "uuid": "c0780ccf-2290-4657-b0c6-e7987b010aef"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input_file": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "adapters"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 744.5500183105469,
+                "height": 316.8000183105469,
+                "left": -1235.9375,
+                "right": -1035.9375,
+                "top": 427.75,
+                "width": 200,
+                "x": -1235.9375,
+                "y": 427.75
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3d0c7bdf12f5",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.73+galaxy0",
+            "type": "tool",
+            "uuid": "8003a18f-6790-46e2-bbac-426e49d4e373",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "text_file",
+                    "uuid": "7b92fd1f-91b8-4320-847f-377917a53317"
+                },
+                {
+                    "label": null,
+                    "output_name": "html_file",
+                    "uuid": "d5c8b4e9-1cb4-420e-b20f-9b3477060023"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "scATAC-seq_debarcode",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "I1_fastq": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "I2_fastq": {
+                    "id": 6,
+                    "output_name": "output"
+                },
+                "R1_fastq": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Parse barcode",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "fastqsanger.gz"
+                }
+            ],
+            "position": {
+                "bottom": 217.6999969482422,
+                "height": 215.1999969482422,
+                "left": -1005.40625,
+                "right": -805.40625,
+                "top": 2.5,
+                "width": 200,
+                "x": -1005.40625,
+                "y": 2.5
+            },
+            "post_job_actions": {},
+            "tool_id": "scATAC-seq_debarcode",
+            "tool_state": "{\"I1_fastq\": {\"__class__\": \"ConnectedValue\"}, \"I2_fastq\": {\"__class__\": \"ConnectedValue\"}, \"R1_fastq\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "c19bf5a0-f95a-456f-bafd-ae863c64e01a",
+            "workflow_outputs": [
+                {
+                    "label": "Output FASTQ with scATAC-seq barcode in header",
+                    "output_name": "output",
+                    "uuid": "4331c6e3-8335-40b3-8309-e417034e32e8"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input_file": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "adapters"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 1075.6437683105469,
+                "height": 316.8000183105469,
+                "left": -1493,
+                "right": -1293,
+                "top": 758.84375,
+                "width": 200,
+                "x": -1493,
+                "y": 758.84375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3d0c7bdf12f5",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.73+galaxy0",
+            "type": "tool",
+            "uuid": "cb8ea6f5-cb11-45fa-b068-63df0b75cc7f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "text_file",
+                    "uuid": "3f71ec9b-d11a-4653-ae0d-c79abfb096fa"
+                },
+                {
+                    "label": null,
+                    "output_name": "html_file",
+                    "uuid": "5f891953-0bf5-43f0-a4f2-bf2a10edb22d"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "scATAC-seq_debarcode",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "I1_fastq": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "I2_fastq": {
+                    "id": 6,
+                    "output_name": "output"
+                },
+                "R1_fastq": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Parse barcode",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "fastqsanger.gz"
+                }
+            ],
+            "position": {
+                "bottom": 472.77500915527344,
+                "height": 215.1999969482422,
+                "left": -1005.40625,
+                "right": -805.40625,
+                "top": 257.57501220703125,
+                "width": 200,
+                "x": -1005.40625,
+                "y": 257.57501220703125
+            },
+            "post_job_actions": {},
+            "tool_id": "scATAC-seq_debarcode",
+            "tool_state": "{\"I1_fastq\": {\"__class__\": \"ConnectedValue\"}, \"I2_fastq\": {\"__class__\": \"ConnectedValue\"}, \"R1_fastq\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "e9151dab-ceca-4cc2-a4db-acf0721271a9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "cf65b486-7968-44ac-88bb-2480215eaf02"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input_file": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "adapters"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 1104.9562683105469,
+                "height": 316.8000183105469,
+                "left": -1238.90625,
+                "right": -1038.90625,
+                "top": 788.15625,
+                "width": 200,
+                "x": -1238.90625,
+                "y": 788.15625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3d0c7bdf12f5",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.73+galaxy0",
+            "type": "tool",
+            "uuid": "a4ed06f4-0488-4f54-93fc-7b73435f9960",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "html_file",
+                    "uuid": "8954c6d5-af25-43e3-b96e-d9766cd0ce51"
+                },
+                {
+                    "label": null,
+                    "output_name": "text_file",
+                    "uuid": "cae57844-3b45-414a-9c3e-4f8e7353618a"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.5+galaxy0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "library|input_1": {
+                    "id": 10,
+                    "output_name": "output"
+                },
+                "library|input_2": {
+                    "id": 12,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Bowtie2",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 351.8062438964844,
+                "height": 205.1999969482422,
+                "left": -760.9375,
+                "right": -560.9375,
+                "top": 146.6062469482422,
+                "width": 200,
+                "x": -760.9375,
+                "y": 146.6062469482422
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "cd659e8cc5fa",
+                "name": "bowtie2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"analysis_type\": {\"analysis_type_selector\": \"full\", \"__current_case__\": 1, \"input_options\": {\"input_options_selector\": \"no\", \"__current_case__\": 1}, \"alignment_options\": {\"alignment_options_selector\": \"yes\", \"__current_case__\": 0, \"N\": \"0\", \"L\": \"22\", \"i\": \"S,1,1.15\", \"n_ceil\": \"L,0,0.15\", \"dpad\": \"15\", \"gbar\": \"4\", \"ignore_quals\": \"false\", \"nofw\": \"false\", \"norc\": \"false\", \"no_1mm_upfront\": \"false\", \"align_mode\": {\"align_mode_selector\": \"end-to-end\", \"__current_case__\": 0, \"score_min_ete\": \"L,-0.6,-0.6\"}}, \"scoring_options\": {\"scoring_options_selector\": \"no\", \"__current_case__\": 1}, \"reporting_options\": {\"reporting_options_selector\": \"no\", \"__current_case__\": 0}, \"effort_options\": {\"effort_options_selector\": \"no\", \"__current_case__\": 1}, \"other_options\": {\"other_options_selector\": \"no\", \"__current_case__\": 1}}, \"library\": {\"type\": \"paired\", \"__current_case__\": 1, \"input_1\": {\"__class__\": \"ConnectedValue\"}, \"input_2\": {\"__class__\": \"ConnectedValue\"}, \"unaligned_file\": \"false\", \"aligned_file\": \"false\", \"paired_options\": {\"paired_options_selector\": \"yes\", \"__current_case__\": 0, \"I\": \"0\", \"X\": \"2000\", \"fr_rf_ff\": \"--fr\", \"no_mixed\": \"false\", \"no_discordant\": \"true\", \"dovetail\": \"false\", \"no_contain\": \"false\", \"no_overlap\": \"false\"}}, \"reference_genome\": {\"source\": \"indexed\", \"__current_case__\": 0, \"index\": \"mm10\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"sam_options\": {\"sam_options_selector\": \"no\", \"__current_case__\": 1}, \"save_mapping_stats\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.4.5+galaxy0",
+            "type": "tool",
+            "uuid": "5442a929-36cd-48ff-9026-cdcfd801ee55",
+            "workflow_outputs": [
+                {
+                    "label": "Bowtie2 on input dataset(s): alignments",
+                    "output_name": "output",
+                    "uuid": "724e1a6d-657b-4afa-b35b-215f92aff403"
+                }
+            ]
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "results_0|software_cond|output_0|input": {
+                    "id": 8,
+                    "output_name": "text_file"
+                },
+                "results_1|software_cond|output_0|input": {
+                    "id": 9,
+                    "output_name": "text_file"
+                },
+                "results_2|software_cond|output_0|input": {
+                    "id": 11,
+                    "output_name": "text_file"
+                },
+                "results_3|software_cond|output_0|input": {
+                    "id": 13,
+                    "output_name": "text_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MultiQC",
+            "outputs": [
+                {
+                    "name": "stats",
+                    "type": "input"
+                },
+                {
+                    "name": "plots",
+                    "type": "input"
+                },
+                {
+                    "name": "html_report",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "bottom": 943.1000061035156,
+                "height": 408.3999938964844,
+                "left": -1007.0187377929688,
+                "right": -807.0187377929688,
+                "top": 534.7000122070312,
+                "width": 200,
+                "x": -1007.0187377929688,
+                "y": 534.7000122070312
+            },
+            "post_job_actions": {
+                "HideDatasetActionplots": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "plots"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "9a913cdee30e",
+                "name": "multiqc",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"comment\": \"\", \"export\": \"true\", \"flat\": \"false\", \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}, {\"__index__\": 1, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}, {\"__index__\": 2, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}, {\"__index__\": 3, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}], \"saveLog\": \"false\", \"title\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.11+galaxy0",
+            "type": "tool",
+            "uuid": "200a2ace-efa8-4951-b372-19088ae9f4c5",
+            "workflow_outputs": [
+                {
+                    "label": "MultiQC on input dataset(s): Stats",
+                    "output_name": "stats",
+                    "uuid": "887dc5c1-0a25-4df7-8d38-08bc97b3933e"
+                },
+                {
+                    "label": "MultiQC on input dataset(s): Webpage",
+                    "output_name": "html_report",
+                    "uuid": "b6f85b0f-aec1-4125-8fe2-28ba6b0eb4d1"
+                }
+            ]
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/jjohnson/samtools_filter/samtools_filter/1.1.1",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "input1": {
+                    "id": 14,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM",
+                    "name": "bed_file"
+                }
+            ],
+            "label": null,
+            "name": "Filter SAM or BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 333.3000030517578,
+                "height": 184.8000030517578,
+                "left": -509.5,
+                "right": -309.5,
+                "top": 148.5,
+                "width": 200,
+                "x": -509.5,
+                "y": 148.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/jjohnson/samtools_filter/samtools_filter/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "9710e9bcc5f3",
+                "name": "samtools_filter",
+                "owner": "jjohnson",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bed_file\": {\"__class__\": \"RuntimeValue\"}, \"flag\": {\"filter\": \"yes\", \"__current_case__\": 1, \"reqBits\": null, \"skipBits\": [\"0x0004\", \"0x0008\", \"0x0100\", \"0x0200\", \"0x0400\"]}, \"header\": \"-h\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"library\": \"\", \"mapq\": \"30\", \"read_group\": \"\", \"regions\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "5e290e31-3432-49e6-91cc-83849224bad4",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output1",
+                    "uuid": "f41f0b5a-400d-4b6e-a726-0824319ea1cc"
+                }
+            ]
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "scATAC-seq_errcorrect",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "i5_scATAC": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "i7_scATAC": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 16,
+                    "output_name": "output1"
+                },
+                "r5_scATAC": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "r7_scATAC": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Error correction",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "unsorted.bam"
+                }
+            ],
+            "position": {
+                "bottom": 511.6000061035156,
+                "height": 255.60000610351562,
+                "left": -199.5,
+                "right": 0.5,
+                "top": 256,
+                "width": 200,
+                "x": -199.5,
+                "y": 256
+            },
+            "post_job_actions": {},
+            "tool_id": "scATAC-seq_errcorrect",
+            "tool_state": "{\"barcode_mismatch\": \"2\", \"i5_scATAC\": {\"__class__\": \"ConnectedValue\"}, \"i7_scATAC\": {\"__class__\": \"ConnectedValue\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"r5_scATAC\": {\"__class__\": \"ConnectedValue\"}, \"r7_scATAC\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "45361530-5731-4cf8-b9a9-2b864a6f3947",
+            "workflow_outputs": [
+                {
+                    "label": "Barcode Error-corrected BAM file",
+                    "output_name": "output",
+                    "uuid": "c9238a41-ba6e-401e-8ea1-34cd0df586df"
+                }
+            ]
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "scATAC-seq_decell",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "input": {
+                    "id": 17,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool scATAC-seq Split cells",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "scATAC-seq Split cells",
+            "outputs": [
+                {
+                    "name": "singlecells",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 411.5,
+                "height": 134,
+                "left": 56,
+                "right": 256,
+                "top": 277.5,
+                "width": 200,
+                "x": 56,
+                "y": 277.5
+            },
+            "post_job_actions": {},
+            "tool_id": "scATAC-seq_decell",
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"minread\": \"20\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "d38cb808-8b78-4334-bb72-c34c15870afb",
+            "workflow_outputs": [
+                {
+                    "label": "scATAC-seq individual cells",
+                    "output_name": "singlecells",
+                    "uuid": "d2a92423-721b-4b24-9cee-2cff02c3130f"
+                }
+            ]
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "scATAC-seq_dedup",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input": {
+                    "id": 18,
+                    "output_name": "singlecells"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool scATAC-seq Remove duplicates",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "scATAC-seq Remove duplicates",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 418.5,
+                "height": 134,
+                "left": 311,
+                "right": 511,
+                "top": 284.5,
+                "width": 200,
+                "x": 311,
+                "y": 284.5
+            },
+            "post_job_actions": {},
+            "tool_id": "scATAC-seq_dedup",
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "6055ee88-9185-43c0-a9a5-adf4b6d28605",
+            "workflow_outputs": [
+                {
+                    "label": "De-duplicated BAM file",
+                    "output_name": "output",
+                    "uuid": "0807f1ee-1571-4d15-9108-5dfbc49bc8f9"
+                }
+            ]
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_merge/samtools_merge/1.13",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "bamfiles": {
+                    "id": 19,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Samtools merge",
+                    "name": "bamfiles"
+                },
+                {
+                    "description": "runtime parameter for tool Samtools merge",
+                    "name": "bed_file"
+                },
+                {
+                    "description": "runtime parameter for tool Samtools merge",
+                    "name": "headerbam"
+                }
+            ],
+            "label": null,
+            "name": "Samtools merge",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 478.3000030517578,
+                "height": 194.8000030517578,
+                "left": 550,
+                "right": 750,
+                "top": 283.5,
+                "width": 200,
+                "x": 550,
+                "y": 283.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_merge/samtools_merge/1.13",
+            "tool_shed_repository": {
+                "changeset_revision": "b40e2d865d52",
+                "name": "samtools_merge",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bamfiles\": {\"__class__\": \"RuntimeValue\"}, \"bed_file\": {\"__class__\": \"RuntimeValue\"}, \"headerbam\": {\"__class__\": \"RuntimeValue\"}, \"idpg\": \"false\", \"idrg\": \"false\", \"region\": \"\", \"seed\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.13",
+            "type": "tool",
+            "uuid": "5357ef13-0153-4ae5-808f-22f02f4ccaeb",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "c45c929d-e00d-4269-a93c-cb563818aefb"
+                }
+            ]
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "scATAC-seq_barcodefeq",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "input": {
+                    "id": 20,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool scATAC-seq Barcode frequency",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "scATAC-seq Barcode frequency",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 680.5,
+                "height": 134,
+                "left": 768,
+                "right": 968,
+                "top": 546.5,
+                "width": 200,
+                "x": 768,
+                "y": 546.5
+            },
+            "post_job_actions": {},
+            "tool_id": "scATAC-seq_barcodefeq",
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "a4a55d1f-cdd0-4dbc-b9c0-4a0adf2fcdda",
+            "workflow_outputs": [
+                {
+                    "label": "Barcode usage statistics from scATAC-seq",
+                    "output_name": "output",
+                    "uuid": "e69d4ba5-c64f-46aa-a3ff-c22f125a1876"
+                }
+            ]
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "scATAC-seq_filtercell",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "FREQ": {
+                    "id": 21,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 20,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool scATAC-seq Filter cells",
+                    "name": "FREQ"
+                },
+                {
+                    "description": "runtime parameter for tool scATAC-seq Filter cells",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "scATAC-seq Filter cells",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 459.90000915527344,
+                "height": 164.40000915527344,
+                "left": 804,
+                "right": 1004,
+                "top": 295.5,
+                "width": 200,
+                "x": 804,
+                "y": 295.5
+            },
+            "post_job_actions": {},
+            "tool_id": "scATAC-seq_filtercell",
+            "tool_state": "{\"FREQ\": {\"__class__\": \"RuntimeValue\"}, \"MIN_READ\": \"20\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "7dc18ee0-8b22-4804-9e7c-5e220ae83790",
+            "workflow_outputs": [
+                {
+                    "label": "Filtered BAM file",
+                    "output_name": "output",
+                    "uuid": "48ee042a-29b7-48a7-93e5-cfed9128d74a"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "8bf33f7b-7f10-4fc5-b9db-4b21b355434d",
+    "version": 2
+}
