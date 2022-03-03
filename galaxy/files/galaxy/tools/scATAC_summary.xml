@@ -2,7 +2,8 @@
     <description>- calculate scATAC-seq summary statistics</description>
 
     <requirements>
-            <requirement type="package" version="1.14">samtools</requirement>
+        <requirement type="package" version="0.18.0">pysam</requirement>
+        <requirement type="package" version="1.14">samtools</requirement>
     </requirements>
 
     <command>
@@ -26,16 +27,17 @@
         echo "Estimated PCR duplication rate: $(echo "scale=2; ($BEFORE_PICARD_READS - $AFTER_PICARD_READS) / $BEFORE_PICARD_READS * 100"| bc -l)%" 2>&1 | tee -a $PREFIX.log
         echo "Total number of reads left: $FINAL_READS" 2>&1 | tee -a $PREFIX.log
         echo "Number of cells with more than $MIN_READ reads: $TOTAL_CELLS" 2>&1 | tee -a $PREFIX.log
-      -->
-        <![CDATA[
-          TOTAL_READS=$(zcat "$R1" | wc -l | awk '{print $1}')
 
-          echo "================================ Summary ==================================" > "$output"
-          echo "Total number of raw reads: $((TOTAL_READS/4))" >> "$output"
+        echo "Total number of raw reads: $((TOTAL_READS/4))" >> "$output"
+      -->
+
+        <![CDATA[
+          python  $__tool_directory__/scATAC_summary.py -a "$R1" -b "$UNIQ" > "$output"
         ]]>
     </command>
     <inputs>
       <param name="R1" type="data" format="fastqsanger.gz" label="scATAC-seq FASTQ file" />
+      <param name="UNIQ" type="data" format="bam" label="scATAC-seq initial BAM file" />
     </inputs>
 
     <outputs>
