@@ -27,17 +27,54 @@
         echo "Estimated PCR duplication rate: $(echo "scale=2; ($BEFORE_PICARD_READS - $AFTER_PICARD_READS) / $BEFORE_PICARD_READS * 100"| bc -l)%" 2>&1 | tee -a $PREFIX.log
         echo "Total number of reads left: $FINAL_READS" 2>&1 | tee -a $PREFIX.log
         echo "Number of cells with more than $MIN_READ reads: $TOTAL_CELLS" 2>&1 | tee -a $PREFIX.log
-
-        echo "Total number of raw reads: $((TOTAL_READS/4))" >> "$output"
       -->
 
         <![CDATA[
-          python  $__tool_directory__/scATAC_summary.py -a "$R1" -b "$UNIQ" > "$output"
+          ln -s '$UNIQ' uniq &&
+          #if $UNIQ.is_of_type('bam'):
+              #if str( $UNIQ.metadata.bam_index ) != "None":
+                        ln -s '${UNIQ.metadata.bam_index}' uniq.bai &&
+              #else:
+                        samtools index uniq uniq.bai &&
+              #end if
+          #end if
+
+          ln -s '$BAR' bar &&
+          #if $BAR.is_of_type('bam'):
+              #if str( $BAR.metadata.bam_index ) != "None":
+                        ln -s '${BAR.metadata.bam_index}' bar.bai &&
+              #else:
+                        samtools index bar bar.bai &&
+              #end if
+          #end if
+
+          ln -s '$PCR' pcr &&
+          #if $PCR.is_of_type('bam'):
+              #if str( $PCR.metadata.bam_index ) != "None":
+                        ln -s '${PCR.metadata.bam_index}' pcr.bai &&
+              #else:
+                        samtools index pcr pcr.bai &&
+              #end if
+          #end if
+
+          ln -s '$FINAL' final &&
+          #if $FINAL.is_of_type('bam'):
+              #if str( $FINAL.metadata.bam_index ) != "None":
+                        ln -s '${FINAL.metadata.bam_index}' final.bai &&
+              #else:
+                        samtools index final final.bai &&
+              #end if
+          #end if
+
+          python  $__tool_directory__/scATAC_summary.py -a "$R1" -b uniq -c bar -d pcr -e final > "$output"
         ]]>
     </command>
     <inputs>
       <param name="R1" type="data" format="fastqsanger.gz" label="scATAC-seq FASTQ file" />
-      <param name="UNIQ" type="data" format="bam" label="scATAC-seq initial BAM file" />
+      <param name="UNIQ" type="data" format="bam" label="scATAC-seq BAM file after mapping uniquely" />
+      <param name="BAR" type="data" format="bam" label="scATAC-seq BAM file after error-correction" />
+      <param name="PCR" type="data" format="bam" label="scATAC-seq BAM file after PCR deduplication" />
+      <param name="FINAL" type="data" format="bam" label="scATAC-seq final BAM file" />
     </inputs>
 
     <outputs>
