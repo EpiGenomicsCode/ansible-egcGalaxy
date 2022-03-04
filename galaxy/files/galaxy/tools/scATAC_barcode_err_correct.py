@@ -27,7 +27,7 @@ def min_dist(s, sl):
 
 def main():
     """ main function """
-    parser = optparse.OptionParser(usage='%prog [-h] [-m mismatches allowed] [-a r7_ATAC] [-b i7_ATAC] [-c i5_ATAC] [-d r5_ATAC]',
+    parser = optparse.OptionParser(usage='%prog [-h] [-m mismatches allowed] [-a r7_ATAC] [-b i7_ATAC] [-c i5_ATAC] [-d r5_ATAC] [-o Output Barcode ID]',
                                    description='Barcode error correction single-cell ATAC-seq allowing mismatch.')
     parser.add_option('-m',
         dest="mismatch",
@@ -50,8 +50,12 @@ def main():
         dest="r5",
         help='r5 Barcodes'
     )
+    parser.add_option('-o',
+        dest="output",
+        help='Uniq barcode list'
+    )
 
-    if len(sys.argv) < 10:
+    if len(sys.argv) < 12:
         parser.print_help()
         exit('error: too few arguments')
 
@@ -61,6 +65,7 @@ def main():
     i7_ATAC = args.i7
     i5_ATAC = args.i5
     r5_ATAC = args.r5
+    output = args.output
 
     table_r7 = [x.strip() for x in open(r7_ATAC).readlines()]
     table_i7 = [x.strip() for x in open(i7_ATAC).readlines()]
@@ -71,6 +76,8 @@ def main():
     if len(table_i7) == 0: sys.exit("error(main): i7 table has 0 elements")
     if len(table_r5) == 0: sys.exit("error(main): r5 table has 0 elements")
     if len(table_i5) == 0: sys.exit("error(main): i5 table has 0 elements")
+
+    uniqBarcode = set()
 
     for line in sys.stdin:
         # head of bam file
@@ -135,6 +142,7 @@ def main():
                 continue
         # new barcode
         barcode = cur_r7 + cur_i7 + cur_i5 + cur_r5
+        uniqBarcode.add(barcode)
         try:
             print(barcode + line[len(barcode):],end='')
         except IOError:
@@ -146,6 +154,10 @@ def main():
                 sys.stderr.close()
             except IOError:
                 pass
+
+    with open(output, 'w') as fout:
+        for elem in uniqBarcode:
+            fout.write(elem + "\n")
 
 if __name__ == '__main__':
     main()

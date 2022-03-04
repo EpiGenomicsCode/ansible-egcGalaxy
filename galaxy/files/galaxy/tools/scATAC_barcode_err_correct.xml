@@ -7,12 +7,12 @@
     <command>
         <![CDATA[
           samtools view -h "$input"
-          | python $__tool_directory__/scATAC_barcode_err_correct.py -m "$barcode_mismatch" -a "$r7_scATAC" -b "$i7_scATAC" -c "$r5_scATAC" -d "$i5_scATAC"
+          | python $__tool_directory__/scATAC_barcode_err_correct.py -m "$barcode_mismatch" -a "$r7_scATAC" -b "$i7_scATAC" -c "$r5_scATAC" -d "$i5_scATAC" -o "$barID"
           | samtools view -bS - > "$output"
         ]]>
     </command>
     <inputs>
-      <param name="input" type="data" format="unsorted.bam" label="Uncorrected BAM file" />
+      <param name="input" type="data" format="bam" label="Uncorrected BAM file" />
       <param name="barcode_mismatch" type="integer" value="2" min="1" label="Mismatches allowed" />
       <param name="r7_scATAC" type="data" format="tabular" label="r7 scATAC-seq barcodes" />
       <param name="i7_scATAC" type="data" format="tabular" label="i7 scATAC-seq barcodes" />
@@ -20,7 +20,8 @@
       <param name="i5_scATAC" type="data" format="tabular" label="i5 scATAC-seq barcodes" />
     </inputs>
     <outputs>
-        <data name="output" type="data" format="unsorted.bam"  label="Barcode Error-corrected BAM file"/>
+        <data name="barID" type="data" format="tabular"  label="Detected Unique Barcodes"/>
+        <data name="output" type="data" format="bam"  label="Barcode Error-corrected BAM file"/>
     </outputs>
 
     <tests>
