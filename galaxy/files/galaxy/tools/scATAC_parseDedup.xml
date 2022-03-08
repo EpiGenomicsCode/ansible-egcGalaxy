@@ -1,0 +1,39 @@
+<tool id="scATAC-seq_split_and_dedup" name="scATAC-seq Split and de-duplicate cells" version="1.0.0">
+    <description>- parse out and de-duplicate individual cells from scATAC-seq</description>
+
+    <requirements>
+      <requirement type="package" version="1.14">samtools</requirement>
+      <requirement type="package" version="0.18.0">pysam</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+            samtools view -h "$input"
+            | samtools sort -n -O sam -T sorttmp -
+            | python  $__tool_directory__/scATAC_parseDedup.py -m "$minread" -
+        ]]>
+    </command>
+    <inputs>
+      <param name="input" type="data" format="unsorted.bam" label="Error-corrected BAM file" />
+      <param name="minread" type="integer" value="20" min="1" label="Minimum reads per cell" />
+    </inputs>
+
+    <outputs>
+      <collection name="singlecells" type="list" label="scATAC-seq individual cells">
+        <discover_datasets pattern="(?P&lt;designation&gt;.*)" directory="output" ext="bam" visible="false" />
+      </collection>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+**What it does**
+
+Split single-cell ATAC-seq data into individual BAM files.
+Provided by:
+https://raw.githubusercontent.com/epigen-UCSD/snATAC_pipeline/master/bin/scATAC_decell
+
+    </help>
+
+</tool>
