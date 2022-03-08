@@ -7,28 +7,6 @@
     </requirements>
 
     <command>
-
-      <!--
-        TOTAL_READS=$(zcat $R1 | wc -l | awk '{print $1}')
-        UNIQ_READS=$(samtools view $PREFIX\_tmp/$PREFIX.umap.bam | wc -l | awk '{print $1}')
-        BARCODE_CORRECTED_READS=$(samtools view $PREFIX\_tmp/$PREFIX.umap.corrected.bam | wc -l | awk '{print $1}')
-        BEFORE_PICARD_READS=$(samtools view $PREFIX\_tmp/$PREFIX.umap.corrected.nsorted.bam | wc -l | awk '{print $1}')
-        AFTER_PICARD_READS=$(samtools view $PREFIX\_tmp/$PREFIX.umap.corrected.nsorted.nodup.bam | wc -l | awk '{print $1}')
-        TOTAL_CELLS=$(awk -v cutoff="$MIN_READ" '{if ($2 > cutoff) print }' $PREFIX\_tmp/$PREFIX.umap.corrected.nsorted.nodup.stat | wc -l | awk '{print $1}')
-        FINAL_READS=$(samtools view $PREFIX\_tmp/$PREFIX.umap.corrected.nsorted.nodup.filtered.gsorted.bam | wc -l | awk '{print $1}')
-        TOTAL_BARCODE=$(samtools view $PREFIX\_tmp/$PREFIX.umap.corrected.bam | awk '{split($1,a,":"); print a[1]}' | sort | uniq -c | wc -l | awk '{print $1}')
-
-        echo " (`date`) Step 10. clean up;" 2>&1 | tee -a $PREFIX.log
-        echo "================================ Summary ==================================" 2>&1 | tee -a $PREFIX.log
-        echo "Total number of raw reads: $((TOTAL_READS/4))" 2>&1 | tee -a $PREFIX.log
-        echo "Uniquely mapped reads (MAPQ>=30): $UNIQ_READS" 2>&1 | tee -a $PREFIX.log
-        echo "Reads left after barcode correction: $BARCODE_CORRECTED_READS" 2>&1 | tee -a $PREFIX.log
-        echo "Uniquely barcode combinations: $TOTAL_BARCODE" 2>&1 | tee -a $PREFIX.log
-        echo "Estimated PCR duplication rate: $(echo "scale=2; ($BEFORE_PICARD_READS - $AFTER_PICARD_READS) / $BEFORE_PICARD_READS * 100"| bc -l)%" 2>&1 | tee -a $PREFIX.log
-        echo "Total number of reads left: $FINAL_READS" 2>&1 | tee -a $PREFIX.log
-        echo "Number of cells with more than $MIN_READ reads: $TOTAL_CELLS" 2>&1 | tee -a $PREFIX.log
-      -->
-
         <![CDATA[
           ln -s '$UNIQ' uniq &&
           #if $UNIQ.is_of_type('bam'):
@@ -66,15 +44,18 @@
               #end if
           #end if
 
-          python  $__tool_directory__/scATAC_summary.py -a "$R1" -b uniq -c bar -d pcr -e final > "$output"
+          python  $__tool_directory__/scATAC_summary.py -a "$FASTQC_RAW" -b uniq -c bar -d "$UNIQBAR" -e pcr -f final -g "$MIN_READ" -i "$FINAL_BAR" > "$output"
         ]]>
     </command>
     <inputs>
-      <param name="R1" type="data" format="fastqsanger.gz" label="scATAC-seq FASTQ file" />
+      <param name="FASTQC_RAW" type="data" format="txt" label="scATAC-seq FASTQC raw data file" />
       <param name="UNIQ" type="data" format="bam" label="scATAC-seq BAM file after mapping uniquely" />
       <param name="BAR" type="data" format="bam" label="scATAC-seq BAM file after error-correction" />
+      <param name="UNIQBAR" type="data" format="tabular" label="scATAC-seq unique barcodes" />
       <param name="PCR" type="data" format="bam" label="scATAC-seq BAM file after PCR deduplication" />
       <param name="FINAL" type="data" format="bam" label="scATAC-seq final BAM file" />
+      <param name="MIN_READ" type="integer" value="20" min="1" label="Minimum reads per cell" />
+      <param name="FINAL_BAR" type="data" format="tabular" label="scATAC-seq final barcodes stats" />
     </inputs>
 
     <outputs>
