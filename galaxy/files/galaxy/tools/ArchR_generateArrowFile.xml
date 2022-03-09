@@ -1,0 +1,34 @@
+<tool id="ArchR_generateArrowFiles" name="ArchR Generate Arrow Files" version="1.0.0">
+    <description>- generate ArchR Arrow files from scATAC-seq BAM files</description>
+    <requirements>
+      <requirement type="package">r-devtools</requirement>
+      <requirement type="package" version="1.22.1">bioconductor-deseq2</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+
+        ]]>
+    </command>
+    <inputs>
+      <param name="input" type="data" format="bam" label="scATAC-seq BAM file" />
+    </inputs>
+    <outputs>
+        <data name="output" type="data" format="bgzip"  label="Converted ArrowFile"/>
+        <data name="size_dist" type="data" format="pdf"  label="Insert size histogram"/>
+        <data name="unique_frag" type="data" format="pdf"  label="Unique fragments QC plot"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+**What it does**
+
+Converts scATAC-seq data to ArrowFile format while generating basic QC plots
+Provided by:
+https://www.archrproject.com/index.html
+
+    </help>
+
+</tool>

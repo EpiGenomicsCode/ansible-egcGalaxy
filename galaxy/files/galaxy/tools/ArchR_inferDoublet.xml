@@ -1,0 +1,40 @@
+<tool id="ArchR_inferDoublets" name="ArchR infer Doublets" version="1.0.0">
+    <description>- infer Doublets from ArchR Arrow files</description>
+    <requirements>
+      <requirement type="package" version="1.22.1">bioconductor-deseq2</requirement>
+      <requirement type="package" version="2.26.2">bioconductor-rhdf5</requirement>
+      <requirement type="package" version="1.10.0">bioconductor-tximport</requirement>
+      <requirement type="package" version="1.34.1">bioconductor-genomicfeatures</requirement>
+      <requirement type="package" version="1.20.2">r-getopt</requirement>
+      <requirement type="package" version="0.8.0">r-ggrepel</requirement>
+      <requirement type="package" version="3.0.1">r-gplots</requirement>
+      <requirement type="package" version="1.0.10">r-pheatmap</requirement>
+      <requirement type="package" version="0.2.20">r-rjson</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+
+        ]]>
+    </command>
+    <inputs>
+      <param name="input" type="data" format="unsorted.bam" label="BAM file" />
+
+    </inputs>
+    <outputs>
+        <data name="output" type="data" format="unsorted.bam"  label="BAM file"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+**What it does**
+
+Calculates predicted doublet formation from scATAC-seq data
+Provided by:
+https://www.archrproject.com/index.html
+
+    </help>
+
+</tool>
