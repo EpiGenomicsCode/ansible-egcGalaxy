@@ -1,0 +1,41 @@
+<tool id="scATAC-seq_convertTofrag" name="scATAC-seq Convert BAM to TSV" version="1.0.0">
+    <description>- convert scATAC-seq BAM file TSV</description>
+    <requirements>
+      <requirement type="package" version="0.8.0">sinto</requirement>
+      <requirement type="package" version="1.14">samtools</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+            ln -s '$BAM' bamfile &&
+            #if $BAM.is_of_type('bam'):
+                #if str( $BAM.metadata.bam_index ) != "None":
+                          ln -s '${BAM.metadata.bam_index}' bamfile.bai &&
+                #else:
+                          samtools index bamfile bamfile.bai &&
+                #end if
+            #end if
+
+            sinto fragments -b bamfile -f tmpOutput --barcode_regex "[^:]*" 2> /dev/null &&
+            sort -k1,1 -k2,2n tmpOutput | bgzip > "$output"
+        ]]>
+    </command>
+    <inputs>
+      <param name="BAM" type="data" format="bam" label="scATAC-seq BAM file" />
+    </inputs>
+
+    <outputs>
+        <data name="output" type="data" format="bgzip"  label="Converted BAM file"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+**What it does**
+
+Converts scATAC-seq BAM file to tab-indexed BED file
+
+    </help>
+
+</tool>
