@@ -1,20 +1,48 @@
 <tool id="ArchR_generateArrowFiles" name="ArchR Generate Arrow Files" version="1.0.0">
     <description>- generate ArchR Arrow files from scATAC-seq BAM files</description>
     <requirements>
-      <requirement type="package">r-devtools</requirement>
-      <requirement type="package" version="1.22.1">bioconductor-deseq2</requirement>
+      <requirement type="package" version="1.20.3">r-getopt</requirement>
+      <requirement type="package" version="1.0.1">r-archr</requirement>
     </requirements>
+
+<!--
+
+promoterRegion = c(2000, 100),
+
+-->
+
 
     <command>
         <![CDATA[
+        #import json
+        #import os
+        Rscript $__tool_directory__/ArchR_generateArrowFile.R
+          --cores \${GALAXY_SLOTS:-1}
+          --minTSS "$mintss"
+          --minFrag "$minfrag"
+          --maxFrag "$maxfrag"
+          --outArrow "$output"
+          -g "$genome"
 
         ]]>
     </command>
     <inputs>
       <param name="input" type="data" format="bam" label="scATAC-seq BAM file" />
+
+      <param name="mintss" type="integer" value="4" min="1" label="Minimum TSS enrichment" help="The minimum numeric transcription start site (TSS) enrichment score required for a cell to pass filtering for use in downstream analyses. Cells with a TSS enrichment score greater than or equal to minTSS will be retained. TSS enrichment score is a measurement of signal-to-background in ATAC-seq." />
+      <param name="minfrag" type="integer" value="1000" min="1" label="Minimum read depth per cell" help="The minimum number of mapped ATAC-seq fragments required per cell to pass filtering for use in downstream analyses. Cells containing greater than or equal to minFrags total fragments wll be retained." />
+      <param name="maxfrag" type="integer" value="100000" min="1" label="Maximum read depth per cell" help="The maximum number of mapped ATAC-seq fragments required per cell to pass filtering for use in downstream analyses. Cells containing less than or equal to maxFrags total fragments wll be retained." />
+
+      <param name="genome" type="select" label="Select reference Genome" help="Select reference genome used for enrichment annotation comparison.">
+        <option value="mm10" selected="true">mm10</option>
+        <option value="mm9">mm9</option>
+        <option value="hg38">hg38</option>
+        <option value="hg19">hg19</option>
+      </param>
+
     </inputs>
     <outputs>
-        <data name="output" type="data" format="bgzip"  label="Converted ArrowFile"/>
+        <data name="output" type="data" format="bgzip"  label="Converted Arrow file"/>
         <data name="size_dist" type="data" format="pdf"  label="Insert size histogram"/>
         <data name="unique_frag" type="data" format="pdf"  label="Unique fragments QC plot"/>
     </outputs>
