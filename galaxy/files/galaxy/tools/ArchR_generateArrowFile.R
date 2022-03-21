@@ -17,8 +17,14 @@ args <- commandArgs(trailingOnly = TRUE)
 spec <- matrix(c(
   "quiet", "q", 0, "logical",
   "help", "h", 0, "logical",
-  "cores", "s", 0, "integer",
-  "genome", "g", 1, "character"
+  "cores", "c", 0, "integer",
+  "genome", "g", 1, "character",
+  "sample", "s", 1, "character",
+  "sampleid", "n", 1, "character",
+  "minTSS", "t", 1, "integer",
+  "minFrag", "a", 1, "integer",
+  "maxFrag", "b", 1, "integer",
+  "outArrow", "o", 1, "character"
 ), byrow = TRUE, ncol = 4)
 opt <- getopt(spec)
 
@@ -44,8 +50,22 @@ if (opt$cores > 1) {
 
 addArchRGenome(opt$genome)
 
-inputFiles <- getTutorialData("Hematopoiesis")
+#inputFiles <- getTutorialData("Hematopoiesis")
 #inputFiles
+#typeof(inputFiles)
+#inputFiles[1]
+#inputFiles[2]
+#inputFiles[3]
+#names(inputFiles)
+
+#inputFiles = "HemeFragments/scATAC_BMMC_R1.fragments.tsv.gz"
+#names(inputFiles) = "scATAC_BMMC_R1"
+#inputFiles
+
+inputFiles = opt$sample
+names(inputFiles) = opt$sampleid
+inputFiles
+
 #quit()
 
 ArrowFiles <- createArrowFiles(
@@ -75,5 +95,4 @@ ArrowFiles <- createArrowFiles(
   # Tn5 bias strands
   offsetPlus = 4,
   offsetMinus = -5
-
 )

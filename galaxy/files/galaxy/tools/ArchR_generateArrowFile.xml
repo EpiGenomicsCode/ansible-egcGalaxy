@@ -14,20 +14,24 @@ promoterRegion = c(2000, 100),
 
     <command>
         <![CDATA[
-        #import json
-        #import os
-        Rscript $__tool_directory__/ArchR_generateArrowFile.R
-          --cores \${GALAXY_SLOTS:-1}
-          --minTSS "$mintss"
-          --minFrag "$minfrag"
-          --maxFrag "$maxfrag"
-          --outArrow "$output"
-          -g "$genome"
-
+          #import json
+          #import os
+          Rscript $__tool_directory__/ArchR_generateArrowFile.R
+            --cores \${GALAXY_SLOTS:-1}
+            --minTSS "$mintss"
+            --minFrag "$minfrag"
+            --maxFrag "$maxfrag"
+            --outArrow "$output"
+            -g "$genome"
+            -s "$input"
+            -n "$samplename"
+          &&
+          mv QualityControl/*/*.pdf .
         ]]>
     </command>
     <inputs>
-      <param name="input" type="data" format="bam" label="scATAC-seq BAM file" />
+      <param name="input" type="data" format="bgzip" label="scATAC-seq TSV file" />
+      <param name="samplename" type="text" value="scATAC-seq sample" label="scATAC-seq sampleID" />
 
       <param name="mintss" type="integer" value="4" min="1" label="Minimum TSS enrichment" help="The minimum numeric transcription start site (TSS) enrichment score required for a cell to pass filtering for use in downstream analyses. Cells with a TSS enrichment score greater than or equal to minTSS will be retained. TSS enrichment score is a measurement of signal-to-background in ATAC-seq." />
       <param name="minfrag" type="integer" value="1000" min="1" label="Minimum read depth per cell" help="The minimum number of mapped ATAC-seq fragments required per cell to pass filtering for use in downstream analyses. Cells containing greater than or equal to minFrags total fragments wll be retained." />
@@ -42,9 +46,14 @@ promoterRegion = c(2000, 100),
 
     </inputs>
     <outputs>
-        <data name="output" type="data" format="bgzip"  label="Converted Arrow file"/>
-        <data name="size_dist" type="data" format="pdf"  label="Insert size histogram"/>
+        <data name="output" type="data" format="bgzip"  label="Arrow file"/>
+        <collection name="singlecells" type="list" label="scATAC-seq quality control">
+          <discover_datasets pattern="(?P&lt;designation&gt;.*)" directory="" ext="pdf" visible="false" />
+        </collection>
+
+<!--        <data name="size_dist" type="data" format="pdf"  label="Insert size histogram"/>
         <data name="unique_frag" type="data" format="pdf"  label="Unique fragments QC plot"/>
+  -->
     </outputs>
 
     <tests>
