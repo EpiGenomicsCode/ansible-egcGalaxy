@@ -43,29 +43,17 @@ suppressPackageStartupMessages({
 
 if (opt$cores > 1) {
   library("parallel")
-  addArchRThreads(threads = opt$cores)
+  addArchRThreads(threads = opt$cores, force=TRUE)
 } else {
-  addArchRThreads(threads = 1)
+  addArchRThreads(threads = 1, force=TRUE)
 }
 
 addArchRGenome(opt$genome)
 
 #inputFiles <- getTutorialData("Hematopoiesis")
-#inputFiles
-#typeof(inputFiles)
-#inputFiles[1]
-#inputFiles[2]
-#inputFiles[3]
-#names(inputFiles)
-
-#inputFiles = "HemeFragments/scATAC_BMMC_R1.fragments.tsv.gz"
-#names(inputFiles) = "scATAC_BMMC_R1"
-#inputFiles
-
 inputFiles = opt$sample
 names(inputFiles) = opt$sampleid
-inputFiles
-
+#inputFiles
 #quit()
 
 ArrowFiles <- createArrowFiles(
@@ -78,9 +66,9 @@ ArrowFiles <- createArrowFiles(
   genomeAnnotation = getGenomeAnnotation(),
   threads = getArchRThreads(),
 
-  minTSS = 4, #Dont set this too high because you can always increase later
-  minFrags = 1000,
-  maxFrags = 1e+05,
+  minTSS = opt$mintss, #Dont set this too high because you can always increase later
+  minFrags = opt$minFrag,
+  maxFrags = opt$maxFrag,
   nucLength = 147,
   promoterRegion = c(2000, 100),
 
