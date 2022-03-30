@@ -107,6 +107,7 @@ certbot_environment: production
 If you were previously set to SSL 'staging' and are now ready to move your Galaxy instance into SSL 'production', begin by removing your 'staging' certificates.
 ```
 sudo su -
+rm /etc/letsencrypt/renewal/hyperion.cac.cornell.edu.conf 
 rm -r /etc/letsencrypt/live/hyperion.cac.cornell.edu/
 rm -r /etc/letsencrypt/archive/hyperion.cac.cornell.edu/
 ```
