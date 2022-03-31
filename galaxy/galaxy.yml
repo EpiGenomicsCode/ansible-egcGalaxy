@@ -23,3 +23,8 @@
     - name: Install slurm-drmaa
       package:
         name: slurm-drmaa1
+    - name: Copy tool config file for galaxy
+      copy:
+        src: templates/galaxy/config/local_tool_conf.xml.j2
+        #dest: /mnt/mountpoint/srv/galaxy/server/config/tool_conf.xml
+        dest: "{{ galaxy_root }}/config/local_tool_conf.xml" 
