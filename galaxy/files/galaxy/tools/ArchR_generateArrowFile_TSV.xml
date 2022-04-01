@@ -18,10 +18,10 @@ promoterRegion = c(2000, 100),
 
 <command>
     <![CDATA[
-    ln -s '$input' sample.tsv.gz &&
-    tabix -p bed sample.tsv.gz &&
+    ln -s '$input' sample.tsv &&
+    bgzip -c sample.tsv > sample.tsv.gz &&
     Rscript $__tool_directory__/ArchR_generateArrowFile.R
-        --cores 1
+        --cores 2
         --minTSS "$mintss"
         --minFrag "$minfrag"
         --maxFrag "$maxfrag"
@@ -30,6 +30,9 @@ promoterRegion = c(2000, 100),
         -s sample.tsv.gz
         -n "$samplename"
       && mv ArchRLogs/*.log "$log"
+      && mv *.arrow "$output"
+      && mv QualityControl/*/*Fragment_Size_Distribution.pdf "$size_dist"
+      && mv QualityControl/*/*TSS_by_Unique_Frags.pdf "$unique_frag"
     ]]>
 </command>
 <inputs>
@@ -51,12 +54,13 @@ promoterRegion = c(2000, 100),
 <outputs>
     <data name="output" type="data" format="bgzip"  label="Arrow file"/>
     <data name="log" type="data" format="txt"  label="Log file"/>
-    <collection name="singlecells" type="list" label="scATAC-seq quality control">
-      <discover_datasets pattern="(?P&lt;designation&gt;.*)" directory="" ext="pdf" visible="false" />
-    </collection>
+    <data name="size_dist" type="data" format="pdf"  label="Insert size histogram"/>
+    <data name="unique_frag" type="data" format="pdf"  label="Unique fragments QC plot"/>
 
-<!--        <data name="size_dist" type="data" format="pdf"  label="Insert size histogram"/>
-        <data name="unique_frag" type="data" format="pdf"  label="Unique fragments QC plot"/>
+<!--
+<collection name="singlecells" type="list" label="scATAC-seq quality control">
+  <discover_datasets pattern="(?P&lt;designation&gt;.*)" directory="" ext="pdf" visible="false" />
+</collection>
   -->
     </outputs>
 
