@@ -66,7 +66,7 @@ ArrowFiles <- createArrowFiles(
   genomeAnnotation = getGenomeAnnotation(),
   threads = getArchRThreads(),
 
-  minTSS = opt$mintss, #Dont set this too high because you can always increase later
+  minTSS = opt$minTSS, #Dont set this too high because you can always increase later
   minFrags = opt$minFrag,
   maxFrags = opt$maxFrag,
   nucLength = 147,

@@ -1,4 +1,4 @@
-<tool id="ArchR_generateArrowFiles" name="ArchR Generate Arrow Files" version="1.0.0">
+<tool id="ArchR_generateArrowFiles_tsv" name="ArchR Generate Arrow Files from TSV" version="1.0.0">
     <description>- generate ArchR Arrow files from scATAC-seq BAM files</description>
     <requirements>
       <requirement type="package" version="1.20.3">r-getopt</requirement>
@@ -6,6 +6,7 @@
       <requirement type="package" version="2.10.0">bioconductor-rsamtools</requirement>
       <requirement type="package" version="1.0.1">r-archr</requirement>
       <requirement type="package" version="1.14">samtools</requirement>
+      <requirement type="package" version="1.11">tabix</requirement>
     </requirements>
 
 <!--
@@ -17,16 +18,8 @@ promoterRegion = c(2000, 100),
 
 <command>
     <![CDATA[
-    ln -s '$input' sample &&
-    #if $input.is_of_type('bam'):
-        #if str( $input.metadata.bam_index ) != "None":
-            ln -s '${input.metadata.bam_index}' sample.bai &&
-        #else:
-            samtools index sample sample.bai &&
-        #end if
-    #end if
-    #import json
-    #import os
+    ln -s '$input' sample.tsv.gz &&
+    tabix -p bed sample.tsv.gz &&
     Rscript $__tool_directory__/ArchR_generateArrowFile.R
         --cores 1
         --minTSS "$mintss"
@@ -34,13 +27,13 @@ promoterRegion = c(2000, 100),
         --maxFrag "$maxfrag"
         --outArrow "$output"
         -g "$genome"
-        -s sample
+        -s sample.tsv.gz
         -n "$samplename"
       && mv ArchRLogs/*.log "$log"
     ]]>
 </command>
 <inputs>
-  <param name="input" type="data" format="bam" label="scATAC-seq BAM file" />
+  <param name="input" type="data" format="bed" label="scATAC-seq TSV file" />
   <param name="samplename" type="text" value="scATAC-seq sample" label="scATAC-seq sampleID" />
 
   <param name="mintss" type="integer" value="4" min="1" label="Minimum TSS enrichment" help="The minimum numeric transcription start site (TSS) enrichment score required for a cell to pass filtering for use in downstream analyses. Cells with a TSS enrichment score greater than or equal to minTSS will be retained. TSS enrichment score is a measurement of signal-to-background in ATAC-seq." />
