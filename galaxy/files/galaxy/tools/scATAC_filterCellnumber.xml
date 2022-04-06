@@ -13,7 +13,7 @@
         ]]>
     </command>
     <inputs>
-      <param name="input" type="data" format="bam" label="Uncorrected BAM file" />
+      <param name="input" type="data" format="bam" label="Filtered BAM file" />
       <param name="MIN_READ" type="integer" value="20" min="1" label="Minimun number of reads per cell to retain in BAM" />
       <param name="FREQ" type="data" format="tabular" label="Barcode frequency statistics" />
     </inputs>
