@@ -47,7 +47,7 @@ if (opt$cores > 1) {
 
 inputFiles = opt$sample
 sampleName <- h5read(inputFiles, paste0("Metadata/Sample"))
-file.path("QualityControl", sampleName)
+#file.path("QualityControl", sampleName)
 dir.create(file.path("QualityControl", sampleName), recursive = TRUE, showWarnings = TRUE)
 #inputFiles
 #sampleName
