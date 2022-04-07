@@ -1,28 +1,49 @@
 <tool id="ArchR_inferDoublets" name="ArchR infer Doublets" version="1.0.0">
     <description>- infer Doublets from ArchR Arrow files</description>
     <requirements>
-      <requirement type="package" version="1.22.1">bioconductor-deseq2</requirement>
-      <requirement type="package" version="2.26.2">bioconductor-rhdf5</requirement>
-      <requirement type="package" version="1.10.0">bioconductor-tximport</requirement>
-      <requirement type="package" version="1.34.1">bioconductor-genomicfeatures</requirement>
-      <requirement type="package" version="1.20.2">r-getopt</requirement>
-      <requirement type="package" version="0.8.0">r-ggrepel</requirement>
-      <requirement type="package" version="3.0.1">r-gplots</requirement>
-      <requirement type="package" version="1.0.10">r-pheatmap</requirement>
-      <requirement type="package" version="0.2.20">r-rjson</requirement>
+      <requirement type="package" version="1.20.3">r-getopt</requirement>
+      <requirement type="package" version="1.30.16">r-BiocManager</requirement>
+      <requirement type="package" version="2.10.0">bioconductor-rsamtools</requirement>
+      <requirement type="package" version="1.0.1">r-archr</requirement>
+      <requirement type="package" version="4.1.0">r-seurat</requirement>
+      <requirement type="package" version="1.14">samtools</requirement>
     </requirements>
 
     <command>
         <![CDATA[
-
+          cp "$input" "$output" &&
+          Rscript $__tool_directory__/ArchR_inferDoublet.R
+              --cores 2
+              -s "$output"
+              -k "$kCells"
+              -m "$knnMethod"
+              -l "$LSIMethod"
+            2>&1
+            && mv ArchRLogs/*.log "$log"
+            && mv QualityControl/*/*pdf QualityControl/
         ]]>
     </command>
-    <inputs>
-      <param name="input" type="data" format="unsorted.bam" label="BAM file" />
 
+    <inputs>
+      <param name="input" type="data" format="bgzip" label="Arrow file"/>
+      <param name="kCells" type="integer" value="10" min="1" label="Minimum cell # for doublets" help="The number of cells neighboring a simulated doublet to be considered as putative doublets." />
+      <param name="knnMethod" type="select" label="Dimensionality reduction method" help="Select dimensionality reduction method to be used for k-nearest neighbors calculation.">
+        <option value="UMAP" selected="true">UMAP</option>
+        <option value="LSI">LSI</option>
+      </param>
+      <param name="LSIMethod" type="select" label="TF-IDF normalization" help="Order of operations in the TF-IDF normalization.">
+        <option value="1" selected="true">tf-logidf</option>
+        <option value="2">log(tf-idf)</option>
+        <option value="3">logtf-logidf</option>
+      </param>
     </inputs>
+
     <outputs>
-        <data name="output" type="data" format="unsorted.bam"  label="BAM file"/>
+        <data name="output" type="data" format="bgzip"  label="Arrow file"/>
+        <data name="log" type="data" format="txt" label="Log file"/>
+        <collection name="qcreports" type="list" label="scATAC-seq quality control">
+          <discover_datasets pattern="(?P&lt;designation&gt;.*)" directory="QualityControl" ext="pdf" visible="false" />
+        </collection>
     </outputs>
 
     <tests>
