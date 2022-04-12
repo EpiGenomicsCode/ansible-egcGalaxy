@@ -1,0 +1,61 @@
+<tool id="ArchR_cluster" name="ArchR Dimensionality Reduction" version="1.0.0">
+    <description>- Dimensionality reduction and clustering with ArchR Arrow files</description>
+    <requirements>
+      <requirement type="package" version="1.20.3">r-getopt</requirement>
+      <requirement type="package" version="1.30.16">r-BiocManager</requirement>
+      <requirement type="package" version="2.10.0">bioconductor-rsamtools</requirement>
+      <requirement type="package" version="1.0.1">r-archr</requirement>
+      <requirement type="package" version="4.1.0">r-seurat</requirement>
+      <requirement type="package" version="1.14">samtools</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+          cp "$input" "$output" &&
+          Rscript $__tool_directory__/ArchR_inferDoublet.R
+              --cores 2
+              -s "$output"
+              -k "$kCells"
+              -m "$knnMethod"
+              -l "$LSIMethod"
+            2>&1
+            && mv ArchRLogs/*.log "$log"
+            && mv QualityControl/*/*pdf QualityControl/
+        ]]>
+    </command>
+
+    <inputs>
+      <param name="input" type="data" format="bgzip" label="Arrow file"/>
+      <param name="kCells" type="integer" value="10" min="1" label="Minimum cell # for doublets" help="The number of cells neighboring a simulated doublet to be considered as putative doublets." />
+      <param name="knnMethod" type="select" label="Dimensionality reduction method" help="Select dimensionality reduction method to be used for k-nearest neighbors calculation.">
+        <option value="UMAP" selected="true">UMAP</option>
+        <option value="LSI">LSI</option>
+      </param>
+      <param name="LSIMethod" type="select" label="TF-IDF normalization" help="Order of operations in the TF-IDF normalization.">
+        <option value="1" selected="true">tf-logidf</option>
+        <option value="2">log(tf-idf)</option>
+        <option value="3">logtf-logidf</option>
+      </param>
+    </inputs>
+
+    <outputs>
+        <data name="output" type="data" format="bgzip"  label="Arrow file"/>
+        <data name="log" type="data" format="txt" label="Log file"/>
+        <collection name="qcreports" type="list" label="scATAC-seq quality control">
+          <discover_datasets pattern="(?P&lt;designation&gt;.*)" directory="QualityControl" ext="pdf" visible="false" />
+        </collection>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+**What it does**
+
+Calculates predicted doublet formation from scATAC-seq data
+Provided by:
+https://www.archrproject.com/index.html
+
+    </help>
+
+</tool>
