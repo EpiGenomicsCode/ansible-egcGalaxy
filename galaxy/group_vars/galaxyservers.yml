@@ -20,7 +20,7 @@ galaxy_manage_paths: true
 galaxy_layout: root-dir
 galaxy_root: /srv/galaxy
 galaxy_user: {name: galaxy, shell: /bin/bash}
-galaxy_commit_id: release_22.01
+galaxy_commit_id: release_22.05
 galaxy_force_checkout: true
 miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 miniconda_version: 4.7.12
@@ -37,16 +37,10 @@ galaxy_config:
     check_migrate_tools: false
     tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
     object_store_store_by: uuid
-    conda_ensure_channels: 'conda-forge,bioconda,defaults,austintwang'
-#    galaxy_dependency_resolvers:
-#      - type: tool_shed_packages
-#      - type: galaxy_packages
-#      - type: conda
-#        prefix: /srv/galaxy/conda
-#        auto_init: true
-#        auto_install: false
-    job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
-    #job_metrics_config_file: "{{ galaxy_config_dir }}/job_metrics_conf.xml"
+    id_secret: "{{ vault_id_secret }}"
+    job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
+
+    # Productionizing Galaxy
     # SQL Performance
     database_engine_option_server_side_cursors: true
     slow_query_log_threshold: 5
@@ -69,31 +63,37 @@ galaxy_config:
     allow_user_impersonation: true
     # Tool security
     outputs_to_working_directory: true
-  uwsgi:
-    socket: 127.0.0.1:5000
-    buffer-size: 16384
-    processes: 1
-    threads: 4
-    offload-threads: 2
-    static-map:
-      - /static={{ galaxy_server_dir }}/static
-      - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
-    static-safe: client/galaxy/images
-    master: true
-    virtualenv: "{{ galaxy_venv_dir }}"
-    pythonpath: "{{ galaxy_server_dir }}/lib"
-    module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
-    thunder-lock: true
-    die-on-term: true
-    hook-master-start:
-      - unix_signal:2 gracefully_kill_them_all
-      - unix_signal:15 gracefully_kill_them_all
-    py-call-osafterfork: true
-    enable-threads: true
-    mule:
-      - lib/galaxy/main.py
-      - lib/galaxy/main.py
-    farm: job-handlers:1,2
+
+    gravity:
+      galaxy_root: "{{ galaxy_root }}/server"
+      app_server: gunicorn
+      gunicorn:
+        # listening options
+        bind: "unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock"
+        # performance options
+        workers: 2
+        # Other options that will be passed to gunicorn
+        extra_args: '--forwarded-allow-ips="*"'
+        preload: true
+      celery:
+        concurrency: 2
+        loglevel: DEBUG
+      handlers:
+        handler:
+          processes: 3
+          pools:
+            - job-handler
+            - workflow-scheduler
+
+    conda_ensure_channels: 'conda-forge,bioconda,defaults,austintwang'
+#    galaxy_dependency_resolvers:
+#      - type: tool_shed_packages
+#      - type: galaxy_packages
+#      - type: conda
+#        prefix: /srv/galaxy/conda
+#        auto_init: true
+#        auto_install: false
+
 
 # systemd
 galaxy_manage_systemd: yes
@@ -108,8 +108,8 @@ galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
 #    dest: "{{ galaxy_config['app:main']['blacklist_file'] }}"
 
 galaxy_config_templates:
-  - src: templates/galaxy/config/job_conf.xml.j2
-    dest: "{{ galaxy_config_dir }}/job_conf.xml"
+  - src: templates/galaxy/config/job_conf.yml.j2
+    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 
 galaxy_local_tools:
 - scATAC_debarcode.xml
@@ -140,8 +140,8 @@ certbot_auth_method: --webroot
 certbot_install_method: virtualenv
 certbot_auto_renew: yes
 certbot_auto_renew_user: root
-certbot_environment: production
-#certbot_environment: staging
+#certbot_environment: production
+certbot_environment: staging
 certbot_well_known_root: /srv/nginx/_well-known_root
 certbot_share_key_users:
   - nginx
