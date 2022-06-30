@@ -39,7 +39,6 @@ galaxy_config:
     object_store_store_by: uuid
     id_secret: "{{ vault_id_secret }}"
     job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
-
     # Productionizing Galaxy
     # SQL Performance
     database_engine_option_server_side_cursors: true
@@ -63,29 +62,31 @@ galaxy_config:
     allow_user_impersonation: true
     # Tool security
     outputs_to_working_directory: true
-
-    gravity:
-      galaxy_root: "{{ galaxy_root }}/server"
-      app_server: gunicorn
-      gunicorn:
-        # listening options
-        bind: "unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock"
-        # performance options
-        workers: 2
-        # Other options that will be passed to gunicorn
-        extra_args: '--forwarded-allow-ips="*"'
-        preload: true
-      celery:
-        concurrency: 2
-        loglevel: DEBUG
-      handlers:
-        handler:
-          processes: 3
-          pools:
-            - job-handler
-            - workflow-scheduler
-
+    # TUS
+    tus_upload_store: /data/tus
+    # Add custom conda channel for scATAC-seq pipelines
     conda_ensure_channels: 'conda-forge,bioconda,defaults,austintwang'
+  gravity:
+    galaxy_root: "{{ galaxy_root }}/server"
+    app_server: gunicorn
+    gunicorn:
+      # listening options
+      bind: "unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock"
+      # performance options
+      workers: 2
+      # Other options that will be passed to gunicorn
+      extra_args: '--forwarded-allow-ips="*"'
+      preload: true
+    celery:
+      concurrency: 2
+      loglevel: DEBUG
+    handlers:
+      handler:
+        processes: 3
+        pools:
+          - job-handler
+          - workflow-scheduler
+
 #    galaxy_dependency_resolvers:
 #      - type: tool_shed_packages
 #      - type: galaxy_packages
@@ -140,13 +141,15 @@ certbot_auth_method: --webroot
 certbot_install_method: virtualenv
 certbot_auto_renew: yes
 certbot_auto_renew_user: root
-#certbot_environment: production
-certbot_environment: staging
+certbot_environment: production
+#certbot_environment: staging
 certbot_well_known_root: /srv/nginx/_well-known_root
 certbot_share_key_users:
   - nginx
+  - rabbitmq
 certbot_post_renewal: |
     systemctl restart nginx || true
+    systemctl restart rabbitmq-server || true
 certbot_domains:
  - "{{ inventory_hostname }}"
 certbot_agree_tos: --agree-tos
@@ -163,6 +166,19 @@ nginx_conf_http:
 nginx_ssl_role: usegalaxy_eu.certbot
 nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+
+# TUS
+galaxy_tusd_port: 1080
+tusd_instances:
+  - name: main
+    user: "{{ galaxy_user.name }}"
+    group: "galaxy"
+    args:
+      - "-host=localhost"
+      - "-port={{ galaxy_tusd_port }}"
+      - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
+      - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
+      - "-hooks-http-forward-headers=X-Api-Key,Cookie"
 
 # Slurm
 slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.

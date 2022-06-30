@@ -20,6 +20,7 @@
       become: true
       become_user: "{{ galaxy_user.name }}"
     - galaxyproject.nginx
+    - galaxyproject.tusd
     - galaxyproject.cvmfs
   post_tasks:
     - name: Install slurm-drmaa
