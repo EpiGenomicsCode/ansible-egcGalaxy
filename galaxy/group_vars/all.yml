@@ -12,3 +12,7 @@ galaxy_job_metrics_plugins:
   - type: env
   - type: cgroup
   - type: hostname
+
+# temp password for RabbitMQ
+vault_rabbitmq_password_vhost: XXX
+vault_rabbitmq_password_mqadmin: XXX

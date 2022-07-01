@@ -4,9 +4,48 @@
   vars_files:
     - group_vars/secret.yml
   pre_tasks:
-    - name: Install Dependencies
+    - name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+      when: ansible_os_family == 'Debian'
+    - name: Install RabbitMQ dependencies
+      ansible.builtin.package:
+        state: latest
+        name:
+          - python3-pip
+          - python3-virtualenv
+    - name: Install Galaxy dependencies
       package:
         name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+    - name: Configure SELinux
+      ansible.posix.seboolean:
+        name: "{{ item }}"
+        state: true
+        persistent: true
+      loop:
+        - httpd_can_network_connect
+      when: ansible_os_family == 'CentOS'
+    - name: Install docker pip package
+      ansible.builtin.pip:
+        name: docker
+    - name: Set docker user
+      block:
+        - name: Set _docker_users CentOS
+          set_fact:
+            _docker_users: ['centos']
+          when: ansible_distribution == 'CentOS'
+        - name: Set _docker_users Ubuntu
+          set_fact:
+            _docker_users: ['ubuntu']
+          when: ansible_distribution == 'Ubuntu'
+        - name: Set _docker_users Debian
+          set_fact:
+            _docker_users: ['debian']
+          when: ansible_distribution == 'Debian'
+        - name: Set docker_users
+          set_fact:
+            docker_users: "{{ _docker_users }}"
   roles:
     - galaxyproject.repos
     - galaxyproject.slurm
@@ -19,7 +58,10 @@
     - role: uchida.miniconda
       become: true
       become_user: "{{ galaxy_user.name }}"
+    - create_rabbitmq_user
+    - geerlingguy.docker
     - galaxyproject.nginx
+    - usegalaxy_eu.rabbitmqserver
     - galaxyproject.tusd
     - galaxyproject.cvmfs
   post_tasks:

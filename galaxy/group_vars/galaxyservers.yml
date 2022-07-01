@@ -95,7 +95,6 @@ galaxy_config:
 #        auto_init: true
 #        auto_install: false
 
-
 # systemd
 galaxy_manage_systemd: yes
 galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
@@ -161,8 +160,10 @@ nginx_servers:
 nginx_ssl_servers:
   - galaxy
 nginx_enable_default_server: false
+nginx_remove_default_vhost: true
 nginx_conf_http:
   client_max_body_size: 1g
+
 nginx_ssl_role: usegalaxy_eu.certbot
 nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -189,3 +190,33 @@ slurm_config:
   SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
   SelectType: select/cons_res
   SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
+
+# RabbitMQ
+rabbitmq_users:
+  - user: mqadmin
+    password: "{{ vault_rabbitmq_password_mqadmin }}"
+    tags: administrator
+    vhost: /
+  - user: galaxy
+    password: "{{ vault_rabbitmq_password_vhost }}"
+    vhost: galaxy
+
+rabbitmq_plugins:
+  - rabbitmq_management
+
+rabbitmq_config:
+  listeners:
+    tcp: none
+  ssl_listeners:
+    default: 5671
+  ssl_options:
+    cacertfile: /etc/ssl/certs/fullchain.pem
+    certfile: /etc/ssl/certs/cert.pem
+    keyfile: /etc/ssl/user/privkey-rabbitmq.pem
+    verify: verify_peer
+    fail_if_no_peer_cert: 'false'
+
+rabbitmq_container:
+  name: rabbit_hole
+  image: rabbitmq:3.9.11
+  hostname: "{{ inventory_hostname }}"
