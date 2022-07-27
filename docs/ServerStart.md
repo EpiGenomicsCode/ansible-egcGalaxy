@@ -61,8 +61,13 @@ sudo apt install sshpass -y
 Download roles for ansible
 ```
 cd galaxy/
-ansible-galaxy install -p roles -r requirements.yml
+ansible-galaxy install -r requirements.yml
 ```
+
+<details>
+Updates to ansible.cfg allow for direct pathing of the requirements download to be set without explicitly calling it.
+</details>
+
 
 <details>
 <summary> Error in uchida.miniconda
@@ -107,7 +112,7 @@ certbot_environment: production
 If you were previously set to SSL 'staging' and are now ready to move your Galaxy instance into SSL 'production', begin by removing your 'staging' certificates.
 ```
 sudo su -
-rm /etc/letsencrypt/renewal/hyperion.cac.cornell.edu.conf 
+rm /etc/letsencrypt/renewal/hyperion.cac.cornell.edu.conf
 rm -r /etc/letsencrypt/live/hyperion.cac.cornell.edu/
 rm -r /etc/letsencrypt/archive/hyperion.cac.cornell.edu/
 ```
