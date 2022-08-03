@@ -87,25 +87,9 @@ galaxy_config:
           - job-handler
           - workflow-scheduler
 
-#    galaxy_dependency_resolvers:
-#      - type: tool_shed_packages
-#      - type: galaxy_packages
-#      - type: conda
-#        prefix: /srv/galaxy/conda
-#        auto_init: true
-#        auto_install: false
-
 # systemd
 galaxy_manage_systemd: yes
 galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
-
-#galaxy_config_files:
-#  - src: files/galaxy/config/dependency_resolvers_conf.xml
-#    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
-#  - src: files/galaxy/config/job_metrics_conf.xml
-#    dest: "{{ galaxy_config.galaxy.job_metrics_config_file }}"
-#  - src: files/galaxy/config/disposable_email_blacklist.conf
-#    dest: "{{ galaxy_config['app:main']['blacklist_file'] }}"
 
 galaxy_config_templates:
   - src: templates/galaxy/config/job_conf.yml.j2
@@ -160,10 +144,30 @@ nginx_servers:
 nginx_ssl_servers:
   - galaxy
 nginx_enable_default_server: false
-nginx_remove_default_vhost: true
 nginx_conf_http:
   client_max_body_size: 1g
-
+  # gzip: "on" # This is enabled by default in Ubuntu, and the duplicate directive will cause a crash.
+  gzip_proxied: "any"
+  gzip_static: "on"   # The ngx_http_gzip_static_module module allows sending precompressed files with the ".gz" filename extension instead of regular files.
+  gzip_vary: "on"
+  gzip_min_length: 128
+  gzip_comp_level: 6  # Tradeoff of better compression for slightly more CPU time.
+  gzip_types: |
+      text/plain
+      text/css
+      text/xml
+      text/javascript
+      application/javascript
+      application/x-javascript
+      application/json
+      application/xml
+      application/xml+rss
+      application/xhtml+xml
+      application/x-font-ttf
+      application/x-font-opentype
+      image/png
+      image/svg+xml
+      image/x-icon
 nginx_ssl_role: usegalaxy_eu.certbot
 nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -194,11 +198,11 @@ slurm_config:
 # RabbitMQ
 rabbitmq_users:
   - user: mqadmin
-    password: "{{ vault_rabbitmq_password_mqadmin }}"
+    password: "{{ rabbitmq_users_password.mqadmin }}"
     tags: administrator
     vhost: /
   - user: galaxy
-    password: "{{ vault_rabbitmq_password_vhost }}"
+    password: "{{ rabbitmq_users_password.galaxy }}"
     vhost: galaxy
 
 rabbitmq_plugins:

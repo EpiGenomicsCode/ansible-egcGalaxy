@@ -67,8 +67,7 @@ ansible-galaxy install -r requirements.yml
 <details>
 Updates to ansible.cfg allow for direct pathing of the requirements download to be set without explicitly calling it.
 </details>
-
-
+<br>
 <details>
 <summary> Error in uchida.miniconda
 </summary>

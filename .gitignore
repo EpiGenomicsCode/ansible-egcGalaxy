@@ -1,3 +1,6 @@
+.DS_Store
+ephemeris_tools/.DS_Store
+galaxy/collections/
 galaxy/roles/galaxyproject.cvmfs/
 galaxy/roles/galaxyproject.galaxy/
 galaxy/roles/galaxyproject.nginx/
@@ -11,8 +14,4 @@ galaxy/roles/natefoo.postgresql_objects/
 galaxy/roles/uchida.miniconda/
 galaxy/roles/usegalaxy_eu.certbot/
 galaxy/roles/usegalaxy_eu.rabbitmqserver/
-galaxy/collections/
-ephemeris_tools/.DS_Store
-.DS_Store
 galaxy/.vault-password.txt
-galaxy/group_vars/.vault-password.txt
