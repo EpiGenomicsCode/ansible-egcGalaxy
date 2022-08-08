@@ -20,10 +20,18 @@ execution:
   environments:
     local_dest:
       runner: local_runner
+    local_8core:
+      runner: local_runner
+      local_slots: 8
     slurm:
       runner: slurm
+    slurm-4c:
+      runner: slurm
+      request_cpus: 4
+      native_specification: --nodes=1 --ntasks=1 --cpus-per-task=4
     slurm-14c:
       runner: slurm
+      request_cpus: 14
       native_specification: --nodes=1 --ntasks=1 --cpus-per-task=14
     pulsar:
       runner: pulsar_runner
@@ -38,6 +46,8 @@ execution:
 
 tools:
 - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
-  environments: local_dest
+  environment: local_dest
 - id: bowtie2
-  environments: slurm-14c
+  environment: slurm-14c
+- id: fastqc
+  environment: slurm-4c
