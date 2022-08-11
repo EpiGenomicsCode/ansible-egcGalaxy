@@ -100,17 +100,6 @@ def main():
         cur_i7 = barcode[8:16]
         cur_i5 = barcode[16:24]
         cur_r5 = barcode[24:]
-
-        #CTGAAGCT r7
-        #TAAGGCGA i7
-        #TCAGAGCC r5
-        #ATTATACG
-
-        #CGGCTATG r7
-        #CTCTCTAC i7
-        #GTCAGTAC r5
-        #AAGGCTAT i5
-
         # skip this read if barcode has mismatch with r5 or r7
         if not cur_r7 in table_r7:  # if not perfectly matched
             (opt_match, num_mm, opt_match2, num_mm2) = min_dist(cur_r7, table_r7)

@@ -48,6 +48,8 @@ tools:
 - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
   environment: local_dest
 - id: bowtie2
-  environment: slurm-14c
+  environment: slurm
 - id: fastqc
-  environment: slurm-4c
+  environment: slurm
+- id: samtools_filter
+  environment: slurm

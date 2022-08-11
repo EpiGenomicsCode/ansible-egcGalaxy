@@ -46,6 +46,14 @@
         - name: Set docker_users
           set_fact:
             docker_users: "{{ _docker_users }}"
+    - name: Make scATAC preprocessing toolkit destination dir
+      file:
+        path: /srv/galaxy/local_tools/scATAC_processing
+        state: directory
+    - name: Make ArchR toolkit destination dir
+      file:
+        path: /srv/galaxy/local_tools/ArchR_tools
+        state: directory
   roles:
     - galaxyproject.repos
     - galaxyproject.slurm

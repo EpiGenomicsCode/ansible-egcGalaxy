@@ -13,7 +13,7 @@
     </command>
     <inputs>
       <param name="input" type="data" format="bam" label="Uncorrected BAM file" />
-      <param name="barcode_mismatch" type="integer" value="2" min="1" label="Mismatches allowed" />
+      <param name="barcode_mismatch" type="integer" value="2" min="1" label="Mismatches allowed per barcode" />
       <param name="r7_scATAC" type="data" format="tabular" label="r7 scATAC-seq barcodes" />
       <param name="i7_scATAC" type="data" format="tabular" label="i7 scATAC-seq barcodes" />
       <param name="r5_scATAC" type="data" format="tabular" label="r5 scATAC-seq barcodes" />

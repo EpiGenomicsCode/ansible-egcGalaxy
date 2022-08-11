@@ -1,20 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
 <toolbox monitor="true" tool_path="/srv/galaxy/local_tools">
     <section id="scATAC" name="scATAC-seq Pre-processing">
-      <tool file="scATAC_barcode_err_correct.xml" />
-      <tool file="scATAC_barcodefreq.xml" />
-      <tool file="scATAC_convertToTSV.xml" />
-      <tool file="scATAC_debarcode.xml" />
-      <tool file="scATAC_decell.xml" />
-      <tool file="scATAC_filterCellnumber.xml" />
-      <tool file="scATAC_parseDedup.xml" />
-      <tool file="scATAC_removePCRdup.xml" />
-      <tool file="scATAC_summary.xml" />
+      <tool file="scATAC_processing/scATAC_barcode_err_correct.xml" />
+      <tool file="scATAC_processing/scATAC_barcodefreq.xml" />
+      <tool file="scATAC_processing/scATAC_convertToTSV.xml" />
+      <tool file="scATAC_processing/scATAC_debarcode.xml" />
+      <tool file="scATAC_processing/scATAC_filterCellnumber.xml" />
+      <tool file="scATAC_processing/scATAC_parseDedup.xml" />
+      <tool file="scATAC_processing/scATAC_summary.xml" />
     </section>
 
     <section id="ArchR" name="ArchR">
-      <tool file="ArchR_generateArrowFile.xml" />
-      <tool file="ArchR_generateArrowFile_TSV.xml" />
-      <tool file="ArchR_inferDoublet.xml" />
+      <tool file="ArchR_tools/ArchR_generateArrowFile.xml" />
+      <tool file="ArchR_tools/ArchR_generateArrowFile_TSV.xml" />
+      <tool file="ArchR_tools/ArchR_inferDoublet.xml" />
     </section>
 </toolbox>
