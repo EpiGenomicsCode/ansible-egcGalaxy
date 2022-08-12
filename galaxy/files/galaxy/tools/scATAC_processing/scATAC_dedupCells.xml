@@ -1,5 +1,5 @@
-<tool id="scATAC-seq_split_and_dedup" name="scATAC-seq Split and de-duplicate cells" version="1.0.0">
-    <description>- parse out and de-duplicate individual cells from scATAC-seq</description>
+<tool id="scATAC-seq_split_dedup_merge" name="scATAC-seq split, de-duplicate, then merge cells" version="1.0.0">
+    <description>- parse out and de-duplicate individual cells from scATAC-seq and then merge to single BAM</description>
 
     <requirements>
       <requirement type="package" version="1.14">samtools</requirement>
@@ -10,7 +10,7 @@
         <![CDATA[
             samtools view -h "$input"
             | samtools sort -n -O sam -T sorttmp -
-            | python  $__tool_directory__/scATAC_parseDedup.py -m "$minread" -
+            | python  $__tool_directory__/scATAC_dedupCells.py -m "$minread" -o "$output" - 
         ]]>
     </command>
     <inputs>
@@ -19,9 +19,7 @@
     </inputs>
 
     <outputs>
-      <collection name="singlecells" type="list" label="scATAC-seq individual cells">
-        <discover_datasets pattern="(?P&lt;designation&gt;.*)" directory="output" ext="bam" visible="false" />
-      </collection>
+      <data name="output" type="data" format="bam"  label="Single-cell deduplicated BAM file"/>
     </outputs>
 
     <tests>
@@ -30,7 +28,7 @@
     <help>
 **What it does**
 
-Split single-cell ATAC-seq data into individual BAM files.
+Split single-cell ATAC-seq data into individual BAM files, deduplicate them, and then merge into single BAM.
 Provided by:
 https://raw.githubusercontent.com/epigen-UCSD/snATAC_pipeline/master/bin/scATAC_decell
 

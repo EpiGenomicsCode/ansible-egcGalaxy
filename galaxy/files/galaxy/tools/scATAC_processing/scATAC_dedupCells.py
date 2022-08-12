@@ -8,15 +8,20 @@ import pysam
 
 def main():
     """ main function """
-    parser = optparse.OptionParser(usage='%prog [-h] [-m Min reads per cell]',
+    parser = optparse.OptionParser(usage='%prog [-h] [-m Min reads per cell] [-o Output BAM file]',
                                    description='Parse individual cells from scATAC-seq data.')
     parser.add_option('-m',
                       dest="min",
                       help='Minimum number of reads',
                       type="int"
-                      )
+    )
 
-    if len(sys.argv) < 2:
+    parser.add_option('-o',
+                      dest="output",
+                      help='Output BAM file name',
+    )
+
+    if len(sys.argv) < 4:
         parser.print_help()
         exit('error: too few arguments')
 
@@ -24,7 +29,6 @@ def main():
     min_reads = args.min
 
     os.mkdir('output')
-
     prev_barcode = ""
     instances = []
     heads = []
@@ -47,6 +51,7 @@ def main():
                 instances.append(line)
 
     os.chdir('output')
+    input_BAM = list()
     for file in os.listdir():
         if file.endswith('.sam'):
             barID = file.split(".")[0]
@@ -56,6 +61,10 @@ def main():
             os.remove(file)
             os.remove(barID + "_fixmate.bam")
             os.remove(barID + "_sort.bam")
+            input_BAM.append(barID + ".bam")
+
+    merge_parameters = ['-f',args.output] + input_BAM
+    pysam.merge(*merge_parameters)
 
 if __name__ == '__main__':
     main()

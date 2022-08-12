@@ -105,8 +105,8 @@ galaxy_local_tools:
 - scATAC_processing/scATAC_filterCellnumber.py
 - scATAC_processing/scATAC_summary.xml
 - scATAC_processing/scATAC_summary.py
-- scATAC_processing/scATAC_parseDedup.xml
-- scATAC_processing/scATAC_parseDedup.py
+- scATAC_processing/scATAC_dedupCells.xml
+- scATAC_processing/scATAC_dedupCells.py
 - scATAC_processing/scATAC_convertToTSV.xml
 - ArchR_tools/ArchR_generateArrowFile.xml
 - ArchR_tools/ArchR_generateArrowFile_TSV.xml
