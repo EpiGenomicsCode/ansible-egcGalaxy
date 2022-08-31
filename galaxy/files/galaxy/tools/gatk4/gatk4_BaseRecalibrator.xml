@@ -1,0 +1,43 @@
+<tool id="gatk4_BaseRecalibrator" name="GATK4 Base Recalibrator" version="1.0.0">
+    <description>- Generates recalibration table for Base Quality Score Recalibration (BQSR)</description>
+    <requirements>
+      <requirement type="package" version="4.2.6.1">gatk4</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+        #set $fasta_file = $fasta_source.fasta_id.fields.path
+        ln -s '${fasta_file}.fai' 'input.fasta.fai' &&
+        ln -s '$fasta_file' 'input.fasta' &&
+          gatk --java-options "-Xms4G -Xmx4G -XX:ParallelGCThreads=2" BaseRecalibrator \
+            -I "$INPUT" \
+            -R 'input.fasta' \
+            --known-sites "$KNOWN" \
+            -O "$OUTPUT"
+        ]]>
+    </command>
+    <inputs>
+      <param name="INPUT" type="data" format="bam" label="BAM file" />
+      <param name="KNOWN" type="data" format="vcf" label="One or more databases of known polymorphic sites used to exclude regions around known polymorphisms from analysis." />
+      <param name="GENOME" type="select" label="Select reference genome" help="If your genome of interest is not listed, contact the Galaxy team">
+        <options from_data_table="fasta_indexes" />
+      </param>
+    </inputs>
+    <outputs>
+        <data name="OUTPUT" type="data" format="tabular" label="Recalibration table file"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+      **What it does**
+
+      First pass of the base quality score recalibration. Generates a recalibration table based on various covariates. The default covariates are read group, reported quality score, machine cycle, and nucleotide context.
+      This walker generates tables based on specified covariates. It does a by-locus traversal operating only at sites that are in the known sites VCF. ExAc, gnomAD, or dbSNP resources can be used as known sites of variation. We assume that all reference mismatches we see are therefore errors and indicative of poor base quality. Since there is a large amount of data one can then calculate an empirical probability of error given the particular covariates seen at this site, where p(error) = num mismatches / num observations. The output file is a table (of the several covariate values, num observations, num mismatches, empirical quality score).
+
+      https://gatk.broadinstitute.org/hc/en-us/articles/360036898312-BaseRecalibrator
+
+    </help>
+
+</tool>

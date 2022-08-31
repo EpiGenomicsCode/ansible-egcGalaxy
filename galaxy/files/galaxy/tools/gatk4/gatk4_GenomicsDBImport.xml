@@ -1,0 +1,38 @@
+<tool id="gatk4_GenomicsDBImport" name="GATK4 GenomicsDBImport" version="1.0.0">
+    <description>- Import VCFs to GenomicsDB</description>
+    <requirements>
+      <requirement type="package" version="4.2.6.1">gatk4</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+          gatk --java-options "-Xms24G -Xmx24G -XX:ParallelGCThreads=2" GenomicsDBImport \
+            -V "$VCF" \
+            --genomicsdb-workspace-path "$OUTPUT"
+        ]]>
+    </command>
+    <inputs>
+      <param name="VCF" type="data" format="vcf" label="Recalibrated BAM file" />
+    </inputs>
+    <outputs>
+        <data name="OUTPUT" type="data" format="vcf" label="GVCF file"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+      **What it does**
+
+      Import single-sample GVCFs into GenomicsDB before joint genotyping.
+      The GATK4 Best Practice Workflow for SNP and Indel calling uses GenomicsDBImport to merge GVCFs from multiple samples. GenomicsDBImport offers the same functionality as CombineGVCFs and initially came from the Intel-Broad Center for Genomics. The datastore transposes sample-centric variant information across genomic loci to make data more accessible to tools.
+
+      To query the contents of the GenomicsDB datastore, use SelectVariants. See Tutorial#11813 to get started.
+
+      Details on GenomicsDB are at https://github.com/GenomicsDB/GenomicsDB/wiki. In brief, GenomicsDB utilises a data storage system optimized for storing/querying sparse arrays. Genomics data is typically sparse in that each sample has few variants with respect to the entire reference genome. GenomicsDB contains specialized code for genomics applications, such as VCF parsing and INFO field annotation calculation.
+
+      https://gatk.broadinstitute.org/hc/en-us/articles/5358869876891-GenomicsDBImport
+
+    </help>
+
+</tool>

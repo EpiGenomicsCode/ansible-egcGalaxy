@@ -54,6 +54,10 @@
       file:
         path: /srv/galaxy/local_tools/ArchR_tools
         state: directory
+    - name: Make Gatk4 toolkit destination dir
+      file:
+        path: /srv/galaxy/local_tools/gatk4
+        state: directory
   roles:
     - galaxyproject.repos
     - galaxyproject.slurm
