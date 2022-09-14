@@ -1,5 +1,5 @@
 <tool id="ArchR_generateArrowFiles_tsv" name="ArchR Generate Arrow Files from TSV" version="1.0.0">
-    <description>- generate ArchR Arrow files from scATAC-seq BAM files</description>
+    <description>- generate ArchR Arrow files from scATAC-seq TSV files</description>
     <requirements>
       <requirement type="package" version="1.20.3">r-getopt</requirement>
       <requirement type="package" version="1.30.16">r-BiocManager</requirement>

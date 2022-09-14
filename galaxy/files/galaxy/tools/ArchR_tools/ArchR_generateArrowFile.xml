@@ -28,7 +28,7 @@ promoterRegion = c(2000, 100),
     #import json
     #import os
     Rscript $__tool_directory__/ArchR_generateArrowFile.R
-        --cores 1
+        --cores 2
         --minTSS "$mintss"
         --minFrag "$minfrag"
         --maxFrag "$maxfrag"

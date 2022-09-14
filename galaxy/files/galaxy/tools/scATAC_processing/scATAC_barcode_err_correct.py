@@ -27,7 +27,7 @@ def min_dist(s, sl):
 
 def main():
     """ main function """
-    parser = optparse.OptionParser(usage='%prog [-h] [-m mismatches allowed] [-a r7_ATAC] [-b i7_ATAC] [-c i5_ATAC] [-d r5_ATAC] [-o Output Barcode ID]',
+    parser = optparse.OptionParser(usage='%prog [-h] [-m mismatches allowed] [-a r7_ATAC] [-b i7_ATAC] [-c r5_ATAC] [-d i5_ATAC] [-o Output Barcode ID]',
                                    description='Barcode error correction single-cell ATAC-seq allowing mismatch.')
     parser.add_option('-m',
         dest="mismatch",
@@ -43,12 +43,12 @@ def main():
         help='i7 Barcodes'
     )
     parser.add_option('-c',
-        dest="i5",
-        help='i5 Barcodes'
-    )
-    parser.add_option('-d',
         dest="r5",
         help='r5 Barcodes'
+    )
+    parser.add_option('-d',
+        dest="i5",
+        help='i5 Barcodes'
     )
     parser.add_option('-o',
         dest="output",
