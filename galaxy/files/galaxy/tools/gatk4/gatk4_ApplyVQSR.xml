@@ -1,0 +1,51 @@
+<tool id="gatk4_ApplyVQSR" name="GATK4 ApplyVQSR" version="1.0.0">
+    <description>- Apply a score cutoff to filter variants based on a recalibration table</description>
+    <requirements>
+      <requirement type="package" version="4.2.6.1">gatk4</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+        #set $fasta_file = $fasta_source.fasta_id.fields.path
+        ln -s '${fasta_file}.fai' 'input.fasta.fai' &&
+        ln -s '$fasta_file' 'input.fasta' &&
+          gatk --java-options "-Xms4G -Xmx4G -XX:ParallelGCThreads=2" ApplyVQSR \
+            -R "$REFERENCE" \
+            -V "$VARIANT" \
+            --truth-sensitivity-filter-level 99.9 \
+            --tranches-file "$TRANCHES" \
+            --recal-file "$RECAL_TABLE" \
+            -mode SNP \
+            -O "$OUTPUT"
+        ]]>
+    </command>
+    <inputs>
+      <param name="REFERENCE" type="select" label="Select reference genome" help="If your genome of interest is not listed, contact the Galaxy team">
+        <options from_data_table="fasta_indexes" />
+      </param>
+      <param name="VARIANT" type="data" format="vcf" label="One or more VCF files containing variants" />
+      <param name="RECAL_TABLE" type="data" format="tabular" label="The input recal file used by ApplyVQSR." />
+      <data name="TRANCHES" type="data" format="tabular" label="TThe input tranches file describing where to cut the data"/>
+    </inputs>
+    <outputs>
+        <data name="OUTPUT" type="data" format="vcf" label="	The output filtered and recalibrated VCF file in which each variant is annotated with its VQSLOD value"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+      **What it does**
+
+      Apply a score cutoff to filter variants based on a recalibration table
+      This tool performs the second pass in a two-stage process called Variant Quality Score Recalibration (VQSR). Specifically, it applies filtering to the input variants based on the recalibration table produced in the first step by VariantRecalibrator and a target sensitivity value, which the tool matches internally to a VQSLOD score cutoff based on the model's estimated sensitivity to a set of true variants.
+
+      The filter determination is not just a pass/fail process. The tool evaluates for each variant which "tranche", or slice of the dataset, it falls into in terms of sensitivity to the truthset. Variants in tranches that fall below the specified truth sensitivity filter level have their FILTER field annotated with the corresponding tranche level. This results in a callset that is filtered to the desired level but retains the information necessary to increase sensitivity if needed.
+
+      To be clear, please note that by "filtered", we mean that variants failing the requested tranche cutoff are marked as filtered in the output VCF; they are not discarded unless the option to do so is specified.
+
+      https://gatk.broadinstitute.org/hc/en-us/articles/5358890204187-ApplyVQSR
+
+    </help>
+
+</tool>

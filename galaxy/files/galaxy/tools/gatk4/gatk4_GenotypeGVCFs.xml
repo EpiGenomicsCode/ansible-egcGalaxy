@@ -1,0 +1,44 @@
+<tool id="gatk4_GenotypeGVCFs" name="GATK4 GenotypeGVCFs" version="1.0.0">
+    <description>- Perform joint genotyping on one or more samples pre-called with HaplotypeCaller</description>
+    <requirements>
+      <requirement type="package" version="4.2.6.1">gatk4</requirement>
+    </requirements>
+
+    <command>
+        <![CDATA[
+        #set $fasta_file = $fasta_source.fasta_id.fields.path
+        ln -s '${fasta_file}.fai' 'input.fasta.fai' &&
+        ln -s '$fasta_file' 'input.fasta' &&
+          gatk --java-options "-Xms4G -Xmx4G -XX:ParallelGCThreads=2" GenotypeGVCFs \
+            -R "$REFERENCE" \
+            -D "$DBSNP" \
+            -V gendb://genomicsDBimport_chrA1 \
+            -O "$OUTPUT"
+        ]]>
+    </command>
+    <inputs>
+      <param name="REFERENCE" type="select" label="Select reference genome" help="If your genome of interest is not listed, contact the Galaxy team">
+        <options from_data_table="fasta_indexes" />
+      </param>
+      <param name="DBSNP" type="data" format="vcf" label="dbSNP file" />
+    </inputs>
+    <outputs>
+        <data name="OUTPUT" type="data" format="vcf" label="VCF file"/>
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>
+      **What it does**
+
+      Perform joint genotyping on one or more samples pre-called with HaplotypeCaller
+      This tool is designed to perform joint genotyping on a single input, which may contain one or many samples.
+      In any case, the input samples must possess genotype likelihoods produced by HaplotypeCaller with `-ERC GVCF`
+      or `-ERC BP_RESOLUTION`.
+
+      https://gatk.broadinstitute.org/hc/en-us/articles/360036899732-GenotypeGVCFs
+
+    </help>
+
+</tool>
