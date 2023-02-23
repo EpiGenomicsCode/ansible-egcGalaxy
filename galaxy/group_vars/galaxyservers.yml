@@ -29,7 +29,7 @@ miniconda_manage_dependencies: false
 galaxy_config:
   galaxy:
     tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
-    brand: "Single-cell Analysis"
+    brand: "EpiGenomics Core"
     admin_users: admin@example.org,jessica.hayward@cornell.edu
     serve_xss_vulnerable_mimetypes: true # To allow SVG files be shown in galaxy web interface
     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
@@ -116,7 +116,7 @@ galaxy_local_tools:
 - gatk4/gatk4_ApplyBQSR.xml
 - gatk4/gatk4_HaplotypeCaller.xml
 - gatk4/gatk4_GenomicsDBImport.xml
-- ScriptManager/ScriptManager-v0.13-dev.jar
+- ScriptManager/ScriptManager-v0.14.jar
 - ScriptManager/scriptmanager_tagpileup.xml
 - ScriptManager/scriptmanager_compositeimage.xml
 - ScriptManager/macros.xml

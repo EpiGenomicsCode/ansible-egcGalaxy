@@ -27,7 +27,7 @@ roles:
   - name: galaxyproject.tusd
     version: 0.0.1
   - src: galaxyproject.cvmfs
-    version: 0.2.13
+    version: 0.2.21
   - src: galaxyproject.repos
     version: 0.0.2
   - src: galaxyproject.slurm

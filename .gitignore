@@ -5,6 +5,7 @@ galaxy/roles/galaxyproject.cvmfs/
 galaxy/roles/galaxyproject.galaxy/
 galaxy/roles/galaxyproject.nginx/
 galaxy/roles/galaxyproject.postgresql/
+galaxy/roles/galaxyproject.postgresql_objects/
 galaxy/roles/galaxyproject.repos/
 galaxy/roles/galaxyproject.slurm/
 galaxy/roles/galaxyproject.tusd/
