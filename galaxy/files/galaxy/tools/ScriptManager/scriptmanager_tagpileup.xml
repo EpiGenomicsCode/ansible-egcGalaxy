@@ -19,7 +19,7 @@
               #end if
           #end if
 
-        java -jar $__tool_directory__/ScriptManager-v0.13-dev.jar read-analysis tag-pileup input.bed bamfile.bam
+        java -jar $__tool_directory__/ScriptManager-v0.14.jar read-analysis tag-pileup input.bed bamfile.bam
           -M pileup
           #if str($read) == "read1"  :
               --read1

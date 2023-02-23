@@ -9,7 +9,7 @@
 
     <command detect_errors="aggressive">
         <![CDATA[
-          java -jar $__tool_directory__/ScriptManager-v0.13-dev.jar figure-generation composite-plot '$INPUT'
+          java -jar $__tool_directory__/ScriptManager-v0.14.jar figure-generation composite-plot '$INPUT'
             -o '$IMAGE'
             -x '$WIDTH'
             -y '$HEIGHT'
