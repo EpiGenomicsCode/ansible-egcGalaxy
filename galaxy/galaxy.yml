@@ -1,51 +1,37 @@
+---
+- hosts: dbservers
+  become: true
+  become_user: root
+  pre_tasks:
+    - name: Install Dependencies
+      package:
+        name: 'acl'
+  roles:
+    - galaxyproject.postgresql
+    - role: galaxyproject.postgresql_objects
+      become: true
+      become_user: postgres
+
 - hosts: galaxyservers
   become: true
   become_user: root
   vars_files:
     - group_vars/secret.yml
   pre_tasks:
-    - name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
-      apt:
-        update_cache: true
-        cache_valid_time: 3600
-      when: ansible_os_family == 'Debian'
-    - name: Install RabbitMQ dependencies
-      ansible.builtin.package:
-        state: latest
-        name:
-          - python3-pip
-          - python3-virtualenv
     - name: Install Galaxy dependencies
       package:
-        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
-    - name: Configure SELinux
-      ansible.posix.seboolean:
-        name: "{{ item }}"
-        state: true
-        persistent: true
-      loop:
-        - httpd_can_network_connect
-      when: ansible_os_family == 'CentOS'
+        name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-venv', 'python3-setuptools', 'python3-pip']
     - name: Install docker pip package
       ansible.builtin.pip:
         name: docker
-    - name: Set docker user
-      block:
-        - name: Set _docker_users CentOS
-          set_fact:
-            _docker_users: ['centos']
-          when: ansible_distribution == 'CentOS'
-        - name: Set _docker_users Ubuntu
-          set_fact:
-            _docker_users: ['ubuntu']
-          when: ansible_distribution == 'Ubuntu'
-        - name: Set _docker_users Debian
-          set_fact:
-            _docker_users: ['debian']
-          when: ansible_distribution == 'Debian'
-        - name: Set docker_users
-          set_fact:
-            docker_users: "{{ _docker_users }}"
+    - name: Install RHEL/CentOS/Rocky specific dependencies
+      package:
+        name: ['tmpwatch']
+      when: ansible_os_family == 'RedHat'
+    - name: Install Debian/Ubuntu specific dependencies
+      package:
+        name: ['tmpreaper']
+      when: ansible_os_family == 'Debian'
     - name: Make scATAC preprocessing toolkit destination dir
       file:
         path: /srv/galaxy/local_tools/scATAC_processing
@@ -63,28 +49,31 @@
         path: /srv/galaxy/local_tools/ScriptManager
         state: directory
   roles:
+    - galaxyproject.tusd
     - galaxyproject.repos
     - galaxyproject.slurm
-    - galaxyproject.postgresql
-    - role: galaxyproject.postgresql_objects
-      become: true
-      become_user: postgres
-    - geerlingguy.pip
     - galaxyproject.galaxy
-    - role: uchida.miniconda
+    - usegalaxy_eu.tpv_auto_lint
+    - role: galaxyproject.miniconda
       become: true
-      become_user: "{{ galaxy_user.name }}"
-    - create_rabbitmq_user
-    - geerlingguy.docker
+      become_user: "{{ galaxy_user_name }}"
     - galaxyproject.nginx
+    - geerlingguy.docker
     - usegalaxy_eu.rabbitmqserver
-    - galaxyproject.tusd
+    - galaxyproject.gxadmin
     - galaxyproject.cvmfs
   post_tasks:
+#    - name: Copy tool config file for galaxy
+#      copy:
+#        src: templates/galaxy/config/local_tool_conf.xml.j2
+#        dest: "{{ galaxy_root }}/config/local_tool_conf.xml"
+    - name: Setup gxadmin cleanup task
+      ansible.builtin.cron:
+        name: "Cleanup Old User Data"
+        user: galaxy # Run as the Galaxy user
+        minute: "0"
+        hour: "0"
+        job: "GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server /usr/local/bin/gxadmin galaxy cleanup 60"
     - name: Install slurm-drmaa
       package:
         name: slurm-drmaa1
-    - name: Copy tool config file for galaxy
-      copy:
-        src: templates/galaxy/config/local_tool_conf.xml.j2
-        dest: "{{ galaxy_root }}/config/local_tool_conf.xml"

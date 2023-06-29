@@ -68,19 +68,6 @@ ansible-galaxy install -r requirements.yml
 Updates to ansible.cfg allow for direct pathing of the requirements download to be set without explicitly calling it.
 </details>
 <br>
-<details>
-<summary> Error in uchida.miniconda
-</summary>
-<br>
-Miniconda version in uchida.miniconda is out of date and requires a manual update for now.
-
-After downloading the roles, make the following change to
-uchida.miniconda/vars/main.yml
-
-> "miniconda_installer: Miniconda{{ "3" if miniconda_python == 3 or miniconda_version not in miniconda_oldversions else "" }}-py39_{{ miniconda_version }}-{{ miniconda_systems[ansible_system] }}-{{ miniconda_architecture[ansible_architecture] }}.sh"
-
-</details>
-<br>
 
 Deploy ansible playbook
 - -k allows for passing of SSH password through commandline

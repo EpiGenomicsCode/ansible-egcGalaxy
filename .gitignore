@@ -15,4 +15,8 @@ galaxy/roles/natefoo.postgresql_objects/
 galaxy/roles/uchida.miniconda/
 galaxy/roles/usegalaxy_eu.certbot/
 galaxy/roles/usegalaxy_eu.rabbitmqserver/
+galaxy/roles/galaxyproject.gxadmin/
+galaxy/roles/galaxyproject.miniconda/
+galaxy/roles/usegalaxy_eu.apptainer/
+galaxy/roles/usegalaxy_eu.tpv_auto_lint/
 galaxy/.vault-password.txt
