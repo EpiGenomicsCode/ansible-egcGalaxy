@@ -21,7 +21,7 @@ galaxy_job_config:
     slurm:
       load: galaxy.jobs.runners.slurm:SlurmJobRunner
       drmaa_library_path: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
-    pulsar_runner:
+    pulsar_psu_runner:
       load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
       amqp_url: "pyamqp://galaxy_psu:{{ rabbitmq_users_password.psupulsar }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
       amqp_acknowledge: true
