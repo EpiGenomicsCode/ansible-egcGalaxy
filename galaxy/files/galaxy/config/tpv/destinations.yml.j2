@@ -1,0 +1,43 @@
+# NOTE: Use dashes (-) exclusively for tags and underscores (_) exclusively for destinations.
+destinations:
+  local_env:
+    runner: local_runner
+    max_accepted_cores: 1
+    params:
+      tmp_dir: true
+  slurm:
+    runner: slurm
+    max_accepted_cores: 24
+    max_accepted_mem: 256
+    max_cores: 2
+    max_mem: 8
+    params:
+      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
+  pulsar_psu_tpv:
+    runner: pulsar_runner
+    params:
+      default_file_action: remote_transfer
+      dependency_resolution: remote
+      jobs_directory: /storage/group/bfp2/default/00_pughlab/pulsar/files/staging
+      persistence_directory: /storage/group/bfp2/default/00_pughlab/pulsar/files/persisted_data
+      remote_metadata: false
+      rewrite_parameters: true
+      transport: curl
+      outputs_to_working_directory: false
+    scheduling:
+      require:
+        - psu-pulsar
+  pulsar_iu_tpv:
+    runner: pulsar_iu_runner
+    params:
+      default_file_action: remote_transfer
+      dependency_resolution: remote
+      jobs_directory: /storage/group/bfp2/default/00_pughlab/pulsar/files/staging
+      persistence_directory: /storage/group/bfp2/default/00_pughlab/pulsar/files/persisted_data
+      remote_metadata: false
+      rewrite_parameters: true
+      transport: curl
+      outputs_to_working_directory: false
+    scheduling:
+      require:
+        - iu-pulsar

@@ -23,7 +23,17 @@ galaxy_job_config:
       drmaa_library_path: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
     pulsar_runner:
       load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
-      amqp_url: "pyamqp://galaxy:{{ rabbitmq_users_password.galaxy }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
+      amqp_url: "pyamqp://galaxy_psu:{{ rabbitmq_users_password.psupulsar }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
+      amqp_acknowledge: true
+      amqp_ack_republish_time: 1200
+      amqp_consumer_timeout: 2
+      amqp_publish_retry: true
+      amqp_publish_retry_max_retries: 60
+      galaxy_url: "https://{{ inventory_hostname }}"
+      manager: _default_
+    pulsar_iu_runner:
+      load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
+      amqp_url: "pyamqp://galaxy_iu:{{ rabbitmq_users_password.iupulsar }}@localhost:5671/{{ rabbitmq_vhosts[1] }}?ssl=1"
       amqp_acknowledge: true
       amqp_ack_republish_time: 1200
       amqp_consumer_timeout: 2
@@ -46,7 +56,10 @@ galaxy_job_config:
         rules_module: tpv.rules
         tpv_config_files:
           - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
-          - "{{ tpv_config_dir }}/tpv_rules_local.yml"
+#          - "{{ tpv_config_dir }}/tpv_rules_local.yml"
+          - "{{ tpv_config_dir }}/tool_defaults.yml"
+          - "{{ tpv_config_dir }}/tools.yml"
+          - "{{ tpv_config_dir }}/destinations.yml"
   resources:
     default: default
     groups:
@@ -134,13 +147,21 @@ galaxy_config:
 
 galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
 
+galaxy_config_file_src_dir: files/galaxy/config
 galaxy_config_files:
-  - src: files/galaxy/config/tpv_rules_local.yml
-    dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
+#  - src: "{{ galaxy_config_file_src_dir }}/tpv_rules_local.yml"
+#    dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
+  - src: "{{ galaxy_config_file_src_dir }}/tpv/tool_defaults.yml"
+    dest: "{{ tpv_mutable_dir }}/tool_defaults.yml"
+  - src: "{{ galaxy_config_file_src_dir }}/tpv/tools.yml"
+    dest: "{{ tpv_mutable_dir }}/tools.yml"
 
+galaxy_config_template_src_dir: templates/galaxy/config
 galaxy_config_templates:
-  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
+  - src: "{{ galaxy_config_template_src_dir }}/job_resource_params_conf.xml.j2"
     dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
+  - src: "{{ galaxy_config_file_src_dir }}/tpv/destinations.yml.j2"
+    dest: "{{ tpv_mutable_dir }}/destinations.yml"
 
 galaxy_extra_dirs:
   - /data
@@ -274,7 +295,8 @@ rabbitmq_config:
   consumer_timeout: 21600000 # 6 hours in milliseconds
 
 rabbitmq_vhosts:
-  - /galaxy
+  - /pulsar/galaxy_psu
+  - /pulsar/galaxy_iu
 
 # RabbitMQ
 rabbitmq_users:
@@ -282,9 +304,12 @@ rabbitmq_users:
     password: "{{ rabbitmq_users_password.mqadmin }}"
     tags: administrator
     vhost: /
-  - user: galaxy
-    password: "{{ rabbitmq_users_password.galaxy }}"
-    vhost: galaxy
+  - user: galaxy_psu
+    password: "{{ rabbitmq_users_password.psupulsar }}"
+    vhost: /pulsar/galaxy_psu
+  - user: galaxy_iu
+    password: "{{ rabbitmq_users_password.iupulsar }}"
+    vhost: /pulsar/galaxy_iu
 
 # TUS
 galaxy_tusd_port: 1080
