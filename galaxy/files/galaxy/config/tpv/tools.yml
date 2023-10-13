@@ -23,15 +23,19 @@ tools:
         cores: int(job.get_param_values(app)['__job_resource']['cores'])
         params:
            walltime: "{int(job.get_param_values(app)['__job_resource']['time'])}"
-  .*/bwa/.*:
+#  .*/bwa/.*:
+#    scheduling:
+#      require:
+#        - psu-pulsar
+  .*/bwa*/.*:
     scheduling:
       require:
-        - psu-pulsar
-  .*/bwa_mem/.*:
-    scheduling:
-      require:
-        - psu-pulsar
+        - iu-pulsar
   .*/fastqc/.*:
+    scheduling:
+      require:
+        - iu-pulsar
+  .*/*repeat_masker*/.*:
     scheduling:
       require:
         - iu-pulsar

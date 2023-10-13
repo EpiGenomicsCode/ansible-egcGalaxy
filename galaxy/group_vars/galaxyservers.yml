@@ -9,7 +9,8 @@ galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
 galaxy_commit_id: release_23.0
 galaxy_force_checkout: true
 miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
-miniconda_version: 4.12.0
+#miniconda_version: 4.12.0
+miniconda_version: 23.9.0
 miniconda_channels: ['conda-forge', 'defaults']
 
 # Galaxy Job Configuration
@@ -79,6 +80,8 @@ galaxy_config:
     # Main Configuration
     admin_users:
     - admin@example.org
+    - jsc333@cornell.edu
+    - owl8@cornell.edu
     database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
     file_path: /data/datasets
     job_working_directory: /data/jobs
@@ -200,6 +203,52 @@ galaxy_local_tools:
   - ScriptManager/scriptmanager_compositeimage.xml
   - ScriptManager/macros.xml
   - testing.xml
+  - PEGR/bam_to_scidx_output_stats.py
+  - PEGR/bam_to_scidx_output_stats.xml
+  - PEGR/bedtools_intersectbed_output_stats.py
+  - PEGR/bedtools_intersectbed_output_stats.xml
+  - PEGR/bwa_mem_output_stats_single.py
+  - PEGR/bwa_mem_output_stats_single.xml
+  - PEGR/chexmix_output_stats.py
+  - PEGR/chexmix_output_stats.xml
+  - PEGR/cwpair2_output_stats.py
+  - PEGR/cwpair2_output_stats.xml
+  - PEGR/extract_genomic_dna_output_stats.py
+  - PEGR/extract_genomic_dna_output_stats.xml
+  - PEGR/extract_genomic_dna_output_stats2.xml
+  - PEGR/extract_genomic_dna_output_stats3.xml
+  - PEGR/fasta_nucleotide_color_plot_output_stats.py
+  - PEGR/fasta_nucleotide_color_plot_output_stats.xml
+  - PEGR/fastqc_output_stats.py
+  - PEGR/fastqc_output_stats.xml
+  - PEGR/fastqc_output_stats2.xml
+  - PEGR/galaxy_post_pegr.py
+  - PEGR/galaxy_post_pegr.xml
+  - PEGR/galaxy_post_pegr_util.py
+  - PEGR/genetrack_output_stats.py
+  - PEGR/genetrack_output_stats.xml
+  - PEGR/input_dataset_output_stats.py
+  - PEGR/input_dataset_r1_output_stats.xml
+  - PEGR/input_dataset_r2_output_stats.xml
+  - PEGR/macros.xml
+  - PEGR/mark_duplicates_bam_output_stats.py
+  - PEGR/mark_duplicates_bam_output_stats.xml
+  - PEGR/meme_fimo_output_stats.py
+  - PEGR/meme_fimo_output_stats.xml
+  - PEGR/meme_meme_output_stats.py
+  - PEGR/meme_meme_output_stats.xml
+  - PEGR/pe_histogram_output_stats.py
+  - PEGR/pe_histogram_output_stats.xml
+  - PEGR/pegr_info_file.txt.sample
+  - PEGR/repeatmasker_wrapper_output_stats.py
+  - PEGR/repeatmasker_wrapper_output_stats.xml
+  - PEGR/repeatmasker_wrapper_output_stats2.xml
+  - PEGR/samtool_filter2_output_stats.py
+  - PEGR/samtool_filter2_output_stats.xml
+  - PEGR/stats_config.ini.sample
+  - PEGR/stats_util.py
+  - PEGR/tag_pileup_frequency_output_stats.py
+  - PEGR/tag_pileup_frequency_output_stats.xml
 
 # Certbot
 certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -314,3 +363,12 @@ rabbitmq_users:
 # TUS
 galaxy_tusd_port: 1080
 galaxy_tus_upload_store: /data/tus
+
+# Singularity var
+galaxy_job_conf_singularity_volumes:
+  iu_pulsar:
+    - "$tool_directory:ro"
+    - "$working_directory:rw"
+    - "$job_directory:rw"
+    - "/cvmfs/data.galaxyproject.org:ro"
+    - "/tmp:rw"

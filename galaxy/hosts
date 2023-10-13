@@ -1,4 +1,5 @@
 [galaxyservers]
 hyperion.cac.cornell.edu ansible_connection=ssh ansible_user=wkl29
+#shrike.cac.cornell.edu ansible_connection=ssh ansible_user=wkl29
 [dbservers:children]
 galaxyservers

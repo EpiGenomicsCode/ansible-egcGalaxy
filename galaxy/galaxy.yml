@@ -48,6 +48,10 @@
       file:
         path: /srv/galaxy/local_tools/ScriptManager
         state: directory
+    - name: Make PEGR toolkit destination dir
+      file:
+        path: /srv/galaxy/local_tools/PEGR
+        state: directory
   roles:
     - galaxyproject.tusd
     - galaxyproject.repos
@@ -63,10 +67,10 @@
     - galaxyproject.gxadmin
     - galaxyproject.cvmfs
   post_tasks:
-#    - name: Copy tool config file for galaxy
-#      copy:
-#        src: templates/galaxy/config/local_tool_conf.xml.j2
-#        dest: "{{ galaxy_root }}/config/local_tool_conf.xml"
+    - name: Copy tool config file for galaxy
+      copy:
+        src: templates/galaxy/config/local_tool_conf.xml.j2
+        dest: "{{ galaxy_root }}/config/local_tool_conf.xml"
     - name: Setup gxadmin cleanup task
       ansible.builtin.cron:
         name: "Cleanup Old User Data"
