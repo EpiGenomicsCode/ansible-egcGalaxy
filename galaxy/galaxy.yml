@@ -65,7 +65,7 @@
     - geerlingguy.docker
     - usegalaxy_eu.rabbitmqserver
     - galaxyproject.gxadmin
-    - galaxyproject.cvmfs
+    #- galaxyproject.cvmfs
   post_tasks:
     - name: Copy tool config file for galaxy
       copy:
