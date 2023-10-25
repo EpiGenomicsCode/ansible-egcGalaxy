@@ -4,7 +4,8 @@ galaxy_separate_privileges: true # Best practices for security, configuration is
 galaxy_manage_paths: true # False by default as your administrator might e.g. have root_squash enabled on NFS. Here we can create the directories so it's fine.
 galaxy_manage_cleanup: true
 galaxy_layout: root-dir
-galaxy_root: /srv/galaxy
+#galaxy_root: /srv/galaxy
+galaxy_root: /cephfs/galaxy
 galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
 galaxy_commit_id: release_23.0
 galaxy_force_checkout: true
@@ -83,8 +84,8 @@ galaxy_config:
     - jsc333@cornell.edu
     - owl8@cornell.edu
     database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
-    file_path: /data/datasets
-    job_working_directory: /data/jobs
+    file_path: /cephfs/data/datasets
+    job_working_directory: /cephfs/data/jobs
     object_store_store_by: uuid
     id_secret: "{{ vault_id_secret }}"
     job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -167,7 +168,7 @@ galaxy_config_templates:
     dest: "{{ tpv_mutable_dir }}/destinations.yml"
 
 galaxy_extra_dirs:
-  - /data
+  - /cephfs/data
   - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
 
 galaxy_extra_privsep_dirs:
@@ -362,7 +363,7 @@ rabbitmq_users:
 
 # TUS
 galaxy_tusd_port: 1080
-galaxy_tus_upload_store: /data/tus
+galaxy_tus_upload_store: /cephfs/data/tus
 
 # Singularity var
 galaxy_job_conf_singularity_volumes:
