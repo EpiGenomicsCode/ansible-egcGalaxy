@@ -24,23 +24,10 @@ ansible-galaxy install -r requirements.yml
 
   Note that Certbot authorization is set to 'production' by default. If you are performing development work on a server, this should be set to 'staging' to avoid hitting your Certbot certificate quota. We **strongly** recommend to keep this parameter in this mode until Galaxy is confirmed to be online and working.
 
-
-Under `group_vars/galaxyservers.yml`
-
-Staging SSL
-```
-certbot_environment: staging
-#certbot_environment: production
-```
-
-Production SSL
-```
-#certbot_environment: staging
-certbot_environment: production
-```
-
 #### Converting over to SSL 'production'
-If you were previously set to SSL 'staging' and are now ready to move your Galaxy instance into SSL 'production', begin by removing your 'staging' certificates.
+Follow these instructions if you were previously set to SSL 'staging' and are now ready to move your Galaxy instance into SSL 'production'.
+
+1. Remove your existing 'staging' certificates.
 ```
 sudo su -
 rm /etc/letsencrypt/renewal/hyperion.cac.cornell.edu.conf
@@ -48,7 +35,21 @@ rm -r /etc/letsencrypt/live/hyperion.cac.cornell.edu/
 rm -r /etc/letsencrypt/archive/hyperion.cac.cornell.edu/
 ```
 
-Update your `group_vars/galaxyservers.yml` to reflect a production SSL environment and then re-run the ansible playbook.
+2. Update your `group_vars/galaxyservers.yml` to reflect a production SSL environment.
+
+- Staging SSL
+```
+certbot_environment: staging
+#certbot_environment: production
+```
+
+- Production SSL
+```
+#certbot_environment: staging
+certbot_environment: production
+```
+
+3. Run the ansible playbook.
 ```
 ansible-playbook -kK galaxy.yml
 ```

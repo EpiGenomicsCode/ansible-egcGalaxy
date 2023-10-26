@@ -23,7 +23,17 @@ sudo reboot
 - 443 for HTTPs, this needs to be available to the world if you want to follow the LetsEncrypt portion of the tutorial.
 - 5671 for AMQP for Pulsar, needed if you plan to setup Pulsar for remote job running.
 
-#### Mount CephFS filesystem
+#### Development - simulate CephFS filesystem
+- Ansible playbook is setup to install assuming a CephFS filesystem mount
+- This must be created ahead of time in a dev-setting otherwise the postgres playbook will create the folder and lock out the galaxy service account
+
+```
+sudo su
+mkdir /cephfs
+chmod 755 /cephfs
+```
+
+#### Production - mount CephFS filesystem
 
 1. Install ceph-common package:
   - Ubuntu:
