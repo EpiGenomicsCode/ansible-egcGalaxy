@@ -30,12 +30,14 @@
       ```
       </details>
 
-  2. Get Galaxy Admin API key
+
+  2. Generate the Galaxy admin API key
     - Galaxy Admins are defined in galaxy.yml and are set during the ansible deployment.
 
-    1. Login to Galaxy as an Admin user
-    2. Go to User -> Preferences in the top menu bar, then click on Manage API key
-    3. If there is no current API key available, click on Create a new key to generate it
+
+        1. Login to Galaxy as an Admin user
+        2. Go to User -> Preferences in the top menu bar, then click on Manage API key
+        3. If there is no current API key available, click on Create a new key to generate it
 
   3. Run Ephemeris script with API keys
     - Make sure to update the APIKEY and GALAXY URL to reflect your install
@@ -60,21 +62,18 @@
   ansible-playbook -kK galaxy.yml
   ```
 
-#### Configure Pulsar server to do genome-based analysis
-1. Establish the genome build folder structure on the Pulsar host
-
-```
-sudo su galaxy
-mkdir -p /storage/group/bfp2/default/00_pughlab/tool_data
-```
-
-2. Download each genome build into the folder
-
-- sacCer3
-```
-cd /storage/group/bfp2/default/00_pughlab/tool_data
-wget -O sacCer3.tar.gz https://cornell.box.com/shared/static/pxkkv10lgui49o9khpxgwgxlpzoqvqhx.gz
-tar xzvf sacCer3.tar.gz
-```
-
 ### CVMFSexec
+- For HPC environments that do not allow for CVMFS to be installed, it is recommended to use [CVMFSexec](https://github.com/cvmfs/cvmfsexec)
+
+- Ansible role to install:
+  - https://github.com/galaxyproject/ansible-role-cvmfsexec
+
+- Mode 1
+  - On systems where only fusermount is available, the mountrepo and umountrepo commands can be used to mount cvmfs repositories in the user's own file space. That path can then be bindmounted at /cvmfs by a container manager such as singularity.
+  - [job conf](https://github.com/galaxyproject/usegalaxy-playbook/blob/8a85e34fc3fdfbf085711a08f60a79402026a16c/env/common/host_vars/vm030.bridges2.psc.edu.yml#L146C1-L146C1)
+  - [env](https://github.com/galaxyproject/usegalaxy-playbook/blob/8a85e34fc3fdfbf085711a08f60a79402026a16c/env/common/templates/galaxy/config/tpv/environments.yaml.j2#L265)
+
+- Mode 3 (PREFERRED)
+  - On systems where unprivileged namespace fuse mounts are available (newer kernels >= 4.18 as on RHEL8 or >= 3.10.0-1127 as on RHEL 7.8), the cvmfsexec command can entirely manage mounting and unmounting of cvmfs repositories in the namespace, so if they get killed everything gets cleanly unmounted. fusermount is not needed in this case.
+  - [job conf](https://github.com/galaxyproject/usegalaxy-playbook/blob/8a85e34fc3fdfbf085711a08f60a79402026a16c/env/common/templates/galaxy/config/tpv/environments.yaml.j2#L404)
+  - [env](https://github.com/galaxyproject/usegalaxy-playbook/blob/8a85e34fc3fdfbf085711a08f60a79402026a16c/env/common/templates/galaxy/config/tpv/environments.yaml.j2#L444C7-L444C7)
