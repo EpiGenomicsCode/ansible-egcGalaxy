@@ -80,6 +80,12 @@ chmod 755 /cephfs
 
   </details>
 
+6. Set storage to re-mount after reboot
+
+  - Add the following line to /etc/fstab as root:
+    ```
+    prod-mon1.cac.cornell.edu,prod-mon2.cac.cornell.edu:/gdk44_0001 /cephfs ceph name=cephfs.gdk44_0001 0 0
+    ```
 
 # Configuring your workstation (Optional)
 ---

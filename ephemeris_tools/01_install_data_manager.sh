@@ -3,7 +3,7 @@
 
 # Variables for each Galaxy instance
 GALAXY=https://hyperion.cac.cornell.edu
-APIKEY=ffd9c00e24c589228caab356ebc91f67
+APIKEY=XXXXX
 
 # Install data managers
 ## dbKey and FASTA file
