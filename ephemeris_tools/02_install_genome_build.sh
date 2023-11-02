@@ -5,7 +5,8 @@
 GALAXY=https://hyperion.cac.cornell.edu
 APIKEY=XXXXX
 
-# Fetch genome builds
-run-data-managers -g $GALAXY -a $APIKEY --config fetch-sacCer3.yml
-# Generate BWA index file
-run-data-managers -g $GALAXY -a $APIKEY --config build-sacCer3-bwa.yml
+# Fetch UCSC genome builds
+run-data-managers -g $GALAXY -a $APIKEY --config genomes/build_UCSC-genome.yml
+
+## Generate genome build from URL
+#run-data-managers -g $GALAXY -a $APIKEY --config genomes/build_custom-genome.yml
