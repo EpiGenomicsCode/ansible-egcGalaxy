@@ -50,13 +50,13 @@ chmod 755 /cephfs
   - To put files in /etc/ceph you must sudo as root!
 
   ```
-  cp ceph.client.cephfs.gdk44_0001.keyring /etc/cephfs
-  cp ceph.conf /etc/cephfs
+  cp ceph.client.cephfs.gdk44_0001.keyring /etc/ceph
+  cp ceph.conf /etc/ceph
   ```
 
 3. Make the keyring file readable only to root (mode 0400) as it contains credentials for accessing your CephFS file system.
     ```
-    chmod 400 etc/cephfs/ceph.client.cephfs.gdk44_0001.keyring
+    chmod 400 /etc/ceph/ceph.client.cephfs.gdk44_0001.keyring
     ```
 
 4. Mount the CephFS file system on the client like this:
@@ -83,9 +83,10 @@ chmod 755 /cephfs
 6. Set storage to re-mount after reboot
 
   - Add the following line to /etc/fstab as root:
-    ```
-    prod-mon1.cac.cornell.edu,prod-mon2.cac.cornell.edu:/gdk44_0001 /cephfs ceph name=cephfs.gdk44_0001 0 0
-    ```
+
+```
+prod-mon1.cac.cornell.edu,prod-mon2.cac.cornell.edu:/gdk44_0001 /cephfs ceph name=cephfs.gdk44_0001 0 0
+```
 
 # Configuring your workstation (Optional)
 ---
