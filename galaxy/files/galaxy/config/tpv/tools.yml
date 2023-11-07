@@ -9,7 +9,7 @@ tools:
       tmp_dir: true
       nativeSpecification: "--nodes=1 --cpus-per-task={cores}"
     scheduling:
-      require:
+      prefer:
         - local-slurm
 
   .*/bwa*/.*:

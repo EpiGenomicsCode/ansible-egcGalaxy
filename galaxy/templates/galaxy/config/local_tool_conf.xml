@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<toolbox monitor="true" tool_path="/cephfs/galaxy/local_tools">
+    <section id="scATAC" name="scATAC-seq Pre-processing">
+      <tool file="scATAC_processing/scATAC_barcode_err_correct.xml" />
+      <tool file="scATAC_processing/scATAC_barcodefreq.xml" />
+      <tool file="scATAC_processing/scATAC_convertToTSV.xml" />
+      <tool file="scATAC_processing/scATAC_debarcode.xml" />
+      <tool file="scATAC_processing/scATAC_filterCellnumber.xml" />
+      <tool file="scATAC_processing/scATAC_dedupCells.xml" />
+      <tool file="scATAC_processing/scATAC_summary.xml" />
+    </section>
+
+    <section id="ArchR" name="ArchR">
+      <tool file="ArchR_tools/ArchR_generateArrowFile.xml" />
+      <tool file="ArchR_tools/ArchR_generateArrowFile_TSV.xml" />
+      <tool file="ArchR_tools/ArchR_inferDoublet.xml" />
+    </section>
+
+    <section id="GATK4" name="GATK4">
+      <tool file="gatk4/gatk4_BaseRecalibrator.xml" />
+      <tool file="gatk4/gatk4_ApplyBQSR.xml" />
+      <tool file="gatk4/gatk4_HaplotypeCaller.xml" />
+      <tool file="gatk4/gatk4_GenomicsDBImport.xml" />
+      <tool file="gatk4/gatk4_ApplyVQSR.xml" />
+      <tool file="gatk4/gatk4_GenotypeGVCFs.xml" />
+      <tool file="gatk4/gatk4_VariantRecalibrator.xml" />
+    </section>
+
+    <section id="ScriptManager" name="ScriptManager">
+      <tool file="ScriptManager/scriptmanager_tagpileup.xml" />
+      <tool file="ScriptManager/scriptmanager_compositeimage.xml" />
+    </section>
+
+    <section id="PEGR" name="PEGR">
+      <tool file="PEGR/bam_to_scidx_output_stats.xml" />
+      <tool file="PEGR/bedtools_intersectbed_output_stats.xml" />
+      <tool file="PEGR/bwa_mem_output_stats_single.xml" />
+      <tool file="PEGR/chexmix_output_stats.xml" />
+      <tool file="PEGR/cwpair2_output_stats.xml" />
+      <tool file="PEGR/extract_genomic_dna_output_stats.xml" />
+      <tool file="PEGR/extract_genomic_dna_output_stats2.xml" />
+      <tool file="PEGR/extract_genomic_dna_output_stats3.xml" />
+      <tool file="PEGR/fasta_nucleotide_color_plot_output_stats.xml" />
+      <tool file="PEGR/fastqc_output_stats.xml" />
+      <tool file="PEGR/fastqc_output_stats2.xml" />
+      <tool file="PEGR/genetrack_output_stats.xml" />
+      <tool file="PEGR/input_dataset_r1_output_stats.xml" />
+      <tool file="PEGR/input_dataset_r2_output_stats.xml" />
+      <tool file="PEGR/mark_duplicates_bam_output_stats.xml" />
+      <tool file="PEGR/meme_fimo_output_stats.xml" />
+      <tool file="PEGR/meme_meme_output_stats.xml" />
+      <tool file="PEGR/pe_histogram_output_stats.xml" />
+      <tool file="PEGR/repeatmasker_wrapper_output_stats.xml" />
+      <tool file="PEGR/repeatmasker_wrapper_output_stats2.xml" />
+      <tool file="PEGR/samtool_filter2_output_stats.xml" />
+      <tool file="PEGR/tag_pileup_frequency_output_stats.xml" />
+    </section>
+
+</toolbox>
