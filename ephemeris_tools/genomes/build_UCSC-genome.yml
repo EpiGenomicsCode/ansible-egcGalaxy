@@ -14,8 +14,6 @@ genomes:
       name: 'C. elegans Oct. 2010 (WS220/ce10) (ce10)'
     - dbkey: dm6
       name: 'D. melanogaster Aug. 2014 (BDGP Release 6 + ISO1 MT/dm6) (dm6)'
-    - dbkey: dm3
-      name: 'D. melanogaster Apr. 2006 (BDGP R5/dm3) (dm3)'
 
 data_managers:
   - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4

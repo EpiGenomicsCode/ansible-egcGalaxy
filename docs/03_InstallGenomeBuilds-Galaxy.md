@@ -6,6 +6,28 @@
 - These instructions assume our primary genome build location and file path structure will be mirrored between Galaxy and all Pulsar installations.
   - For convenience sake, we will follow the folder structure established on PSU ROAR Collab
 
+#### Configure Galaxy to do genome-based analysis (local - RC compatible)
+1. We'll mimic the folder structure on PSU RC that will host the genome builds through Pulsar. This is **extremely** brittle.
+
+  ```
+  sudo su -
+  mkdir -p /storage/group/bfp2/default/00_pughlab/tool_data
+  chgrp -R galaxy /storage
+  chown -R galaxy /storage
+  ```
+
+2. Update the galaxyservers.yml file to reflect the location of the genome builds
+
+  ```
+  galaxy_data_manager_data_path: /storage/group/bfp2/default/00_pughlab/tool_data
+  ```
+
+3. Run the Galaxy playbook to deploy genomebuild changes
+
+  ```
+  ansible-playbook -kK galaxy.yml
+  ```
+
 
 #### Install Data Managers through Ephemeris
   1. Install Ephemeris
@@ -18,48 +40,38 @@
     pip install ephemeris
     ```
 
-      <details>
-      <summary>
-      MacOS Note
-      </summary>
-
-        - XCode must be installed and licensed accepted
-
-      ```
-      sudo xcodebuild -license
-      ```
-      </details>
+  <details>
+  <summary>
+  MacOS Note
+  </summary>
+    - XCode must be installed and licensed accepted
+    ```
+    sudo xcodebuild -license
+    ```
+  </details>
 
 
   2. Generate the Galaxy admin API key
     - Galaxy Admins are defined in galaxy.yml and are set during the ansible deployment.
 
-
         1. Login to Galaxy as an Admin user
         2. Go to User -> Preferences in the top menu bar, then click on Manage API key
         3. If there is no current API key available, click on Create a new key to generate it
+
 
   3. Run Ephemeris script with API keys
     - Make sure to update the APIKEY and GALAXY URL to reflect your install
 
     ```
-    sh ansible-egcGalaxy/ephemeris_tools/install_data_manager.sh
+    sh ansible-egcGalaxy/ephemeris_tools/01_install_data_manager.sh
     ```
 
-#### Configure Galaxy to do genome-based analysis
-  1. Install data manager through Galaxy
-    - Follow this [tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/tutorial.html) to generate genome build on host Galaxy instance
+#### Download and configure Genomes through Ephemeris
 
-  3. Update the tool_data_conf.xml file to reflect the new genome build information
+- Run Ephemeris script with API keys
 
   ```
-  # CVMFS
-  #tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
-  ```
-
-  4. Run the Galaxy playbook to deploy genomebuild changes
-  ```
-  ansible-playbook -kK galaxy.yml
+  sh ansible-egcGalaxy/ephemeris_tools/02_install_genome_build.sh
   ```
 
 ### CVMFSexec
