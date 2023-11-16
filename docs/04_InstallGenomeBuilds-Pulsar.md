@@ -1,12 +1,11 @@
 # Install Pulsar genome builds
 ---
-- This guide
+- This guide provides the links required to install the RC-hardcoded genome build paths for a pulsar server
 
 #### Configure Pulsar server to do genome-based analysis
 1. Establish the genome build folder structure on the Pulsar host
 
 ```
-sudo su galaxy
 mkdir -p /storage/group/bfp2/default/00_pughlab/tool_data
 ```
 

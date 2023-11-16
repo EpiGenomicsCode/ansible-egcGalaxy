@@ -1,0 +1,71 @@
+install_tool_dependencies: True
+install_repository_dependencies: True
+install_resolver_dependencies: True
+
+tools:
+- name: fastqc
+  owner: devteam
+  revisions:
+  - 5ec9f6bceaee
+  tool_panel_section_label: CorePipeline
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+- name: bwa
+  owner: devteam
+  revisions:
+  - e188dc7a68e6
+  tool_panel_section_label: CorePipeline
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+- name: picard
+  owner: devteam
+  revisions:
+  - f9242e01365a
+  tool_panel_section_label: CorePipeline
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+- name: samtools_filter
+  owner: jjohnson
+  revisions:
+  - 9710e9bcc5f3
+  tool_panel_section_label: CorePipeline
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+- name: deeptools_bam_coverage
+  owner: bgruening
+  revisions:
+  - 0e49b109abc2
+  tool_panel_section_label: deeptools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+- name: bedtools
+  owner: iuc
+  revisions:
+  - a1a923cd89e8
+  tool_panel_section_label: bedtools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+- name: extract_genomic_dna
+  owner: iuc
+  revisions:
+  - 5cc8e93ee98f
+  tool_panel_section_label: CorePipeline
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+- name: repeat_masker
+  owner: bgruening
+  revisions:
+  - ba6d2c32f797
+  tool_panel_section_label: CorePipeline
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+- name: meme_meme
+  owner: iuc
+  revisions:
+  - 19237efe98d1
+  tool_panel_section_label: Motif Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+- name: meme_fimo
+  owner: iuc
+  revisions:
+  - c5209f38700d
+  tool_panel_section_label: Motif Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+- name: tag_pileup_frequency
+  owner: iuc
+  revisions:
+  - 580e8bcb6413
+  tool_panel_section_label: CorePipeline
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
