@@ -3,6 +3,7 @@ global:
 
 tools:
   default:
+    abstract: true
     cores: 1
     mem: cores * 4
     params:
@@ -12,16 +13,47 @@ tools:
       prefer:
         - local-slurm
 
-  .*/bwa*/.*:
-    scheduling:
-      require:
-#        - psu-pulsar
-        - iu-pulsar
   .*/fastqc/.*:
     scheduling:
       require:
-        - iu-pulsar
+        - psu-pulsar
+#        - iu-pulsar
+  .*/bwa*/.*:
+    cores: 4
+    mem: 16
+    params:
+      nativeSpecification: "--nodes=1 --ntasks=1 --cpus-per-task={cores}"
+    scheduling:
+      require:
+        - psu-pulsar
+#        - iu-pulsar
+  .*/picard/.*:
+    scheduling:
+      require:
+        - psu-pulsar
+#        - iu-pulsar
+  .*/samtools_filter/.*:
+    scheduling:
+      require:
+        - psu-pulsar
+#        - iu-pulsar
+  .*/*deeptools*/.*:
+    scheduling:
+      require:
+        - psu-pulsar
+#        - iu-pulsar
+  .*/*bedtools*/.*:
+    scheduling:
+      require:
+        - psu-pulsar
+#        - iu-pulsar
   .*/*repeat_masker*/.*:
     scheduling:
       require:
-        - iu-pulsar
+        - psu-pulsar
+#        - iu-pulsar
+  .*/*meme*/.*:
+    scheduling:
+      require:
+        - psu-pulsar
+#        - iu-pulsar
