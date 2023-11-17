@@ -1,0 +1,17 @@
+---
+destination:
+  type: library
+  name: TSS_Coord
+  description: TSS_Coord
+  synopsis:
+items:
+- url: https://cornell.box.com/shared/static/0z92w94dy7di84be4m48c5vvbheyak7z.bed
+  name: saccer3_tss.bed
+  src: url
+  ext: bed
+  info: sacCer3_TSS_1000bp
+- url: https://cornell.box.com/shared/static/ndk2z4ao3s77uxivxklwq04bpx3v8j0q.bed
+  name: hg19_tss.bed
+  src: url
+  ext: bed
+  info: hg19_TSS_K562-mRNA_SORT_2000bp

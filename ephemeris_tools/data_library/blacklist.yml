@@ -1,0 +1,32 @@
+---
+destination:
+  type: library
+  name: Blacklist_Filter
+  description: Blacklist_Filter
+  synopsis:
+items:
+- url: https://cornell.box.com/shared/static/8fd1o6lq4w0aw2jngg2twp61umo2xpv9.bed
+  name: saccer3_blacklist.bed
+  src: url
+  ext: bed
+  info: sacCer3 blacklist
+- url: https://cornell.box.com/shared/static/ifmjc6wwr2v1f6me9yydqqm3m55cw9re.bed
+  name: mm10_blacklist.bed
+  src: url
+  ext: bed
+  info: mm10 blacklist
+- url: https://cornell.box.com/shared/static/30pac40psjo6md48w78wbwqvtxarpxgs.bed
+  name: hg38_blacklist.bed
+  src: url
+  ext: bed
+  info: hg38 blacklist
+- url: https://cornell.box.com/shared/static/8jfs4n757cxogpiluq0i2pgmo66s92w1.bed
+  name: hg19_blacklist.bed
+  src: url
+  ext: bed
+  info: hg19 blacklist
+- url: https://cornell.box.com/shared/static/m3c4dqwlsosavcwp63ick5v3sdkzl1so.bed
+  name: dm6_blacklist.bed
+  src: url
+  ext: bed
+  info: dm6 blacklist

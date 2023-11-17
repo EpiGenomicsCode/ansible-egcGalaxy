@@ -1,6 +1,10 @@
-# Install workflow tools
+# Initialize data libraries required for pipeline
 ---
-- This guide
+- This guide w
 
 #### Configure Pulsar server to do genome-based analysis
-1. Establish the genome build folder structure on the Pulsar host
+- Run Ephemeris script with API keys
+
+  ```
+  sh ansible-egcGalaxy/ephemeris_tools/03_install_corepipeline.sh
+  ```
