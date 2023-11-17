@@ -24,7 +24,7 @@
             #set tool_parameters = ""
             #for $p in $job.parameters:
                 #set tool_parameters = $tool_parameters + "__SeP__" + $p.name
-                #set tool_parameters = $tool_parameters + "__SeP__" + $p.value
+                #set tool_parameters = $tool_parameters + "__SeP__" + str($p.value)
             #end for
             #set workflow_step = None
             #set pjaas = $job.post_job_actions
@@ -48,14 +48,14 @@
             #if $workflow_step is not None:
                 --workflow_step_id "$__app__.security.encode_id($workflow_step.id)"
             #end if
-            --output "$output"
+            --output "$payload"
         ]]>
     </command>
     <inputs>
         <param name="input" type="data" format="bam" label="BAM input" />
     </inputs>
     <outputs>
-        <data name="output" format="txt" />
+        <data name="payload" type="data" format="txt" label="Send ${tool.name} results to PEGR" />
     </outputs>
     <tests>
     </tests>

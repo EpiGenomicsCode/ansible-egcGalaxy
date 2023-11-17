@@ -30,6 +30,36 @@ galaxy_job_config:
       amqp_publish_retry_max_retries: 60
       galaxy_url: "https://{{ inventory_hostname }}"
       manager: _default_
+    pulsar_psu_high_runner:
+      load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
+      amqp_url: "pyamqp://galaxy_psu:{{ rabbitmq_users_password.psupulsar }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
+      amqp_acknowledge: true
+      amqp_ack_republish_time: 1200
+      amqp_consumer_timeout: 2
+      amqp_publish_retry: true
+      amqp_publish_retry_max_retries: 60
+      galaxy_url: "https://{{ inventory_hostname }}"
+      manager: high_core
+    pulsar_psu_med_runner:
+      load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
+      amqp_url: "pyamqp://galaxy_psu:{{ rabbitmq_users_password.psupulsar }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
+      amqp_acknowledge: true
+      amqp_ack_republish_time: 1200
+      amqp_consumer_timeout: 2
+      amqp_publish_retry: true
+      amqp_publish_retry_max_retries: 60
+      galaxy_url: "https://{{ inventory_hostname }}"
+      manager: med_core
+    pulsar_psu_low_runner:
+      load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
+      amqp_url: "pyamqp://galaxy_psu:{{ rabbitmq_users_password.psupulsar }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
+      amqp_acknowledge: true
+      amqp_ack_republish_time: 1200
+      amqp_consumer_timeout: 2
+      amqp_publish_retry: true
+      amqp_publish_retry_max_retries: 60
+      galaxy_url: "https://{{ inventory_hostname }}"
+      manager: low_core
     pulsar_iu_runner:
       load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
       amqp_url: "pyamqp://galaxy_iu:{{ rabbitmq_users_password.iupulsar }}@localhost:5671/{{ rabbitmq_vhosts[1] }}?ssl=1"
@@ -74,7 +104,7 @@ galaxy_config:
     brand: "EpiGenomics Core"
     # Main Configuration
     admin_users:
-    - admin@example.org
+    - egc-admin@egc.org
     - jsc333@cornell.edu
     - owl8@cornell.edu
     database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
@@ -171,15 +201,13 @@ galaxy_local_tools:
   - gatk4/gatk4_ApplyVQSR.xml
   - gatk4/gatk4_GenotypeGVCFs.xml
   - gatk4/gatk4_VariantRecalibrator.xml
-  - ScriptManager/ScriptManager-v0.14.jar
-  - ScriptManager/scriptmanager_tagpileup.xml
-  - ScriptManager/scriptmanager_compositeimage.xml
-  - ScriptManager/macros.xml
-  - testing.xml
   - PEGR/bam_to_scidx_output_stats.py
   - PEGR/bam_to_scidx_output_stats.xml
   - PEGR/bedtools_intersectbed_output_stats.py
   - PEGR/bedtools_intersectbed_output_stats.xml
+  - PEGR/bigwig_dataset_forward_output_stats.xml
+  - PEGR/bigwig_dataset_output_stats.py
+  - PEGR/bigwig_dataset_reverse_output_stats.xml
   - PEGR/bwa_mem_output_stats_single.py
   - PEGR/bwa_mem_output_stats_single.xml
   - PEGR/chexmix_output_stats.py
@@ -200,6 +228,8 @@ galaxy_local_tools:
   - PEGR/galaxy_post_pegr_util.py
   - PEGR/genetrack_output_stats.py
   - PEGR/genetrack_output_stats.xml
+  - PEGR/get_motif_logos_from_meme_output_stats.py
+  - PEGR/get_motif_logos_from_meme_output_stats.xml
   - PEGR/input_dataset_output_stats.py
   - PEGR/input_dataset_r1_output_stats.xml
   - PEGR/input_dataset_r2_output_stats.xml
@@ -218,10 +248,31 @@ galaxy_local_tools:
   - PEGR/repeatmasker_wrapper_output_stats2.xml
   - PEGR/samtool_filter2_output_stats.py
   - PEGR/samtool_filter2_output_stats.xml
-  - PEGR/stats_config.ini.sample
+  - PEGR/scriptmanager_bam-correlation.xml
+  - PEGR/scriptmanager_bam-to-bed.xml
+  - PEGR/scriptmanager_bam-to-bedgraph.xml
+  - PEGR/scriptmanager_bam-to-gff.xml
+  - PEGR/scriptmanager_bam-to-scidx.xml
+  - PEGR/scriptmanager_bed-to-gff.xml
+  - PEGR/scriptmanager_expand-bed.xml
+  - PEGR/scriptmanager_expand-gff.xml
+  - PEGR/scriptmanager_four-color.xml
+  - PEGR/scriptmanager_gff-to-bed.xml
+  - PEGR/scriptmanager_heatmap.xml
+  - PEGR/scriptmanager_label-heatmap.xml
+  - PEGR/scriptmanager_macros.xml
+  - PEGR/scriptmanager_merge-heatmap.xml
+  - PEGR/scriptmanager_pe-stat.xml
+  - PEGR/scriptmanager_se-stat.xml
+  - PEGR/scriptmanager_shift-coord.xml
+  - PEGR/scriptmanager_sort-bed.xml
+  - PEGR/scriptmanager_sort-gff.xml
+  - PEGR/scriptmanager_tag-pileup.xml
+  - PEGR/stats_config.ini
   - PEGR/stats_util.py
   - PEGR/tag_pileup_frequency_output_stats.py
   - PEGR/tag_pileup_frequency_output_stats.xml
+  - PEGR/tss_pileup_frequency_output_stats.xml
 
 galaxy_config_file_src_dir: files/galaxy/config
 galaxy_config_files:
@@ -236,8 +287,8 @@ galaxy_config_template_src_dir: templates/galaxy/config
 galaxy_config_templates:
   - src: "{{ galaxy_config_template_src_dir }}/job_resource_params_conf.xml.j2"
     dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
-  - src: "{{ galaxy_config_template_src_dir }}/local_tool_conf.xml"
-    dest: "{{ galaxy_config_dir }}/local_tool_conf.xml"
+#  - src: "{{ galaxy_config_template_src_dir }}/local_tool_conf.xml"
+#    dest: "{{ galaxy_config_dir }}/local_tool_conf.xml"
 
 galaxy_extra_dirs:
   - /cephfs/galaxy_data

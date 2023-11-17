@@ -2,7 +2,8 @@
 import argparse
 import stats_util
 
-STATS = ['dedupUniquelyMappedReadsSingle', 'mappedReadsSingle', 'totalReadsSingle', 'uniquelyMappedReadsSingle']
+#STATS = ['dedupUniquelyMappedReadsSingle', 'mappedReadsSingle', 'totalReadsSingle', 'uniquelyMappedReadsSingle']
+STATS = ['totalReadsFromBam']
 
 stats_util.check_samtools()
 
