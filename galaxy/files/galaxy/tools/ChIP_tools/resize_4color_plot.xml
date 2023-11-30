@@ -1,0 +1,39 @@
+<tool id="resize_4color_plot" name="resize 4color plot in png format" version="1.0.0">
+    <description>Resize pixel dimensions for a png</description>
+    <requirements>
+        <requirement type="package">pillow</requirement>
+        <requirement type="package">opencv-python-headless</requirement>
+    </requirements>
+    <command>
+        <![CDATA[
+            python3 $__tool_directory__/resize_4color_plot.py
+            -i $input_image
+            -r $rows
+            -c $cols
+            -m $method
+	    -o output.png
+            && mv output.png $output_resized_image
+        ]]>
+    </command>
+    <inputs>
+        <param name="input_image" type="data" format="png" label=" name of the 4color plot" />
+        <param name="rows" type="integer" value="600" label="number of pixels in rows" />
+        <param name="cols" type="integer" value="200" label="number of pixels in columns" />
+        <param name="method" type="select" label="Select image compression method" help="see **What it does** for more information on image compression." >
+            <option value="opencv" selected="True">OpenCV (cv2) py package</option>
+            <option value="pillow">Pillow py package</option>
+        </param>
+    </inputs>
+    <outputs>
+        <data name="output_resized_image" type="data" format="png"  label="${tool.name} on ${on_string}"/>
+    </outputs>
+    <tests>
+    </tests>
+    <help>
+**What it does**
+
+This script will compress and resize a PNG file using INTER_AREA interpolation.
+
+Read more about image resizing and compression here: https://zuru.tech/blog/the-dangers-behind-image-resizing
+    </help>
+</tool>

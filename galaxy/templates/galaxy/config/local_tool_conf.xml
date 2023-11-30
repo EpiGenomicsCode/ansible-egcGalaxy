@@ -55,5 +55,30 @@
       <tool file="PEGR/tag_pileup_frequency_output_stats.xml" />
       <tool file="PEGR/tss_pileup_frequency_output_stats.xml" />
       <tool file="PEGR/get_motif_logos_from_meme_output_stats.xml" />
-      </section>
+    </section>
+
+    <section  id="ChIP_tools" name="ChIP_tools" >
+      <tool file="ChIP_tools/compress_file.xml" />
+      <tool file="ChIP_tools/cwpair2_gz.xml" />
+      <tool file="ChIP_tools/fasta_header_bed2gff.xml" />
+      <tool file="ChIP_tools/fimo_gz.xml" />
+      <tool file="ChIP_tools/fimo_txt_2_gffs.xml" />
+      <tool file="ChIP_tools/genetrack_gz.xml" />
+      <tool file="ChIP_tools/get_motif_logos_from_meme.xml" />
+      <tool file="ChIP_tools/head_gz.xml" />
+      <tool file="ChIP_tools/meme_gz.xml" />
+      <tool file="ChIP_tools/motif_logo_memexml_to_pngs.xml" />
+      <tool file="ChIP_tools/resize_4color_plot.xml" />
+      <tool file="ChIP_tools/sort_gz.xml" />
+      <tool file="ChIP_tools/split_fimo.xml" />
+    </section>
+
+    <section id="ScriptManager" name="ScriptManager" >
+      <tool file="ScriptManager/scriptmanager_bam-to-scidx.xml" />
+      <tool file="ScriptManager/scriptmanager_expand-gff.xml" />
+      <tool file="ScriptManager/scriptmanager_four-color.xml" />
+      <tool file="ScriptManager/scriptmanager_gff-to-bed.xml" />
+      <tool file="ScriptManager/scriptmanager_pe-stat.xml" />
+      <tool file="ScriptManager/scriptmanager_tag-pileup.xml" />
+    </section>
 </toolbox>

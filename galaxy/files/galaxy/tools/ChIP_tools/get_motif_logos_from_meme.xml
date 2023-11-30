@@ -1,0 +1,27 @@
+<tool id="get_motif_logos_from_meme" name="generate motif logo svgs from meme file" version="1.0.2">
+    <description>Parse a MEME file and generate motif logos</description>
+
+    <requirements>
+            <requirement type="package" version="1.24.4">numpy</requirement>
+    </requirements>
+    <expand macro="requirements" />
+    <command>
+        <![CDATA[
+        python $__tool_directory__/generate_motif_logos.py '$input'
+        ]]>
+    </command>
+    <inputs>
+        <param name="input" type="data" format="txt" label="MEME input" />
+    </inputs>
+
+    <outputs>
+        <collection name="output_logo_svg" type="list:paired" label=" ${tool.name} on ${on_string} ">
+            <discover_datasets pattern="(?P&lt;identifier_0&gt;MEME-\d+)_(?P&lt;identifier_1&gt;forward|reverse)\.svg" directory="." format="svg" visible="false" />
+        </collection>
+    </outputs>
+<tests>
+    </tests>
+    <help>
+        Parse a MEME file and generate motif logos
+    </help>
+</tool>

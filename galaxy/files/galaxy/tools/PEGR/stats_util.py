@@ -121,7 +121,7 @@ def get_adapter_dimer_count(file_path):
     return float(adapter_dimer_count)
 
 
-def get_base_json_dict(config_file, dbkey, history_id, history_name, stats_tool_id, stderr, tool_id, tool_parameters, user_email, workflow_step_id):
+def get_base_json_dict(config_file, dbkey, history_id, history_name, stats_tool_id, stderr, tool_id, tool_category, tool_parameters, user_email, workflow_step_id):
     d = {}
     d['genome'] = dbkey
     d['historyId'] = history_id
@@ -129,13 +129,11 @@ def get_base_json_dict(config_file, dbkey, history_id, history_name, stats_tool_
     d['run'] = get_run_from_history_name(history_name)
     d['sample'] = get_sample_from_history_name(history_name)
     d['statsToolId'] = stats_tool_id
-    d['toolCategory'] = get_tool_category(config_file, tool_id)
+    d['toolCategory'] = tool_category
     d['toolStderr'] = stderr
     d['toolId'] = tool_id
-    # d['userEmail'] = user_email
-    # d['workflowId'] = get_workflow_id(config_file, history_name)
-    d['userEmail'] = "owl8@cornell.edu"
-    d['workflowId'] = 'f501013168d48b79'
+    d['userEmail'] = user_email
+    d['workflowId'] = get_workflow_id(config_file, history_name)
     d['workflowStepId'] = workflow_step_id
     return d
 
@@ -213,6 +211,10 @@ def get_genome_size(chrom_lengths_dict):
     for k, v in chrom_lengths_dict.items():
         genome_size += v
     return genome_size
+
+
+def get_motif_count(motif_logo_list):
+    return len(motif_logo_list) // 2
 
 
 def get_peak_stats(file_path):
@@ -384,6 +386,8 @@ def get_statistics(file_path, stats, **kwd):
                 if chrom_lengths_file is None:
                     stop_err('Required chrom_lengths_file parameter not received!')
                 s[k] = get_genome_coverage(file_path, chrom_lengths_file)
+            elif k == 'motifCount':
+                s[k] = get_motif_count(kwd.get('motif_logo_list', []))
             elif k == 'peakPairWis':
                 s[k] = get_number_of_lines(file_path)
             elif k == 'peakStats':
@@ -441,11 +445,6 @@ def get_tmp_filename(dir=None, suffix=None):
     os.close(fd)
     return name
 
-
-def get_tool_category(config_file, tool_id):
-    lc_tool_id = tool_id.lower()
-    category_map = get_config_settings(config_file, section='tool_categories')
-    return category_map.get(lc_tool_id, 'Unknown')
 
 def get_workflow_id(config_file, history_name):
     workflow_name = get_workflow_name_from_history_name(history_name)

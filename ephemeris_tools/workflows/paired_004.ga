@@ -654,16 +654,25 @@
                     "id": 3,
                     "output_name": "output"
                 },
-                "input_bam": {
+                "input1": {
                     "id": 14,
                     "output_name": "output1"
                 },
-                "input_bed": {
+                "input2": {
                     "id": 2,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool ScriptManager: TagPileup",
+                    "name": "input1"
+                },
+                {
+                    "description": "runtime parameter for tool ScriptManager: TagPileup",
+                    "name": "input2"
+                }
+            ],
             "label": null,
             "name": "ScriptManager: TagPileup",
             "outputs": [
@@ -686,7 +695,7 @@
             },
             "post_job_actions": {},
             "tool_id": "scriptmanager_tag-pileup",
-            "tool_state": "{\"BINSIZE\": \"1\", \"CPU\": \"1\", \"SHIFT\": \"0\", \"blacklist\": {\"equal_tags\": true, \"__current_case__\": 0, \"blacklist_yes\": {\"blacklist_option\": true, \"__current_case__\": 0, \"blacklist_filter\": {\"__class__\": \"ConnectedValue\"}}}, \"composite_transformation\": {\"composite_options\": \"none\", \"__current_case__\": 0}, \"input_bam\": {\"__class__\": \"ConnectedValue\"}, \"input_bed\": {\"__class__\": \"ConnectedValue\"}, \"output_strands\": {\"strand\": \"separate\", \"__current_case__\": 0, \"sense_conditional\": {\"sense\": \"sense_color\", \"__current_case__\": 0, \"color_sense\": \"0000FF\"}, \"anti_conditional\": {\"anti\": \"anti_color\", \"__current_case__\": 0, \"color_anti\": \"FF0000\"}}, \"read_aspect\": \"5end\", \"read_output\": \"read1\", \"require_paired_end\": {\"mate_pair\": false, \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"BINSIZE\": \"1\", \"CPU\": \"1\", \"SHIFT\": \"0\", \"blacklist\": {\"equal_tags\": true, \"__current_case__\": 0, \"blacklist_yes\": {\"blacklist_option\": true, \"__current_case__\": 0, \"blacklist_filter\": {\"__class__\": \"ConnectedValue\"}}}, \"composite_transformation\": {\"composite_options\": \"none\", \"__current_case__\": 0}, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}, \"input_bam\": {\"__class__\": \"ConnectedValue\"}, \"input_bed\": {\"__class__\": \"ConnectedValue\"}, \"output_strands\": {\"strand\": \"separate\", \"__current_case__\": 0, \"sense_conditional\": {\"sense\": \"sense_color\", \"__current_case__\": 0, \"color_sense\": \"0000FF\"}, \"anti_conditional\": {\"anti\": \"anti_color\", \"__current_case__\": 0, \"color_anti\": \"FF0000\"}}, \"read_aspect\": \"5end\", \"read_output\": \"read1\", \"require_paired_end\": {\"mate_pair\": false, \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.0",
             "type": "tool",
             "uuid": "98f26f80-15d4-40f0-ae54-b09c81109e35",
@@ -719,7 +728,7 @@
             },
             "post_job_actions": {},
             "tool_id": "scriptmanager_bam-to-scidx",
-            "tool_state": "{\"BAM\": {\"__class__\": \"RuntimeValue\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"read\": \"read_1\", \"require_paired_end\": {\"mate_pair\": false, \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"BAM\": {\"__class__\": \"RuntimeValue\"}, \"gzip\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"read\": \"read_1\", \"require_paired_end\": {\"mate_pair\": false, \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.0",
             "type": "tool",
             "uuid": "cd782242-26c5-4d5c-8075-1f6ca17c94e8",
@@ -772,11 +781,6 @@
                     "label": "output_tabular",
                     "output_name": "output_tabular",
                     "uuid": "4b90b1cf-eba7-4d47-b816-93ff743746d6"
-                },
-                {
-                    "label": "output_png",
-                    "output_name": "output_png",
-                    "uuid": "d6cf985f-635b-49b5-abad-0906a401cf82"
                 }
             ]
         },
@@ -795,7 +799,16 @@
                     "output_name": "output1"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bamCoverage",
+                    "name": "advancedOpt"
+                },
+                {
+                    "description": "runtime parameter for tool bamCoverage",
+                    "name": "bamInput"
+                }
+            ],
             "label": "Make Forward BigWig",
             "name": "bamCoverage",
             "outputs": [
@@ -816,7 +829,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"scaleFactor\": \"1.0\", \"smoothLength\": null, \"ignoreForNormalization\": \"\", \"skipNAs\": false, \"doExtendCustom\": {\"doExtend\": \"custom\", \"__current_case__\": 2, \"extendReadsValue\": \"1\"}, \"ignoreDuplicates\": false, \"centerReads\": false, \"minMappingQuality\": \"1\", \"samFlagInclude\": null, \"samFlagExclude\": null, \"minFragmentLength\": \"0\", \"maxFragmentLength\": \"0\", \"MNase\": false, \"Offset\": \"\", \"filterRNAstrand\": \"forward\", \"blackListFileName\": {\"__class__\": \"ConnectedValue\"}}, \"bamInput\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"1\", \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"\", \"scaling\": {\"type\": \"1x\", \"__current_case__\": 4, \"effectiveGenomeSize\": {\"effectiveGenomeSize_opt\": \"specific\", \"__current_case__\": 0, \"effectiveGenomeSize\": \"\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"scaleFactor\": \"1.0\", \"smoothLength\": null, \"ignoreForNormalization\": \"\", \"skipNAs\": false, \"doExtendCustom\": {\"doExtend\": \"no\", \"__current_case__\": 0}, \"ignoreDuplicates\": false, \"centerReads\": false, \"minMappingQuality\": \"1\", \"samFlagInclude\": \"64\", \"samFlagExclude\": \"16\", \"minFragmentLength\": \"0\", \"maxFragmentLength\": \"0\", \"MNase\": false, \"Offset\": \"1\", \"filterRNAstrand\": \"no\", \"blackListFileName\": {\"__class__\": \"RuntimeValue\"}}, \"bamInput\": {\"__class__\": \"RuntimeValue\"}, \"binSize\": \"1\", \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"\", \"scaling\": {\"type\": \"cpm\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "3.5.4+galaxy0",
             "type": "tool",
             "uuid": "7ac2517c-8553-44dc-a832-567ade8116c4",
@@ -844,7 +857,16 @@
                     "output_name": "output1"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bamCoverage",
+                    "name": "advancedOpt"
+                },
+                {
+                    "description": "runtime parameter for tool bamCoverage",
+                    "name": "bamInput"
+                }
+            ],
             "label": "Make Reverse BigWig",
             "name": "bamCoverage",
             "outputs": [
@@ -865,7 +887,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"scaleFactor\": \"1.0\", \"smoothLength\": null, \"ignoreForNormalization\": \"\", \"skipNAs\": false, \"doExtendCustom\": {\"doExtend\": \"custom\", \"__current_case__\": 2, \"extendReadsValue\": \"1\"}, \"ignoreDuplicates\": false, \"centerReads\": false, \"minMappingQuality\": \"1\", \"samFlagInclude\": null, \"samFlagExclude\": null, \"minFragmentLength\": \"0\", \"maxFragmentLength\": \"0\", \"MNase\": false, \"Offset\": \"\", \"filterRNAstrand\": \"reverse\", \"blackListFileName\": {\"__class__\": \"ConnectedValue\"}}, \"bamInput\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"1\", \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"\", \"scaling\": {\"type\": \"1x\", \"__current_case__\": 4, \"effectiveGenomeSize\": {\"effectiveGenomeSize_opt\": \"specific\", \"__current_case__\": 0, \"effectiveGenomeSize\": \"\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"scaleFactor\": \"1.0\", \"smoothLength\": null, \"ignoreForNormalization\": \"\", \"skipNAs\": false, \"doExtendCustom\": {\"doExtend\": \"no\", \"__current_case__\": 0}, \"ignoreDuplicates\": false, \"centerReads\": false, \"minMappingQuality\": \"1\", \"samFlagInclude\": \"80\", \"samFlagExclude\": \"0\", \"minFragmentLength\": \"0\", \"maxFragmentLength\": \"0\", \"MNase\": false, \"Offset\": \"1\", \"filterRNAstrand\": \"no\", \"blackListFileName\": {\"__class__\": \"RuntimeValue\"}}, \"bamInput\": {\"__class__\": \"RuntimeValue\"}, \"binSize\": \"1\", \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"\", \"scaling\": {\"type\": \"cpm\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "3.5.4+galaxy0",
             "type": "tool",
             "uuid": "aab8ea3c-5242-418c-b95d-9e5b98ba79f2",
@@ -956,10 +978,6 @@
             "errors": null,
             "id": 23,
             "input_connections": {
-                "input_png": {
-                    "id": 18,
-                    "output_name": "output_png"
-                },
                 "input_tabular": {
                     "id": 18,
                     "output_name": "output_tabular"
@@ -1252,7 +1270,7 @@
         },
         "31": {
             "annotation": "",
-            "content_id": "sort1",
+            "content_id": "sort_gz",
             "errors": null,
             "id": 31,
             "input_connections": {
@@ -1261,9 +1279,14 @@
                     "output_name": "MP"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Sort (gzip)",
+                    "name": "input"
+                }
+            ],
             "label": null,
-            "name": "Sort",
+            "name": "Sort (gzip)",
             "outputs": [
                 {
                     "name": "out_file1",
@@ -1274,26 +1297,14 @@
                 "left": 2500,
                 "top": 450
             },
-            "post_job_actions": {
-                "DeleteIntermediatesActionout_file1": {
-                    "action_arguments": {},
-                    "action_type": "DeleteIntermediatesAction",
-                    "output_name": "out_file1"
-                }
-            },
-            "tool_id": "sort1",
-            "tool_state": "{\"column\": \"6\", \"column_set\": [], \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"order\": \"DESC\", \"style\": \"num\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.2.0",
+            "post_job_actions": {},
+            "tool_id": "sort_gz",
+            "tool_state": "{\"column\": \"6\", \"column_set\": [], \"gzip\": true, \"header_lines\": \"0\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"order\": \"r\", \"style\": \"n\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
             "type": "tool",
-            "uuid": "b4e905e3-3b9b-4541-8d69-7a3a5ac2c1de",
+            "uuid": "9c06702a-cdea-4e91-b618-fa9e62d61c71",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": "out_file1",
-                    "output_name": "out_file1",
-                    "uuid": "dfe3b1f1-61ee-4a7a-9dfc-da179c4fcf08"
-                }
-            ]
+            "workflow_outputs": []
         },
         "32": {
             "annotation": "",
@@ -1321,7 +1332,7 @@
             },
             "post_job_actions": {},
             "tool_id": "scriptmanager_expand-gff",
-            "tool_state": "{\"SIZE\": \"30\", \"expansion_select\": \"border\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"SIZE\": \"30\", \"expansion_select\": \"border\", \"gzip\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.0",
             "type": "tool",
             "uuid": "85981d3f-2cb7-480a-946b-2bcdcc335740",
@@ -1336,7 +1347,7 @@
         },
         "33": {
             "annotation": "",
-            "content_id": "Show beginning1",
+            "content_id": "head_gz",
             "errors": null,
             "id": 33,
             "input_connections": {
@@ -1345,9 +1356,14 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Select first (gzip)",
+                    "name": "input"
+                }
+            ],
             "label": null,
-            "name": "Select first",
+            "name": "Select first (gzip)",
             "outputs": [
                 {
                     "name": "out_file1",
@@ -1358,26 +1374,14 @@
                 "left": 3250,
                 "top": 250
             },
-            "post_job_actions": {
-                "DeleteIntermediatesActionout_file1": {
-                    "action_arguments": {},
-                    "action_type": "DeleteIntermediatesAction",
-                    "output_name": "out_file1"
-                }
-            },
-            "tool_id": "Show beginning1",
-            "tool_state": "{\"header\": false, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineNum\": \"500\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.0.2",
+            "post_job_actions": {},
+            "tool_id": "head_gz",
+            "tool_state": "{\"gzip\": false, \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineNum\": \"500\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
             "type": "tool",
-            "uuid": "0e67767f-6f5e-40f5-ab0a-e7f66e6210d8",
+            "uuid": "29f6541a-150c-47ce-a666-ab984eb53e67",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "516f3d4f-0387-4ae1-8e5c-d2d24391705e"
-                }
-            ]
+            "workflow_outputs": []
         },
         "34": {
             "annotation": "",
@@ -1586,24 +1590,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "RepeatMasker repeat statistics on input dataset(s)",
-                    "output_name": "output_table",
-                    "uuid": "375b5b4e-7a58-4ac5-9465-83f536623869"
-                },
-                {
                     "label": "RepeatMasker masked sequence on input dataset(s)",
                     "output_name": "output_masked_genome",
                     "uuid": "bc850251-05bb-42ac-a234-6d43d623ac4a"
-                },
-                {
-                    "label": "RepeatMasker repeat catalogue on input dataset(s)",
-                    "output_name": "output_repeat_catalog",
-                    "uuid": "289e6a79-2453-4ef8-98ba-45085d4d9303"
-                },
-                {
-                    "label": "RepeatMasker output log on input dataset(s)",
-                    "output_name": "output_log",
-                    "uuid": "2a69b954-a104-4872-864e-5b0f3e523747"
                 }
             ]
         },
@@ -1720,94 +1709,47 @@
         },
         "41": {
             "annotation": "",
-            "content_id": "meme_meme_output_stats",
+            "content_id": "get_motif_logos_from_meme",
             "errors": null,
             "id": 41,
-            "input_connections": {
-                "input_html": {
-                    "id": 40,
-                    "output_name": "html_outfile"
-                },
-                "input_txt": {
-                    "id": 40,
-                    "output_name": "txt_outfile"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Meme output statistics",
-            "outputs": [
-                {
-                    "name": "payload",
-                    "type": "txt"
-                }
-            ],
-            "position": {
-                "left": 4000,
-                "top": 100
-            },
-            "post_job_actions": {},
-            "tool_id": "meme_meme_output_stats",
-            "tool_state": "{\"input_html\": {\"__class__\": \"ConnectedValue\"}, \"input_txt\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.0.0",
-            "type": "tool",
-            "uuid": "25bb82ad-81da-4750-9194-b5afc4b09e9b",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "42": {
-            "annotation": "",
-            "content_id": "motif_logo_memexml_to_pngs",
-            "errors": null,
-            "id": 42,
             "input_connections": {
                 "input": {
                     "id": 40,
                     "output_name": "xml_outfile"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool generate motif logo svgs from meme file",
+                    "name": "input"
+                }
+            ],
             "label": null,
-            "name": "extract list of motif logos from memexml file",
+            "name": "generate motif logo svgs from meme file",
             "outputs": [
                 {
-                    "name": "output_logo_png",
-                    "type": "input"
-                },
-                {
-                    "name": "output_logo_rc_png",
+                    "name": "output_logo_svg",
                     "type": "input"
                 }
             ],
             "position": {
                 "left": 4500,
-                "top": 0
+                "top": 175
             },
             "post_job_actions": {},
-            "tool_id": "motif_logo_memexml_to_pngs",
+            "tool_id": "get_motif_logos_from_meme",
             "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.0.0",
+            "tool_version": "1.0.2",
             "type": "tool",
-            "uuid": "4679c8ce-cd08-4a16-a0c8-81bd8b0b674d",
+            "uuid": "bfa47c01-a7d0-4f7a-8311-ff578a61b3fc",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output_logo_rc_png",
-                    "uuid": "a241d9cc-41dc-4cbb-932b-7fcde9fa8f8e"
-                },
-                {
-                    "label": null,
-                    "output_name": "output_logo_png",
-                    "uuid": "23a76e26-1477-4624-9d0a-3ac52375a66f"
-                }
-            ]
+            "workflow_outputs": []
         },
-        "43": {
+        "42": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/meme_fimo/meme_fimo/5.4.1+galaxy0",
             "errors": null,
-            "id": 43,
+            "id": 42,
             "input_connections": {
                 "fasta_type|input_database": {
                     "id": 34,
@@ -1818,25 +1760,22 @@
                     "output_name": "xml_outfile"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FIMO",
+                    "name": "fasta_type"
+                },
+                {
+                    "description": "runtime parameter for tool FIMO",
+                    "name": "input_motifs"
+                }
+            ],
             "label": null,
             "name": "FIMO",
             "outputs": [
                 {
                     "name": "txt_outfile",
                     "type": "txt"
-                },
-                {
-                    "name": "html_outfile",
-                    "type": "html"
-                },
-                {
-                    "name": "gff_outfile",
-                    "type": "txt"
-                },
-                {
-                    "name": "xml_outfile",
-                    "type": "memexml"
                 }
             ],
             "position": {
@@ -1851,7 +1790,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"fasta_type\": {\"fasta_type_selector\": \"history\", \"__current_case__\": 1, \"input_database\": {\"__class__\": \"ConnectedValue\"}}, \"input_motifs\": {\"__class__\": \"ConnectedValue\"}, \"non_commercial_use\": true, \"options_type\": {\"options_type_selector\": \"advanced\", \"__current_case__\": 1, \"thresh\": \"0.0001\", \"qv_thresh\": false, \"bgfile_type\": {\"bgfile_type_selector\": \"default\", \"__current_case__\": 1}, \"max_strand\": false, \"max_stored_scores\": \"100000\", \"motifs_cond\": {\"motif_selector\": \"no\", \"__current_case__\": 0}, \"motif_pseudo\": \"0.1\", \"no_qvalue\": true, \"parse_genomic_coords\": true, \"psp_cond\": {\"psp_selector\": \"no\", \"__current_case__\": 0}, \"prior_dist_cond\": {\"prior_dist_selector\": \"no\", \"__current_case__\": 0}}, \"output_options\": {\"html_outfile\": true, \"xml_outfile\": true, \"gff_outfile\": true}, \"scanrc\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"fasta_type\": {\"fasta_type_selector\": \"history\", \"__current_case__\": 1, \"input_database\": {\"__class__\": \"RuntimeValue\"}}, \"input_motifs\": {\"__class__\": \"RuntimeValue\"}, \"non_commercial_use\": true, \"options_type\": {\"options_type_selector\": \"advanced\", \"__current_case__\": 1, \"thresh\": \"0.0001\", \"qv_thresh\": false, \"bgfile_type\": {\"bgfile_type_selector\": \"default\", \"__current_case__\": 1}, \"max_strand\": false, \"max_stored_scores\": \"100000\", \"motifs_cond\": {\"motif_selector\": \"no\", \"__current_case__\": 0}, \"motif_pseudo\": \"0.1\", \"no_qvalue\": true, \"parse_genomic_coords\": true, \"psp_cond\": {\"psp_selector\": \"no\", \"__current_case__\": 0}, \"prior_dist_cond\": {\"prior_dist_selector\": \"no\", \"__current_case__\": 0}}, \"output_options\": {\"html_outfile\": false, \"xml_outfile\": false, \"gff_outfile\": false}, \"scanrc\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "5.4.1+galaxy0",
             "type": "tool",
             "uuid": "06515856-42b9-4eb2-8ac9-48c40e7edd03",
@@ -1859,43 +1798,83 @@
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "html_outfile",
-                    "uuid": "92f0d1b4-f7fb-43b2-b0f8-b29546902bc4"
-                },
-                {
-                    "label": null,
-                    "output_name": "xml_outfile",
-                    "uuid": "038d0306-726b-4312-8659-d9ff2b3e4359"
-                },
-                {
-                    "label": null,
                     "output_name": "txt_outfile",
                     "uuid": "df4c0e31-de86-4694-a3cf-2cb3ce905c7e"
-                },
-                {
-                    "label": null,
-                    "output_name": "gff_outfile",
-                    "uuid": "bce109bd-39a3-4620-ac94-e42a581612dc"
                 }
             ]
         },
-        "44": {
+        "43": {
             "annotation": "",
-            "content_id": "fimo_text_to_gffs",
+            "content_id": "meme_meme_output_stats",
             "errors": null,
-            "id": 44,
+            "id": 43,
             "input_connections": {
-                "input": {
-                    "id": 43,
+                "input_html": {
+                    "id": 40,
+                    "output_name": "html_outfile"
+                },
+                "input_svg": {
+                    "id": 41,
+                    "output_name": "output_logo_svg"
+                },
+                "input_txt": {
+                    "id": 40,
                     "output_name": "txt_outfile"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Meme output statistics",
+                    "name": "input_svg"
+                }
+            ],
             "label": null,
-            "name": "split fimo txt to gff files per motif",
+            "name": "Meme output statistics",
             "outputs": [
                 {
-                    "name": "output_gff",
+                    "name": "payload",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 4500,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "meme_meme_output_stats",
+            "tool_state": "{\"input_html\": {\"__class__\": \"ConnectedValue\"}, \"input_svg\": {\"__class__\": \"RuntimeValue\"}, \"input_txt\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "25bb82ad-81da-4750-9194-b5afc4b09e9b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "44": {
+            "annotation": "",
+            "content_id": "split_fimo",
+            "errors": null,
+            "id": 44,
+            "input_connections": {
+                "fimo_txt": {
+                    "id": 42,
+                    "output_name": "txt_outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Split FIMO",
+                    "name": "fimo_txt"
+                },
+                {
+                    "description": "runtime parameter for tool Split FIMO",
+                    "name": "meme_xml"
+                }
+            ],
+            "label": null,
+            "name": "Split FIMO",
+            "outputs": [
+                {
+                    "name": "output",
                     "type": "input"
                 }
             ],
@@ -1904,19 +1883,13 @@
                 "top": 800
             },
             "post_job_actions": {},
-            "tool_id": "fimo_text_to_gffs",
-            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_id": "split_fimo",
+            "tool_state": "{\"fimo_txt\": {\"__class__\": \"RuntimeValue\"}, \"meme_xml\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.0",
             "type": "tool",
-            "uuid": "d3858a49-8a2c-4c72-a5ef-cbeadd524f0c",
+            "uuid": "a3f7297c-6e88-4ba5-8c15-6b5665fe66b8",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": " split fimo txt to gff files per motif gff on input dataset(s) ",
-                    "output_name": "output_gff",
-                    "uuid": "6ac216fe-c004-458e-a6ff-70b510baf60f"
-                }
-            ]
+            "workflow_outputs": []
         },
         "45": {
             "annotation": "",
@@ -1926,7 +1899,7 @@
             "input_connections": {
                 "input": {
                     "id": 44,
-                    "output_name": "output_gff"
+                    "output_name": "output"
                 }
             },
             "inputs": [],
@@ -1944,7 +1917,7 @@
             },
             "post_job_actions": {},
             "tool_id": "scriptmanager_expand-gff",
-            "tool_state": "{\"SIZE\": \"10\", \"expansion_select\": \"border\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"SIZE\": \"10\", \"expansion_select\": \"border\", \"gzip\": false, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.0",
             "type": "tool",
             "uuid": "cb53db6e-865c-46b5-9e1f-3d53c7e9bf8c",
@@ -1965,7 +1938,7 @@
             "input_connections": {
                 "input": {
                     "id": 44,
-                    "output_name": "output_gff"
+                    "output_name": "output"
                 }
             },
             "inputs": [],
@@ -1983,7 +1956,7 @@
             },
             "post_job_actions": {},
             "tool_id": "scriptmanager_expand-gff",
-            "tool_state": "{\"SIZE\": \"500\", \"expansion_select\": \"center\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"SIZE\": \"500\", \"expansion_select\": \"center\", \"gzip\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.0",
             "type": "tool",
             "uuid": "1dc75a83-5a0a-4949-bbba-7d9759ffa5c9",
@@ -2067,7 +2040,7 @@
             },
             "post_job_actions": {},
             "tool_id": "scriptmanager_gff-to-bed",
-            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"gzip\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.0",
             "type": "tool",
             "uuid": "d020b4f4-1f24-41b0-a891-4cc3cd061362",
@@ -2154,7 +2127,7 @@
         },
         "51": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/tag_pileup_frequency/tag_pileup_frequency/1.0.2",
+            "content_id": "scriptmanager_tag-pileup",
             "errors": null,
             "id": 51,
             "input_connections": {
@@ -2169,14 +2142,18 @@
             },
             "inputs": [],
             "label": null,
-            "name": "Tag pileup frequency",
+            "name": "ScriptManager: TagPileup",
             "outputs": [
                 {
-                    "name": "heatmaps",
-                    "type": "input"
+                    "name": "composite",
+                    "type": "tabular"
                 },
                 {
-                    "name": "output1",
+                    "name": "matrix_sense",
+                    "type": "tabular"
+                },
+                {
+                    "name": "matrix_anti",
                     "type": "tabular"
                 }
             ],
@@ -2185,30 +2162,13 @@
                 "top": 1100
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/tag_pileup_frequency/tag_pileup_frequency/1.0.2",
-            "tool_shed_repository": {
-                "changeset_revision": "580e8bcb6413",
-                "name": "tag_pileup_frequency",
-                "owner": "iuc",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"bin_size\": \"1\", \"combine_strands\": \"0\", \"composite_smoothing_window\": \"0\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"output_heatmap\": true, \"proper_pe\": false, \"reads\": \"0\", \"tag_shift\": \"0\", \"tags_equal\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.0.2",
+            "tool_id": "scriptmanager_tag-pileup",
+            "tool_state": "{\"BINSIZE\": \"1\", \"CPU\": \"1\", \"SHIFT\": \"0\", \"blacklist\": {\"equal_tags\": false, \"__current_case__\": 1}, \"composite_transformation\": {\"composite_options\": \"none\", \"__current_case__\": 0}, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"output_strands\": {\"strand\": \"separate\", \"__current_case__\": 0, \"sense_conditional\": {\"sense\": \"sense_color\", \"__current_case__\": 0, \"color_sense\": \"0000FF\"}, \"anti_conditional\": {\"anti\": \"anti_color\", \"__current_case__\": 0, \"color_anti\": \"FF0000\"}}, \"read_aspect\": \"5end\", \"read_output\": \"read1\", \"require_paired_end\": {\"mate_pair\": false, \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
             "type": "tool",
-            "uuid": "5811a6bd-bf5d-41ae-be52-555155446b6c",
+            "uuid": "fa6bf701-66b0-4471-917e-1746518d05c9",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output1",
-                    "uuid": "9fcccf8f-9061-4ba0-87e3-3a1611438454"
-                },
-                {
-                    "label": null,
-                    "output_name": "heatmaps",
-                    "uuid": "892fef6a-425f-453c-b70c-12ac6accaa18"
-                }
-            ]
+            "workflow_outputs": []
         },
         "52": {
             "annotation": "",
@@ -2236,7 +2196,7 @@
             },
             "post_job_actions": {},
             "tool_id": "resize_4color_plot",
-            "tool_state": "{\"cols\": \"200\", \"input_image\": {\"__class__\": \"ConnectedValue\"}, \"rows\": \"600\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"cols\": \"200\", \"input_image\": {\"__class__\": \"ConnectedValue\"}, \"method\": \"opencv\", \"rows\": \"600\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.0",
             "type": "tool",
             "uuid": "d82c1570-e0f1-4a43-9805-b27f63d69b84",
@@ -2255,13 +2215,17 @@
             "errors": null,
             "id": 53,
             "input_connections": {
-                "input_heatmaps": {
+                "input_anti": {
                     "id": 51,
-                    "output_name": "heatmaps"
+                    "output_name": "matrix_anti"
+                },
+                "input_sense": {
+                    "id": 51,
+                    "output_name": "matrix_sense"
                 },
                 "input_tabular": {
                     "id": 51,
-                    "output_name": "output1"
+                    "output_name": "composite"
                 }
             },
             "inputs": [],
@@ -2279,7 +2243,7 @@
             },
             "post_job_actions": {},
             "tool_id": "tag_pileup_frequency_output_stats",
-            "tool_state": "{\"input_heatmaps\": {\"__class__\": \"ConnectedValue\"}, \"input_tabular\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"input_anti\": {\"__class__\": \"ConnectedValue\"}, \"input_heatmaps\": {\"__class__\": \"ConnectedValue\"}, \"input_sense\": {\"__class__\": \"ConnectedValue\"}, \"input_tabular\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.0",
             "type": "tool",
             "uuid": "ee643b74-65c9-4568-b013-7d7865b3b3f8",

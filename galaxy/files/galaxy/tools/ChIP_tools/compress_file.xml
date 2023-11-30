@@ -1,0 +1,24 @@
+<tool id="compress_file" name="gzip compress an input file" version="1.0.0">
+    <description>
+        gzip an input file
+    </description>
+    <macros>
+    </macros>
+    <command>
+        <![CDATA[
+        gzip -c "$input" > "$output"
+        ]]>
+    </command>
+    <inputs>
+        <param name="input" type="data" label="input file" />
+    </inputs>
+    <outputs>
+        <data name="output" format="gz"/>
+    </outputs>
+    <tests>
+    </tests>
+    <help>
+**What it does**
+gzip an input file
+    </help>
+</tool>
