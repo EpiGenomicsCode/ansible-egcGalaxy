@@ -8,7 +8,7 @@ tools:
     mem: cores * 4
     params:
       tmp_dir: true
-      nativeSpecification: "--nodes=1 --cpus-per-task={cores}"
+      submit_native_specification: "--account=open --time=8:00:00 --nodes=1 --cpus-per-task={cores}"
     scheduling:
       prefer:
         - local-slurm
@@ -19,10 +19,8 @@ tools:
         - psu-pulsar
 #        - iu-pulsar
   .*/bwa*/.*:
-    cores: 4
-    mem: 16
-    params:
-      nativeSpecification: "--nodes=1 --ntasks=1 --cpus-per-task={cores}"
+    cores: 8
+    mem: 32
     scheduling:
       require:
         - psu-pulsar
@@ -48,11 +46,6 @@ tools:
         - psu-pulsar
 #        - iu-pulsar
   .*/*repeat_masker*/.*:
-    scheduling:
-      require:
-        - psu-pulsar
-#        - iu-pulsar
-  .*/*meme*/.*:
     scheduling:
       require:
         - psu-pulsar
