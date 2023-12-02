@@ -6,17 +6,16 @@
     <expand macro="requirements" />
     <command>
         <![CDATA[
-        mkdir -p fimo_bed &&
-        python $__tool_directory__/split_fimo.py '$fimo_txt' '$meme_xml' --out-dir 'fimo_bed'
+        mkdir -p fimo_gff &&
+        python $__tool_directory__/split_fimo.py '$fimo_txt' --out-dir 'fimo_gff'
         ]]>
     </command>
     <inputs>
         <param name="fimo_txt" type="data" format="txt" label="FIMO text input" />
-        <param name="meme_xml" type="data" format="memexml" label="MEME XML input" />
     </inputs>
     <outputs>
         <collection name="output" type="list" label="${tool.name} on ${on_string} ">
-            <discover_datasets pattern="(?P&lt;designation&gt;.+)\.bed" format="bed" directory="fimo_bed/" visible="false"/>
+            <discover_datasets pattern="(?P&lt;designation&gt;.+)\.gff" format="gff" directory="fimo_gff/" visible="false"/>
         </collection>
     </outputs>
 <tests>

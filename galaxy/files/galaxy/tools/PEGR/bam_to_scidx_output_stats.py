@@ -5,7 +5,7 @@ import stats_util
 STATS = ['genomeCoverage']
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--chrom_len_file', dest='chrom_len_file', help="File names of .len files for chromosome lengths")
+#parser.add_argument('--chrom_len_file', dest='chrom_len_file', help="File names of .len files for chromosome lengths")
 parser.add_argument('--config_file', dest='config_file', help='stats_config.ini')
 parser.add_argument('--dbkey', dest='dbkey', help='Input dbkey')
 parser.add_argument('--history_id', dest='history_id', help='History id')
@@ -25,8 +25,12 @@ args = parser.parse_args()
 
 # Initialize the payload.
 payload = stats_util.get_base_json_dict(args.config_file, args.dbkey, args.history_id, args.history_name, args.stats_tool_id, args.stderr, args.tool_id, args.tool_category, args.tool_parameters, args.user_email, args.workflow_step_id)
-# Generate the statistics and datasets.
-payload['statistics'] = [stats_util.get_statistics(args.input, STATS, dbkey=args.dbkey, chrom_lengths_file=args.chrom_len_file)]
+## Generate the statistics and datasets.
+#payload['statistics'] = [stats_util.get_statistics(args.input, STATS, dbkey=args.dbkey, chrom_lengths_file=args.chrom_len_file)]
+
+statistics = []
+payload['statistics'] = statistics
+
 payload['datasets'] = [stats_util.get_datasets(args.config_file, args.input_id, args.input_datatype)]
 payload['history_url'] = stats_util.get_history_url(args.config_file, args.history_id)
 # Send the payload to PEGR.

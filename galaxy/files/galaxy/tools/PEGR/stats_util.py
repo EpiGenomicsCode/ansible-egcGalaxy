@@ -44,7 +44,7 @@ def is_gz_file(filepath):
 
 def openfile(filepath, mode='r'):
     if (is_gz_file(filepath)):
-        return gzip.open(filepath, mode) 
+        return gzip.open(filepath, mode)
     return open(filepath, mode)
 
 
@@ -132,7 +132,8 @@ def get_base_json_dict(config_file, dbkey, history_id, history_name, stats_tool_
     d['toolCategory'] = tool_category
     d['toolStderr'] = stderr
     d['toolId'] = tool_id
-    d['userEmail'] = user_email
+    #d['userEmail'] = user_email
+    d['userEmail'] = "wkl29@cornell.edu"
     d['workflowId'] = get_workflow_id(config_file, history_name)
     d['workflowStepId'] = workflow_step_id
     return d
@@ -159,7 +160,7 @@ def get_config_settings(config_file, section='defaults'):
     for key, value in config_parser.items(section):
         if section == 'defaults':
             ## python3 updated notation
-            d[key.upper()] = value   
+            d[key.upper()] = value
         else:
             d[key] = value
     return d
@@ -283,19 +284,19 @@ def get_pe_histogram_stats(file_path):
             line = line.strip()
             if line.startswith('# Average Insert Size'):
                 items = line.split(': ')
-                pe_histogram_stats['avgInsertSize'] = float('%.4f' % float(items[1]))
+                pe_histogram_stats['avgInsertSize'] = float('%.2f' % float(items[1]))
                 avg_insert_size_set = True
             elif line.startswith('# Median Insert Size'):
                 items = line.split(': ')
-                pe_histogram_stats['medianInsertSize'] = float('%.4f' % float(items[1]))
+                pe_histogram_stats['medianInsertSize'] = float('%.2f' % float(items[1]))
                 median_insert_size_set = True
             elif line.startswith('# Mode Insert Size'):
                 items = line.split(': ')
-                pe_histogram_stats['modeInsertSize'] = float('%.4f' % float(items[1]))
+                pe_histogram_stats['modeInsertSize'] = float('%.2f' % float(items[1]))
                 mode_insert_size_set = True
             elif line.startswith('# Std deviation of Insert Size'):
                 items = line.split(': ')
-                pe_histogram_stats['stdDevInsertSize'] = float('%.4f' % float(items[1]))
+                pe_histogram_stats['stdDevInsertSize'] = float('%.2f' % float(items[1]))
                 std_dev_insert_size_set = True
             if avg_insert_size_set and median_insert_size_set and mode_insert_size_set and std_dev_insert_size_set:
                 break
@@ -395,16 +396,16 @@ def get_statistics(file_path, stats, **kwd):
             elif k == 'peHistogram':
                 return get_pe_histogram_stats(file_path)
             elif k == 'totalReadsFromBam':  # bwa output stats
-                s['totalReads'] =                 get_reads("samtools view -c -f 0x40 -F 4 -q 5     %s" % file_path) # R1
-                s['totalReadsR2'] =               get_reads("samtools view -c -f 0x80 -F 4 -q 5     %s" % file_path) # R2
+                s['totalReads'] =                 get_reads("samtools view -c -f 0x40               %s" % file_path) # R1
+                s['totalReadsR2'] =               get_reads("samtools view -c -f 0x80               %s" % file_path) # R2
             elif k == 'mappingStatsFromBamPaired':  # markdup output stats
                 # R1
-                s['uniquelyMappedReads'] =        get_reads("samtools view -c -f 0x40 -F 4          %s" % file_path)
-                s['mappedReads'] =                get_reads("samtools view -c -f 0x40               %s" % file_path)
+                s['uniquelyMappedReads'] =        get_reads("samtools view -c -f 0x40 -F 4 -q 5     %s" % file_path)
+                s['mappedReads'] =                get_reads("samtools view -c -f 0x40 -F 4          %s" % file_path)
                 s['dedupUniquelyMappedReads'] =   get_reads("samtools view -c -f 0x41 -F 0x404 -q 5 %s" % file_path)
                 # R2
-                s['uniquelyMappedReadsR2'] =      get_reads("samtools view -c -f 0x80 -F 4          %s" % file_path)
-                s['mappedReadsR2'] =              get_reads("samtools view -c -f 0x80               %s" % file_path)
+                s['uniquelyMappedReadsR2'] =      get_reads("samtools view -c -f 0x80 -F 4 -q 5     %s" % file_path)
+                s['mappedReadsR2'] =              get_reads("samtools view -c -f 0x80 -F 4          %s" % file_path)
                 s['dedupUniquelyMappedReadsR2'] = get_reads("samtools view -c -f 0x81 -F 0x404 -q 5 %s" % file_path)
             elif k == 'dedupUniquelyMappedReadsSingle':  # succeeded by mappingStatsFromBamSingle
                 s['dedupUniquelyMappedReads'] = get_reads("samtools view -c -F 4 -q 5 %s" % file_path)

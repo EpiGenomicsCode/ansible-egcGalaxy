@@ -35,17 +35,22 @@ tools:
       require:
         - psu-pulsar
 #        - iu-pulsar
-  .*/*deeptools*/.*:
-    scheduling:
-      require:
-        - psu-pulsar
-#        - iu-pulsar
   .*/*bedtools*/.*:
     scheduling:
       require:
         - psu-pulsar
 #        - iu-pulsar
   .*/*repeat_masker*/.*:
+    scheduling:
+      require:
+        - psu-pulsar
+#        - iu-pulsar
+  .*/deeptools*/.*:
+    scheduling:
+      require:
+        - psu-pulsar
+#        - iu-pulsar
+  .*/meme*/.*:
     scheduling:
       require:
         - psu-pulsar

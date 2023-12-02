@@ -4,26 +4,29 @@
         <import>macros.xml</import>
     </macros>
     <command>
-        #import time
-        #set non_ready_states = ['new', 'queued', 'running', 'setting_metadata', 'upload']
-        #while $input.dataset.state in $non_ready_states:
-            time.sleep(60)
-        #end while
-        #set history_id = $__app__.security.encode_id($input.history.id)
-        #set history_name = $input.history.name
-        python $__tool_directory__/input_dataset_output_stats.py
-        --config_file $__tool_directory__/stats_config.ini
-        --input "$input"
-        --input_id "$__app__.security.encode_id($input.id)"
-        --input_datatype "$input.ext"
-        --dbkey "$input.metadata.dbkey"
-        --history_id "$history_id"
-        --history_name "$history_name"
-        --stats_tool_id "input_dataset_r1_output_stats"
-        --tool_id "$tool_id"
-        --tool_category "output_fastqRead1"
-        --user_email "$__user_email__"
-        --output "$payload"
+        <![CDATA[
+            #import time
+            #set non_ready_states = ['new', 'queued', 'running', 'setting_metadata', 'upload']
+            #while $input.dataset.state in $non_ready_states:
+                time.sleep(60)
+            #end while
+            #set history_id = $__app__.security.encode_id($input.history.id)
+            #set history_name = $input.history.name
+            python $__tool_directory__/input_dataset_output_stats.py
+            --config_file $__tool_directory__/stats_config.ini
+            --input "$input"
+            --input_id "$__app__.security.encode_id($input.id)"
+            --input_datatype "$input.ext"
+            --dbkey "$input.metadata.dbkey"
+            --history_id "$history_id"
+            --history_name "$history_name"
+            --stats_tool_id "input_dataset_r1_output_stats"
+            --tool_id "input_dataset_r1"
+            --tool_category "output_fastqRead1"
+            --user_email "$__user_email__"
+    	    --output "$payload"
+        ]]>
+
     </command>
     <inputs>
         <param name="input" type="data" format="fastq.gz" label="Fastqsanger.gz input" />
