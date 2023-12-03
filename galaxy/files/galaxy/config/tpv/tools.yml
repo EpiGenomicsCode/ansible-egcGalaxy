@@ -45,12 +45,22 @@ tools:
       require:
         - psu-pulsar
 #        - iu-pulsar
-  .*/deeptools*/.*:
+  .*/deeptools*/*:
     scheduling:
       require:
         - psu-pulsar
 #        - iu-pulsar
-  .*/meme*/.*:
+  .*/meme_meme/*:
+    scheduling:
+      require:
+        - psu-pulsar
+#        - iu-pulsar
+  .*/meme_fimo/*:
+    scheduling:
+      require:
+        - psu-pulsar
+#        - iu-pulsar
+  .*/scriptmanager_bam-to-scidx/*:
     scheduling:
       require:
         - psu-pulsar
