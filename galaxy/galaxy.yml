@@ -35,30 +35,37 @@
     - name: Make scATAC preprocessing toolkit destination dir
       file:
         path: /cephfs/galaxy/local_tools/scATAC_processing
+#        path: /storage/group/bfp2/default/00_pughlab/local_tools/scATAC_processing
         state: directory
     - name: Make ArchR toolkit destination dir
       file:
         path: /cephfs/galaxy/local_tools/ArchR_tools
+#        path: /storage/group/bfp2/default/00_pughlab/local_tools/ArchR_tools
         state: directory
     - name: Make Gatk4 toolkit destination dir
       file:
         path: /cephfs/galaxy/local_tools/gatk4
+#        path: /storage/group/bfp2/default/00_pughlab/local_tools/gatk4
         state: directory
     - name: Make ScriptManager toolkit destination dir
       file:
         path: /cephfs/galaxy/local_tools/ScriptManager
+#        path: /storage/group/bfp2/default/00_pughlab/local_tools/ScriptManager
         state: directory
     - name: Make PEGR toolkit destination dir
       file:
         path: /cephfs/galaxy/local_tools/PEGR
+#        path: /storage/group/bfp2/default/00_pughlab/local_tools/PEGR
         state: directory
     - name: Make ChIP toolkit destination dir
       file:
         path: /cephfs/galaxy/local_tools/ChIP_tools
+#        path: /storage/group/bfp2/default/00_pughlab/local_tools/ChIP_tools
         state: directory
     - name: Make ScriptManager toolkit destination dir
       file:
         path: /cephfs/galaxy/local_tools/ScriptManager
+#        path: /storage/group/bfp2/default/00_pughlab/local_tools/ScriptManager
         state: directory
   roles:
     - galaxyproject.tusd

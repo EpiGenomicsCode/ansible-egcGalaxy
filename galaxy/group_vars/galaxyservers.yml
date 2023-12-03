@@ -2,6 +2,8 @@
 galaxy_create_user: true # False by default, as e.g. you might have a 'galaxy' user provided by LDAP or AD.
 galaxy_separate_privileges: true # Best practices for security, configuration is owned by 'root' (or a different user) than the processes
 galaxy_manage_paths: true # False by default as your administrator might e.g. have root_squash enabled on NFS. Here we can create the directories so it's fine.
+#galaxy_local_tools_dir: /storage/group/bfp2/default/00_pughlab/local_tools
+
 galaxy_manage_cleanup: true
 galaxy_layout: root-dir
 galaxy_root: /cephfs/galaxy
@@ -70,6 +72,8 @@ galaxy_job_config:
 
 galaxy_config:
   galaxy:
+    # Allowlist for HTML generating tools
+    sanitize_allowlist_file: "{{ galaxy_config_dir }}/allowlist.txt"
     # Branding
     brand: "EpiGenomics Core"
     # Main Configuration
@@ -122,7 +126,7 @@ galaxy_config:
       # listening options
       bind: "unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock"
       # performance options
-      workers: 2
+      workers: 4
       # Other options that will be passed to gunicorn
       # This permits setting of 'secure' headers like REMOTE_USER (and friends)
       # https://docs.gunicorn.org/en/stable/settings.html#forwarded-allow-ips
@@ -139,7 +143,7 @@ galaxy_config:
       upload_dir: "{{ galaxy_tus_upload_store }}"
     handlers:
       handler:
-        processes: 2
+        processes: 4
         pools:
           - job-handlers
           - workflow-schedulers
@@ -254,6 +258,8 @@ galaxy_config_files:
     dest: "{{ tpv_mutable_dir }}/environments.yml"
   - src: "{{ galaxy_config_file_src_dir }}/tpv/tools.yml"
     dest: "{{ tpv_mutable_dir }}/tools.yml"
+  - src: "{{ galaxy_config_file_src_dir }}/allowlist.txt"
+    dest: "{{ galaxy_config_dir }}/allowlist.txt"
 
 galaxy_config_template_src_dir: templates/galaxy/config
 galaxy_config_templates:
