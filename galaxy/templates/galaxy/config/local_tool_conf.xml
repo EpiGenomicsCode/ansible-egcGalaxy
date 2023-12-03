@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<toolbox monitor="true" tool_path="/cephfs/galaxy/local_tools">
+<toolbox monitor="true" tool_path="/storage/group/bfp2/default/00_pughlab/local_tools">
     <section id="scATAC" name="scATAC-seq Pre-processing">
       <tool file="scATAC_processing/scATAC_barcode_err_correct.xml" />
       <tool file="scATAC_processing/scATAC_barcodefreq.xml" />

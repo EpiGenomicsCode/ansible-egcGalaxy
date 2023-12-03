@@ -1,4 +1,3 @@
-import gzip
 import argparse
 
 # motif_id  motif_alt_id    sequence_name   start   stop    strand  score   p-value q-value matched_sequence
@@ -6,19 +5,6 @@ import argparse
 # GGTGDRTGGGTSTGKTDTST  MEME-3  chrXI   28  47  -   32.2584 1.04e-11    0   GGTGTGTGGGTGTGGTGTGT
 # GGTGDRTGGGTSTGKTDTST  MEME-3  chrXI   28  47  -   32.2584 1.04e-11    0   GGTGTGTGGGTGTGGTGTGT
 # GGTGDRTGGGTSTGKTDTST  MEME-3  chrX    29  48  -   32.2584 1.04e-11    0   GGTGTGTGGGTGTGGTGTGT
-
-def is_gz_file(filepath):
-    """
-    Check first byte of file to see if it is gzipped
-    """
-    with open(filepath, 'rb') as test_f:
-        return test_f.read(2) == b'\x1f\x8b'
-
-
-def openfile(filepath, mode='r'):
-    if is_gz_file(filepath):
-        return gzip.open(filepath, mode)
-    return open(filepath, mode)
 
 def process_data(input_data, out_dir):
     # Split the data by lines and remove the header
@@ -67,8 +53,6 @@ if __name__ == '__main__':
     parser.add_argument('fimo_txt', help='Name of the .txt file which is output of Fimo')
     parser.add_argument('--out-dir', dest='out_dir', help='Output directory', default='.')
     args = parser.parse_args()
-    #motif_alts = get_motif_alts(args.meme_xml)
-    #fimo_txt_to_gff(args.fimo_txt, motif_alts, args.out_dir)
 
     # Read data from the input file
     with open(args.fimo_txt, 'r') as file:
