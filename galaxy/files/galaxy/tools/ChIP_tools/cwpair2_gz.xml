@@ -5,7 +5,7 @@
         <requirement type="package" version="3.0.3">matplotlib</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
-python '$__tool_directory__/cwpair2.py'
+python '$__tool_directory__/cwpair2_gz.py'
 --input '${input}' '${input.hid}'
 --up_distance $up_distance
 --down_distance $down_distance
@@ -159,7 +159,7 @@ threshold" 50 is used, then it will not consider any peak having less than 100 t
  * **Percentage of the 95 percentile value to filter below** - Percentage of the 95 percentile value below which to filter when using a relative threshold.
  * **Absolute value to filter below** - Absolute value below which to filter when using an absolute threshold.
  * **Output files** - Restrict output dataset collections to matched pairs only or one of several combinations of collection types.
- 
+
 -----
 
 **Output Data Files**

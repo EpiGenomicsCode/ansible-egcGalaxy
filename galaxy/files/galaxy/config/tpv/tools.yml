@@ -65,22 +65,17 @@ tools:
       require:
         - psu-pulsar
 #        - iu-pulsar
-  .*genetrack*:
+  .*genetrack*gz:
      scheduling:
       require:
         - psu-pulsar
 #        - iu-pulsar
-  .*cwpair2*:
+  .*cwpair2*gz:
      scheduling:
       require:
         - psu-pulsar
 #        - iu-pulsar
   .*sort_gz*:
-    scheduling:
-      require:
-        - psu-pulsar
-#        - iu-pulsar
-  .*resize_4color_plot*:
     scheduling:
       require:
         - psu-pulsar

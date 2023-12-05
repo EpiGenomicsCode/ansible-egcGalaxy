@@ -6,7 +6,7 @@
 	    <requirement type="package" version="1.10.0">six</requirement>
     </requirements>
     <command detect_errors="exit_code"><![CDATA[
-python '$__tool_directory__/genetrack.py'
+python '$__tool_directory__/genetrack_gz.py'
 --input_format $input_format_cond.input_format
 --input $input_format_cond.input
 --sigma $sigma

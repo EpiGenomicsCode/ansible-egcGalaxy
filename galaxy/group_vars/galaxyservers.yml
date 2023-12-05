@@ -226,9 +226,9 @@ galaxy_local_tools:
   - ScriptManager/scriptmanager_pe-stat.xml
   - ScriptManager/scriptmanager_tag-pileup.xml
   - ChIP_tools/genetrack_gz.xml
-  - ChIP_tools/genetrack.py
+  - ChIP_tools/genetrack_gz.py
   - ChIP_tools/cwpair2_gz.xml
-  - ChIP_tools/cwpair2.py
+  - ChIP_tools/cwpair2_gz.py
   - ChIP_tools/sort_gz.xml
   - ChIP_tools/head_gz.xml
   - ChIP_tools/split_fimo.xml
