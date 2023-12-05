@@ -226,29 +226,18 @@ galaxy_local_tools:
   - ScriptManager/scriptmanager_pe-stat.xml
   - ScriptManager/scriptmanager_tag-pileup.xml
   - ChIP_tools/genetrack_gz.xml
-  - ChIP_tools/cwpair2_gz.xml
-  - ChIP_tools/genetrack_util.py
-  - ChIP_tools/cwpair2_util.py
-  - ChIP_tools/fimo_gz.xml
-  - ChIP_tools/meme_gz.xml
-  - ChIP_tools/bed_to_fasta.xml
-  - ChIP_tools/motif_logo_memexml_to_pngs.xml
-  - ChIP_tools/bed_to_fasta.py
-  - ChIP_tools/resize_4color_plot.xml
-  - ChIP_tools/split_fimo.py
-  - ChIP_tools/head_gz.xml
-  - ChIP_tools/fasta_header_bed2gff.py
-  - ChIP_tools/cwpair2.py
   - ChIP_tools/genetrack.py
-  - ChIP_tools/fimo_txt_2_gffs.py
-  - ChIP_tools/generate_motif_logos.py
-  - ChIP_tools/compress_file.xml
+  - ChIP_tools/cwpair2_gz.xml
+  - ChIP_tools/cwpair2.py
   - ChIP_tools/sort_gz.xml
-  - ChIP_tools/fasta_header_bed2gff.xml
-  - ChIP_tools/fimo_txt_2_gffs.xml
+  - ChIP_tools/head_gz.xml
   - ChIP_tools/split_fimo.xml
+  - ChIP_tools/split_fimo.py
   - ChIP_tools/get_motif_logos_from_meme.xml
+  - ChIP_tools/motif_logo_memexml_to_pngs.xml
+  - ChIP_tools/resize_4color_plot.xml
   - ChIP_tools/resize_4color_plot.py
+  - ChIP_tools/generate_motif_logos.py
 
 galaxy_config_file_src_dir: files/galaxy/config
 galaxy_config_files:

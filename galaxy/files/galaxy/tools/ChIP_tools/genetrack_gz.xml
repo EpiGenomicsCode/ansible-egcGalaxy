@@ -2,8 +2,8 @@
 <tool id="genetrack_gz" name="GeneTrack (gzip)" version="1.0.1">
     <description>peak predictor</description>
     <requirements>
-        <requirement type="package" version="1.13.0">numpy</requirement>
-	<requirement type="package" version="1.10.0">six</requirement>
+      <requirement type="package" version="1.13.0">numpy</requirement>
+	    <requirement type="package" version="1.10.0">six</requirement>
     </requirements>
     <command detect_errors="exit_code"><![CDATA[
 python '$__tool_directory__/genetrack.py'
@@ -16,7 +16,7 @@ python '$__tool_directory__/genetrack.py'
 --filter $filter
 #if str($gzip) == "Yes" :
     --gzip
-#end if	    
+#end if
 -o '${output}'
     ]]></command>
     <inputs>
@@ -91,7 +91,7 @@ versus downstream (more 3’) of the peak.
 .. image:: $PATH_TO_IMAGES/genetrack.png
 
 GeneTrack continues through the data in order of peak height, until no other peaks are found, and in principle will
-call a peak at a single isolated tag, if no filter is set using the tool's **Absolute read filter** parameter.  A 
+call a peak at a single isolated tag, if no filter is set using the tool's **Absolute read filter** parameter.  A
 filter value of 1 means that it will stop calling peaks when the tag count in the peak hits 1 (so single tag peaks
 will be excluded in this case).  GeneTrack outputs **chrom** (chromosome number), **strand** (+/W or -/C strand),
 **start** (lower coordinate of exclusion zone), **end** (higher coordinate of exclusion zone), and **value** (peak
@@ -126,7 +126,7 @@ action of the exonuclease in ChIP-exo might place all tags for a peak on a singl
  * **Exclusion zone of upstream called peaks** - Defines the exclusion zone centered over peaks upstream of a peak.
  * **Exclusion zone of downstream called peaks** - Defines the exclusion zone centered over peaks downstream of a peak.
  * **Filter** - Absolute read filter, restricts output to only peaks with larger peak height.
- 
+
 -----
 
 **Output gff Columns**
@@ -142,13 +142,13 @@ action of the exonuclease in ChIP-exo might place all tags for a peak on a singl
 9. Attributes (standard deviation of reads located within exclusion zone) = fuzziness of peak
 
 -----
- 
+
 **Considerations**
- 
+
 In principle, the width of the exclusion zone may be as large as the DNA region occupied by the native protein
 plus a steric exclusion zone between the protein and the exonuclease.  On the other hand the site might be considerably
 smaller if the protein is in a denatured state during exonuclease digestion (since it is pre-treated with SDS).
- 
+
 In general, higher resolution data or smaller binding site size data should use smaller sigma values.  Large binding site
 size data such as 147 bp nucleosomal DNA use a larger sigma value like 20 (-s 20).  For transcription factors mapped by
 ChIP-exo, sigma may initially be set at 5, and the exclusion zone set at 20 (-s 5 –e 20).  Sigma is typically varied
