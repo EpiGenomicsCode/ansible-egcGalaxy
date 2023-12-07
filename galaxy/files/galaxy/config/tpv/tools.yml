@@ -5,10 +5,10 @@ tools:
   default:
     abstract: true
     cores: 1
-    mem: cores * 4
+    mem: cores * 4000
     params:
       tmp_dir: true
-      submit_native_specification: "--account=open --time=8:00:00 --nodes=1 --cpus-per-task={cores}"
+      submit_native_specification: "--account=open --time=8:00:00 --nodes=1 --cpus-per-task={cores} --mem={mem}"
     scheduling:
       prefer:
         - local-slurm
@@ -20,7 +20,6 @@ tools:
 #        - iu-pulsar
   .*/bwa*/.*:
     cores: 8
-    mem: 32
     scheduling:
       require:
         - psu-pulsar

@@ -212,7 +212,6 @@ galaxy_local_tools:
   - PEGR/repeatmasker_wrapper_output_stats2.xml
   - PEGR/samtool_filter2_output_stats.py
   - PEGR/samtool_filter2_output_stats.xml
-  - PEGR/stats_config.ini
   - PEGR/stats_util.py
   - PEGR/tag_pileup_frequency_output_stats.py
   - PEGR/tag_pileup_frequency_output_stats.xml
@@ -326,9 +325,16 @@ nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 slurm_nodes:
 - name: localhost # Name of our host
-  CPUs: 4         # Here you would need to figure out how many cores your machine has. For this training we will use 2 but in real life, look at `htop` or similar.
+  CPUs: 8         # Here you would need to figure out how many cores your machine has. For this training we will use 2 but in real life, look at `htop` or similar.
+  RealMemory: 64300
+slurm_partitions:
+- name: debug
+  Default: YES # default partition
+  Nodes: localhost # Name of the nodes to use
+  MaxNodes: 4 # Number of jobs allowed at the same time
+  State: UP # Partition is ON
 slurm_config:
-  SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != CPUs
+  #SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != CPUs
   SelectType: select/cons_res
   SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 
