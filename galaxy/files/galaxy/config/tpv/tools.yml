@@ -60,11 +60,6 @@ tools:
       require:
         - psu-pulsar
 #        - iu-pulsar
-  .*/scriptmanager_bam-to-scidx/*:
-    scheduling:
-      require:
-        - psu-pulsar
-#        - iu-pulsar
   .*genetrack*gz:
      scheduling:
       require:

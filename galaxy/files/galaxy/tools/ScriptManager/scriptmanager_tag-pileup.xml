@@ -2,17 +2,12 @@
     <description>
         Generates tagpileup based on BAM file and coordinate file.
     </description>
-    <macros/>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
     <requirements>
-        <requirement type="package" version="11.0.1">
-            openjdk
-        </requirement>
-        <requirement type="package" version="1.9">
-            samtools
-        </requirement>
-        <requirement type="package" version="1.0">
-            openssl
-        </requirement>
+        <expand macro="requirement_openjdk" />
+        <expand macro="requirement_samtools" />
     </requirements>
     <command detect_errors="aggressive">
         ln -s '$input1' localbam.bam &amp;&amp;
@@ -25,7 +20,7 @@
             #end if
         #end if
 
-        java -jar $__tool_directory__/Scriptmanager-v0.14.jar read-analysis tag-pileup
+        java -jar $__tool_directory__/@JAR_FILENAME@ read-analysis tag-pileup
             '$input2'
             localbam.bam
             -M matrix
