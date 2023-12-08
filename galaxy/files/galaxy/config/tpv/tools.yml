@@ -59,12 +59,12 @@ tools:
       require:
         - psu-pulsar
 #        - iu-pulsar
-  .*genetrack*gz:
+  .*genetrack_gz*:
      scheduling:
       require:
         - psu-pulsar
 #        - iu-pulsar
-  .*cwpair2*gz:
+  .*cwpair2_gz*:
      scheduling:
       require:
         - psu-pulsar
