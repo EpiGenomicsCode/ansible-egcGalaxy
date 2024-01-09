@@ -126,7 +126,7 @@ galaxy_config:
       # listening options
       bind: "unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock"
       # performance options
-      workers: 4
+      workers: 6
       # Other options that will be passed to gunicorn
       # This permits setting of 'secure' headers like REMOTE_USER (and friends)
       # https://docs.gunicorn.org/en/stable/settings.html#forwarded-allow-ips
