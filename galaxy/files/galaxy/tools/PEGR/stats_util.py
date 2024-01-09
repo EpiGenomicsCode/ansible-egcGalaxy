@@ -113,7 +113,7 @@ def get_adapter_dimer_count(file_path):
                     continue
                 line = line.strip()
                 items = line.split('\t')
-                if len(items) > 3 and items[3].startswith('TruSeq Adapter'):
+                if len(items) > 3 and (items[3].startswith('TruSeq Adapter') or items[3].startswith('Illumina')):
                     adapter_dimer_count += float(items[1])
                     in_count_section = False
     fh.close()
