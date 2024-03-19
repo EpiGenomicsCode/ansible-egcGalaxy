@@ -60,12 +60,13 @@ tools:
         - psu-pulsar
 #        - iu-pulsar
   .*genetrack_gz*:
-     scheduling:
+    scheduling:
       require:
         - psu-pulsar
 #        - iu-pulsar
   .*cwpair2_gz*:
-     scheduling:
+    mem: 16000
+    scheduling:
       require:
         - psu-pulsar
 #        - iu-pulsar
